@@ -81,7 +81,7 @@
                                 text: match[0],
                                 start: start,
                                 end: end,
-                                description: 'Links can trigger additional carrier scrutiny. Avoid URL shortening services (bit.ly, tinyurl, etc.) as they are frequently flagged.'
+                                description: 'Links can trigger additional carrier scrutiny. Avoid URL shortening services (bit.ly, tinyurl, etc.) as they are frequently flagged'
                             });
                         }
                     }
@@ -157,6 +157,7 @@
 
     function detectFormatting(text) {
         const issues = [];
+        const seenIndices = new Set();
         
         const words = text.split(/\s+/);
         words.forEach((word, wordIndex) => {
@@ -169,19 +170,70 @@
                         text: word,
                         start: wordStart,
                         end: wordStart + word.length,
-                        description: 'Excessive capitalization may appear aggressive or be flagged by carriers.'
+                        description: 'Excessive capitalization, multiple punctuation marks (!!, ???), or aggressive formatting may be flagged by carriers as potential spam.'
                     });
                 }
             }
         });
         
         const consecutivePunctPattern = /[!?]{2,}/g;
+        let match;
         while ((match = consecutivePunctPattern.exec(text)) !== null) {
+            const punctText = match[0];
+            for (let i = match.index; i < match.index + match[0].length; i++) {
+                seenIndices.add(i);
+            }
+            
+            let example = '';
+            if (punctText.includes('!') && punctText.includes('?')) {
+                example = punctText;
+            } else if (punctText.includes('!')) {
+                example = `!x${punctText.length}`;
+            } else if (punctText.includes('?')) {
+                example = `?x${punctText.length}`;
+            }
+            
             issues.push({
                 type: 'formatting',
-                text: match[0],
+                text: example || punctText,
                 start: match.index,
                 end: match.index + match[0].length,
+                description: 'Excessive capitalization may appear aggressive or be flagged by carriers.'
+            });
+        }
+        
+        const exclamationMatches = [];
+        const exclamationPattern = /!/g;
+        while ((match = exclamationPattern.exec(text)) !== null) {
+            if (!seenIndices.has(match.index)) {
+                exclamationMatches.push(match.index);
+            }
+        }
+        
+        if (exclamationMatches.length > 1) {
+            issues.push({
+                type: 'formatting',
+                text: `!x${exclamationMatches.length}`,
+                start: exclamationMatches[0],
+                end: exclamationMatches[exclamationMatches.length - 1] + 1,
+                description: 'Excessive capitalization may appear aggressive or be flagged by carriers.'
+            });
+        }
+        
+        const questionMatches = [];
+        const questionPattern = /\?/g;
+        while ((match = questionPattern.exec(text)) !== null) {
+            if (!seenIndices.has(match.index)) {
+                questionMatches.push(match.index);
+            }
+        }
+        
+        if (questionMatches.length > 1) {
+            issues.push({
+                type: 'formatting',
+                text: `?x${questionMatches.length}`,
+                start: questionMatches[0],
+                end: questionMatches[questionMatches.length - 1] + 1,
                 description: 'Excessive capitalization may appear aggressive or be flagged by carriers.'
             });
         }
@@ -381,7 +433,20 @@
                     </div>
                     <div class="warning-description">${description}</div>
                     <div class="warning-examples">
-                        ${uniqueExamples.map(ex => `<span class="warning-example">${escapeHtml(ex)}</span>`).join('')}
+                        ${uniqueExamples.map(ex => {
+                            if (type === 'formatting' && /^[!?]x\d+$/.test(ex)) {
+                                const match = ex.match(/^([!?])x(\d+)$/);
+                                if (match) {
+                                    const punct = match[1];
+                                    const count = match[2];
+                                    return `<div class="warning-example warning-example-formatted">
+                                        <span class="warning-punct">${escapeHtml(punct)}</span>
+                                        <span class="warning-count">×${count}</span>
+                                    </div>`;
+                                }
+                            }
+                            return `<span class="warning-example">${escapeHtml(ex)}</span>`;
+                        }).join('')}
                     </div>
                 </div>
             `;

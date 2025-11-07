@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS Linter - Jasper Pilgrim</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo">JP</a>
+            <div class="nav-links">
+                <a href="../../index.html" class="nav-link">Home</a>
+                <a href="../../projects.html" class="nav-link">Projects</a>
+                <a href="../../resources.html" class="nav-link">Resources</a>
+                <a href="../../contact.html" class="nav-link">Contact</a>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5" class="sun-circle"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3" class="sun-ray"></line>
+                    <line x1="12" y1="21" x2="12" y2="23" class="sun-ray"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" class="sun-ray"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" class="sun-ray"></line>
+                    <line x1="1" y1="12" x2="3" y2="12" class="sun-ray"></line>
+                    <line x1="21" y1="12" x2="23" y2="12" class="sun-ray"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" class="sun-ray"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" class="sun-ray"></line>
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" class="moon-path"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header class="app-header">
+            <h1>SMS Linter</h1>
+            <p>Real-time 10DLC compliance checker</p>
+        </header>
+
+        <div class="app-container">
+            <div class="left-panel">
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">ENCODING</div>
+                        <button class="encoding-badge" id="encoding-badge">GSM-7</button>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">CHARACTERS</div>
+                        <div class="char-display">
+                            <span class="char-value" id="char-count">0</span>
+                            <span class="char-max" id="char-max">/160</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">SEGMENTS</div>
+                        <div class="stat-value-large" id="segment-count">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">WARNINGS</div>
+                        <div class="stat-value-large" id="warning-count">0</div>
+                    </div>
+                </div>
+
+                <div class="input-section">
+                    <div class="input-label-row">
+                        <label for="sms-input">Message</label>
+                        <span class="paste-hint">⌘V to paste</span>
+                    </div>
+                    <textarea 
+                        id="sms-input" 
+                        class="sms-input" 
+                        placeholder="Type or paste your SMS message here..."
+                        rows="10"
+                    ></textarea>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="action-btn" id="paste-btn">Paste</button>
+                    <button class="action-btn" id="copy-btn">Copy</button>
+                    <button class="action-btn" id="clear-btn">Clear</button>
+                    <button class="action-btn" id="history-btn">History</button>
+                    <button class="action-btn" id="export-btn">Export</button>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="tabs">
+                    <button class="tab active" data-tab="warnings">
+                        WARNINGS
+                        <span class="tab-badge" id="warnings-badge">0</span>
+                    </button>
+                    <button class="tab" data-tab="segments">SEGMENTS</button>
+                    <button class="tab" data-tab="preview">PREVIEW</button>
+                    <button class="tab" data-tab="suggestions">SUGGESTIONS</button>
+                    <button class="tab" data-tab="history">HISTORY</button>
+                    <button class="tab" data-tab="compliance">COMPLIANCE</button>
+                </div>
+
+                <div class="tab-content">
+                    <div id="warnings-tab" class="tab-pane active">
+                        <div id="warnings-container" class="warnings-container">
+                            <div class="empty-state">
+                                <div class="empty-icon">✓</div>
+                                <div class="empty-title">No issues detected</div>
+                                <div class="empty-message">Your message looks clean!</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="segments-tab" class="tab-pane">
+                        <div class="tab-placeholder">Segments view coming soon</div>
+                    </div>
+                    <div id="preview-tab" class="tab-pane">
+                        <div id="preview-container" class="preview-container">
+                            <div class="phone-preview">
+                                <div class="phone-header">
+                                    <div class="phone-notch"></div>
+                                    <div class="phone-status">
+                                        <span class="phone-time">9:41</span>
+                                        <div class="phone-icons">
+                                            <span class="phone-signal">📶</span>
+                                            <span class="phone-wifi">📶</span>
+                                            <span class="phone-battery">🔋</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="phone-content">
+                                    <div class="message-bubble">
+                                        <div class="message-text" id="preview-message"></div>
+                                        <div class="message-time">Now</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="suggestions-tab" class="tab-pane">
+                        <div class="tab-placeholder">Suggestions view coming soon</div>
+                    </div>
+                    <div id="history-tab" class="tab-pane">
+                        <div class="tab-placeholder">History view coming soon</div>
+                    </div>
+                    <div id="compliance-tab" class="tab-pane">
+                        <div class="tab-placeholder">Compliance view coming soon</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Jasper Pilgrim | A Place for Things</p>
+    </footer>
+
+    <script src="../../script.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

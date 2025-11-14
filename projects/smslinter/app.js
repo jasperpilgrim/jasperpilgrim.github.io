@@ -11,39 +11,36 @@
     const tabs = document.querySelectorAll('.tab');
     const tabPanes = document.querySelectorAll('.tab-pane');
 
-    const HIGH_RISK_TERMS = {
-        financial: ['win', 'winner', 'prize', 'cash', 'loan', 'debt relief', 'credit repair', 'refinance'],
-        moneyMaking: ['work from home', 'make money', 'passive income', 'guaranteed return', 'double your money', 'investment opportunity'],
-        urgency: ['apply now', 'act now', 'limited time', 'limited offer', 'last chance', 'hurry', 'exclusive', 'urgent', 'reply now', 'buy now'],
-        gambling: ['casino', 'bet', 'gamble', 'jackpot', 'slots', 'poker', 'sportsbook', 'free bet', 'spin to win'],
-        drugs: ['kush', 'weed', 'marijuana', 'cannabis', 'thc', 'cbd', 'vape', 'vaping', 'heroin', 'cocaine', 'meth', 'fentanyl', 'xanax', 'percocet', 'oxycodone', 'molly', 'adderall'],
-        alcohol: ['alcohol', 'beer', 'wine', 'liquor', 'tobacco', 'cigarettes', 'e-cigarette'],
-        adult: ['porn', 'xxx', 'escort', 'hookup', 'adult', 'nude', 'erotic', 'viagra', 'cialis', 'sildenafil', 'tadalafil'],
-        health: ['cure', 'miracle cure', 'lose weight fast', 'burn fat', 'guaranteed cure', 'no prescription']
-    };
-
-    const COMMON_ABBREVIATIONS = ['USA', 'CEO', 'CFO', 'CTO', 'API', 'URL', 'HTTP', 'HTTPS', 'WWW', 'ID', 'OK', 'FYI', 'ASAP', 'RSVP', 'VIP', 'PDF', 'GPS', 'TV', 'PC', 'AI', 'ML', 'UI', 'UX'];
+    const COMMON_ABBREVIATIONS = new Set([
+        'GPS', 'USA',
+        'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL',
+        'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT',
+        'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI',
+        'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY', 'DC',
+        'USD', 'CAN', 'EUR', 'GBP', 'CAD', 'AUD', 'JPY', 'CHF', 'CNY',
+        'RN', 'LPN', 'CNA', 'EMT', 'MD', 'DO', 'NP', 'RT', 'CPR',
+        'BLS', 'ACLS', 'PALS', 'ICU', 'CCU', 'NICU', 'PRN',
+        'AM', 'PM', 'EST', 'CST', 'MST', 'PST', 'EDT', 'CDT', 'MDT', 'PDT',
+        'LLC', 'INC', 'LTD', 'CORP',
+        'CEO', 'CFO', 'CTO', 'COO', 'VP', 'HR', 'IT', 'PR', 'QA',
+        'ASAP', 'ETA', 'FYI', 'FAQ', 'URL', 'PDF', 'SMS', 'MMS', 'API', 'SQL',
+        'TEAM', 'STAFF', 'FULL', 'STEAM'
+    ]);
 
     function detectHighRiskLanguage(text) {
         const issues = [];
-        const lowerText = text.toLowerCase();
+        const highRiskPattern = /\b(win|winner|prize|claim\s+your\s+prize|cash|loan|debt\s*relief|credit\s+repair|refinance|work\s+from\s+home|make\s+money|passive\s+income|guaranteed\s+return|double\s+your\s+money|investment\s+opportunity|apply\s+now|act\s+now|limited\s+time|limited\s+offer|last\s+chance|hurry|exclusive|urgent|reply\s+now|buy\s+now|subscribe\s+now|casino|bet|gamble|jackpot|slots|poker|sportsbook|free\s+bet|spin\s+to\s+win|kush|weed|marijuana|cannabis|thc|cbd|vape|vaping|heroin|cocaine|meth|fentanyl|xanax|percocet|oxycodone|molly|adderall|alcohol|beer|wine|liquor|tobacco|cigarettes?|e-?cig(arette)?|porn|xxx|escort|hookup|adult|nude|erotic|viagra|cialis|sildenafil|tadalafil|cure|miracle\s+cure|lose\s+weight\s+(fast|now)|burn\s+fat|guaranteed\s+cure|no\s+prescription)\b/gi;
         
-        Object.entries(HIGH_RISK_TERMS).forEach(([category, terms]) => {
-            terms.forEach(term => {
-                const regex = new RegExp(`\\b${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
-                let match;
-                while ((match = regex.exec(text)) !== null) {
-                    issues.push({
-                        type: 'high-risk',
-                        category: category,
-                        text: match[0],
-                        start: match.index,
-                        end: match.index + match[0].length,
-                        description: 'High-risk language may trigger spam filters.'
-                    });
-                }
+        let match;
+        while ((match = highRiskPattern.exec(text)) !== null) {
+            issues.push({
+                type: 'high-risk',
+                text: match[0],
+                start: match.index,
+                end: match.index + match[0].length,
+                description: 'High-risk language may trigger spam filters.'
             });
-        });
+        }
         
         return issues;
     }
@@ -51,54 +48,36 @@
     function detectURLs(text) {
         const issues = [];
         const seenIndices = new Set();
+        const shorteners = ['bit.ly', 'tinyurl.com', 't.co', 'goo.gl', 'is.gd', 'ow.ly', 'rebrand.ly', 'cutt.ly'];
         
-        const urlPatterns = [
-            { pattern: /https?:\/\/[^\s]+/gi, name: 'http' },
-            { pattern: /www\.[^\s]+/gi, name: 'www' },
-            { pattern: /\b[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}(?:\/[^\s]*)?/gi, name: 'domain' }
-        ];
+        const urlPattern = /(https?:\/\/[^\s]+)|(www\.[^\s]+)|(\b[a-z0-9-]+\.(?:com|org|net|edu|gov|io|co|app|dev|ai|xyz|me|tv|info|biz)(?:\/[^\s]*)?)/gi;
         
-        urlPatterns.forEach(({ pattern, name }) => {
-            let match;
-            while ((match = pattern.exec(text)) !== null) {
-                const start = match.index;
-                const end = start + match[0].length;
-                
-                if (name === 'domain') {
-                    const domain = match[0].split('/')[0];
-                    if (domain.includes('.') && !domain.match(/^\d+\.\d+\.\d+\.\d+$/) && !seenIndices.has(start)) {
-                        let isEmail = false;
-                        const beforeChar = start > 0 ? text[start - 1] : '';
-                        const afterChar = end < text.length ? text[end] : '';
-                        if (beforeChar === '@' || (beforeChar.match(/[a-zA-Z0-9]/) && afterChar === '@')) {
-                            isEmail = true;
-                        }
-                        
-                        if (!isEmail) {
-                            seenIndices.add(start);
-                            issues.push({
-                                type: 'url',
-                                text: match[0],
-                                start: start,
-                                end: end,
-                                description: 'Links can trigger additional carrier scrutiny. Avoid URL shortening services (bit.ly, tinyurl, etc.) as they are frequently flagged'
-                            });
-                        }
-                    }
-                } else {
-                    if (!seenIndices.has(start)) {
-                        seenIndices.add(start);
-                        issues.push({
-                            type: 'url',
-                            text: match[0],
-                            start: start,
-                            end: end,
-                            description: 'Links can trigger additional carrier scrutiny. Avoid URL shortening services (bit.ly, tinyurl, etc.) as they are frequently flagged.'
-                        });
-                    }
+        let match;
+        while ((match = urlPattern.exec(text)) !== null) {
+            const matchText = match[0];
+            const start = match.index;
+            const end = start + matchText.length;
+            
+            if (seenIndices.has(start)) continue;
+            
+            const emailPattern = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
+            if (start > 0) {
+                const before = text.substring(Math.max(0, start - 30), start);
+                if (before.includes('@') && emailPattern.test(before + matchText)) {
+                    continue;
                 }
             }
-        });
+            
+            seenIndices.add(start);
+            
+            issues.push({
+                type: 'url',
+                text: matchText,
+                start: start,
+                end: end,
+                description: 'Links can trigger additional carrier scrutiny. Avoid URL shortening services (bit.ly, tinyurl, etc.) as they are frequently flagged'
+            });
+        }
         
         return issues;
     }
@@ -135,7 +114,7 @@
             }
         }
         
-        const atSymbolPattern = /\B@\B/g;
+        const atSymbolPattern = /@/g;
         while ((match = atSymbolPattern.exec(text)) !== null) {
             if (!seenIndices.has(match.index)) {
                 const beforeChar = match.index > 0 ? text[match.index - 1] : '';
@@ -157,120 +136,118 @@
 
     function detectFormatting(text) {
         const issues = [];
-        const seenIndices = new Set();
         
-        const words = text.split(/\s+/);
-        words.forEach((word, wordIndex) => {
-            const wordStart = text.indexOf(word, wordIndex > 0 ? text.indexOf(words[wordIndex - 1]) + words[wordIndex - 1].length : 0);
-            
-            if (word === word.toUpperCase() && word.length > 1 && !COMMON_ABBREVIATIONS.includes(word)) {
-                if (/^[A-Z]+$/.test(word)) {
+        const minLen = 3;
+        const regex = new RegExp(`\\b[A-Z]{${minLen},}\\b`, 'g');
+        let match;
+        while ((match = regex.exec(text)) !== null) {
+            const word = match[0];
+            if (!COMMON_ABBREVIATIONS.has(word)) {
+                issues.push({
+                    type: 'formatting',
+                    text: word,
+                    start: match.index,
+                    end: match.index + word.length,
+                    description: 'Excessive capitalization, multiple punctuation marks (!!, ???), or aggressive formatting may be flagged by carriers as potential spam.'
+                });
+            }
+        }
+        
+        const punctuationSequences = [];
+        let currentSequence = '';
+        let currentStart = -1;
+        
+        for (let i = 0; i < text.length; i++) {
+            const char = text[i];
+            if (char === '!' || char === '?' || char === '.') {
+                if (currentSequence === '') {
+                    currentStart = i;
+                }
+                currentSequence += char;
+            } else {
+                if (currentSequence.length > 0) {
+                    punctuationSequences.push({
+                        start: currentStart,
+                        end: i,
+                        text: currentSequence,
+                        length: currentSequence.length,
+                        char: currentSequence[0]
+                    });
+                    currentSequence = '';
+                    currentStart = -1;
+                }
+            }
+        }
+        
+        if (currentSequence.length > 0) {
+            punctuationSequences.push({
+                start: currentStart,
+                end: text.length,
+                text: currentSequence,
+                length: currentSequence.length,
+                char: currentSequence[0]
+            });
+        }
+        
+        punctuationSequences.forEach(seq => {
+            if (seq.length >= 2) {
+                issues.push({
+                    type: 'formatting',
+                    text: seq.text,
+                    start: seq.start,
+                    end: seq.end,
+                    description: 'Excessive capitalization, multiple punctuation marks (!!, ???), or aggressive formatting may be flagged by carriers as potential spam.'
+                });
+            } else if (seq.length === 1 && seq.char === '!') {
+                const totalExclamations = punctuationSequences.filter(s => s.char === '!').length;
+                if (totalExclamations > 1) {
                     issues.push({
                         type: 'formatting',
-                        text: word,
-                        start: wordStart,
-                        end: wordStart + word.length,
+                        text: seq.text,
+                        start: seq.start,
+                        end: seq.end,
                         description: 'Excessive capitalization, multiple punctuation marks (!!, ???), or aggressive formatting may be flagged by carriers as potential spam.'
                     });
                 }
             }
         });
         
-        const consecutivePunctPattern = /[!?]{2,}/g;
-        let match;
-        while ((match = consecutivePunctPattern.exec(text)) !== null) {
-            const punctText = match[0];
-            for (let i = match.index; i < match.index + match[0].length; i++) {
-                seenIndices.add(i);
-            }
-            
-            let example = '';
-            if (punctText.includes('!') && punctText.includes('?')) {
-                example = punctText;
-            } else if (punctText.includes('!')) {
-                example = `!x${punctText.length}`;
-            } else if (punctText.includes('?')) {
-                example = `?x${punctText.length}`;
-            }
-            
-            issues.push({
-                type: 'formatting',
-                text: example || punctText,
-                start: match.index,
-                end: match.index + match[0].length,
-                description: 'Excessive capitalization may appear aggressive or be flagged by carriers.'
-            });
-        }
-        
-        const exclamationMatches = [];
-        const exclamationPattern = /!/g;
-        while ((match = exclamationPattern.exec(text)) !== null) {
-            if (!seenIndices.has(match.index)) {
-                exclamationMatches.push(match.index);
-            }
-        }
-        
-        if (exclamationMatches.length > 1) {
-            issues.push({
-                type: 'formatting',
-                text: `!x${exclamationMatches.length}`,
-                start: exclamationMatches[0],
-                end: exclamationMatches[exclamationMatches.length - 1] + 1,
-                description: 'Excessive capitalization may appear aggressive or be flagged by carriers.'
-            });
-        }
-        
-        const questionMatches = [];
-        const questionPattern = /\?/g;
-        while ((match = questionPattern.exec(text)) !== null) {
-            if (!seenIndices.has(match.index)) {
-                questionMatches.push(match.index);
-            }
-        }
-        
-        if (questionMatches.length > 1) {
-            issues.push({
-                type: 'formatting',
-                text: `?x${questionMatches.length}`,
-                start: questionMatches[0],
-                end: questionMatches[questionMatches.length - 1] + 1,
-                description: 'Excessive capitalization may appear aggressive or be flagged by carriers.'
-            });
-        }
-        
         return issues;
     }
 
     function detectEncoding(text) {
         const issues = [];
-        const seenIndices = new Set();
+        const GSM7_BASIC = "@£$¥èéùìòÇ\nØø\rÅåΔ_ΦΓΛΩΠΨΣΘΞ\x1BÆæßÉ !\"#¤%&'()*+,-./0123456789:;<=>?¡ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§¿abcdefghijklmnopqrstuvwxyzäöñüà";
+        const GSM7_EXTENDED = "^{}\\[~]|€";
+        const allGSM = GSM7_BASIC + GSM7_EXTENDED;
         
-        const emojiPattern = /[\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]|[\u{1F600}-\u{1F64F}]|[\u{1F680}-\u{1F6FF}]|[\u{1F900}-\u{1F9FF}]|[\u{1FA00}-\u{1FA6F}]|[\u{1FA70}-\u{1FAFF}]|[\u{2190}-\u{21FF}]|[\u{2300}-\u{23FF}]|[\u{2B50}-\u{2B55}]|[\u{3030}-\u{303F}]|[\u{FE00}-\u{FE0F}]|[\u{1F004}-\u{1F0CF}]|[\u{1F170}-\u{1F251}]/gu;
-        let match;
-        while ((match = emojiPattern.exec(text)) !== null) {
-            for (let i = match.index; i < match.index + match[0].length; i++) {
-                seenIndices.add(i);
-            }
-            issues.push({
-                type: 'encoding',
-                text: match[0],
-                start: match.index,
-                end: match.index + match[0].length,
-                description: 'Using emojis or special characters switches your message to Unicode encoding, which cuts segment capacity from 160 to 70 characters per segment. Long multipart messages are more likely to be flagged as spam, delayed, or dropped entirely by carriers.'
-            });
-        }
+        if (text.length === 0) return issues;
         
-        const unicodePattern = /[^\x00-\x7F]/g;
-        while ((match = unicodePattern.exec(text)) !== null) {
-            if (!seenIndices.has(match.index)) {
-                issues.push({
-                    type: 'encoding',
-                    text: match[0],
-                    start: match.index,
-                    end: match.index + match[0].length,
-                    description: 'Using emojis or special characters switches your message to Unicode encoding, which cuts segment capacity from 160 to 70 characters per segment. Long multipart messages are more likely to be flagged as spam, delayed, or dropped entirely by carriers.'
-                });
+        const seen = new Set();
+        const codePoints = Array.from(text);
+        let position = 0;
+        
+        for (let i = 0; i < codePoints.length; i++) {
+            const char = codePoints[i];
+            const charLen = char.length;
+            
+            if (!allGSM.includes(char) && char.trim() !== '') {
+                const code = char.codePointAt(0);
+                if (code > 0x7F) {
+                    if (!seen.has(position)) {
+                        seen.add(position);
+                        issues.push({
+                            type: 'encoding',
+                            text: char,
+                            start: position,
+                            end: position + charLen,
+                            description: 'Using emojis or special characters switches your message to Unicode encoding, which cuts segment capacity from 160 to 70 characters per segment. Long multipart messages are more likely to be flagged as spam, delayed, or dropped entirely by carriers.'
+                        });
+                    }
+                }
             }
+            
+            position += charLen;
         }
         
         return issues;
@@ -422,7 +399,17 @@
         let html = '';
         
         Object.entries(grouped).forEach(([type, typeIssues]) => {
-            const uniqueExamples = [...new Set(typeIssues.map(i => i.text))].slice(0, 3);
+            let uniqueExamples = [...new Set(typeIssues.map(i => i.text))];
+            if (type === 'formatting') {
+                uniqueExamples.sort((a, b) => {
+                    const aHasMixed = a.includes('!') && a.includes('?');
+                    const bHasMixed = b.includes('!') && b.includes('?');
+                    if (aHasMixed && !bHasMixed) return -1;
+                    if (!aHasMixed && bHasMixed) return 1;
+                    return b.length - a.length;
+                });
+            }
+            uniqueExamples = uniqueExamples.slice(0, 5);
             const description = typeIssues[0].description;
             
             html += `
@@ -438,12 +425,13 @@
                                 const match = ex.match(/^([!?])x(\d+)$/);
                                 if (match) {
                                     const punct = match[1];
-                                    const count = match[2];
-                                    return `<div class="warning-example warning-example-formatted">
-                                        <span class="warning-punct">${escapeHtml(punct)}</span>
-                                        <span class="warning-count">×${count}</span>
-                                    </div>`;
+                                    const count = parseInt(match[2], 10);
+                                    const repeatedPunct = punct.repeat(count);
+                                    return `<span class="warning-example">${escapeHtml(repeatedPunct)}</span>`;
                                 }
+                            }
+                            if (type === 'formatting' && /^[!?]+$/.test(ex) && ex.length >= 2) {
+                                return `<span class="warning-example">${escapeHtml(ex)}</span>`;
                             }
                             return `<span class="warning-example">${escapeHtml(ex)}</span>`;
                         }).join('')}

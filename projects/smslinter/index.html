@@ -71,12 +71,15 @@
                         <label for="sms-input">Message</label>
                         <span class="paste-hint">⌘V to paste</span>
                     </div>
-                    <textarea 
-                        id="sms-input" 
-                        class="sms-input" 
-                        placeholder="Type or paste your SMS message here..."
-                        rows="10"
-                    ></textarea>
+                    <div class="textarea-wrapper">
+                        <textarea 
+                            id="sms-input" 
+                            class="sms-input" 
+                            placeholder="Type or paste your SMS message here..."
+                            rows="10"
+                        ></textarea>
+                        <div id="highlight-overlay" class="highlight-overlay"></div>
+                    </div>
                 </div>
 
                 <div class="action-buttons">

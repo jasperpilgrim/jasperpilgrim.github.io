@@ -1,5 +1,6 @@
 (function() {
     const smsInput = document.getElementById('sms-input');
+    const highlightOverlay = document.getElementById('highlight-overlay');
     const warningsContainer = document.getElementById('warnings-container');
     const charCountEl = document.getElementById('char-count');
     const charMaxEl = document.getElementById('char-max');
@@ -357,6 +358,77 @@
         return div.innerHTML;
     }
 
+    function mergeRanges(ranges) {
+        if (ranges.length === 0) return [];
+        
+        const sorted = [...ranges].sort((a, b) => a.start - b.start);
+        const merged = [sorted[0]];
+        
+        for (let i = 1; i < sorted.length; i++) {
+            const current = sorted[i];
+            const last = merged[merged.length - 1];
+            
+            if (current.start <= last.end) {
+                last.end = Math.max(last.end, current.end);
+                if (!last.types) last.types = new Set([last.type]);
+                last.types.add(current.type);
+            } else {
+                merged.push(current);
+            }
+        }
+        
+        return merged;
+    }
+
+    function renderHighlights(text, issues) {
+        if (!highlightOverlay) {
+            console.warn('Highlight overlay not found');
+            return;
+        }
+        
+        if (text.length === 0 || issues.length === 0) {
+            highlightOverlay.textContent = '';
+            return;
+        }
+        
+        const ranges = issues.map(issue => ({
+            start: issue.start,
+            end: issue.end,
+            type: issue.type
+        }));
+        
+        const merged = mergeRanges(ranges);
+        
+        let html = '';
+        let lastIndex = 0;
+        
+        merged.forEach(range => {
+            if (range.start > lastIndex) {
+                html += escapeHtml(text.substring(lastIndex, range.start));
+            }
+            
+            const rangeText = text.substring(range.start, range.end);
+            const types = range.types ? Array.from(range.types) : [range.type];
+            const primaryType = types[0];
+            
+            html += `<span class="highlight ${primaryType}">${escapeHtml(rangeText)}</span>`;
+            lastIndex = range.end;
+        });
+        
+        if (lastIndex < text.length) {
+            html += escapeHtml(text.substring(lastIndex));
+        }
+        
+        highlightOverlay.innerHTML = html;
+    }
+
+    function syncScroll() {
+        if (highlightOverlay && smsInput) {
+            highlightOverlay.scrollTop = smsInput.scrollTop;
+            highlightOverlay.scrollLeft = smsInput.scrollLeft;
+        }
+    }
+
     function groupIssuesByType(issues) {
         const grouped = {};
         issues.forEach(issue => {
@@ -488,6 +560,8 @@
         renderWarnings(issues);
         renderSegments(text);
         renderPreview(text);
+        renderHighlights(text, issues);
+        syncScroll();
         
         const uniqueCategories = new Set(issues.map(issue => issue.type));
         const warningCount = uniqueCategories.size;
@@ -542,6 +616,23 @@
             auditText(text);
         }, 0);
     });
+
+    smsInput.addEventListener('scroll', syncScroll);
+
+    const textareaWrapper = smsInput.closest('.textarea-wrapper');
+    if (textareaWrapper) {
+        smsInput.addEventListener('focus', () => {
+            textareaWrapper.style.borderColor = 'var(--accent)';
+            textareaWrapper.style.boxShadow = '0 0 0 2px rgba(189, 147, 249, 0.15)';
+            textareaWrapper.style.backgroundColor = 'var(--bg-secondary)';
+        });
+        
+        smsInput.addEventListener('blur', () => {
+            textareaWrapper.style.borderColor = 'var(--border)';
+            textareaWrapper.style.boxShadow = 'none';
+            textareaWrapper.style.backgroundColor = 'var(--card-bg)';
+        });
+    }
 
     auditText('');
 })();

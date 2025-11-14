@@ -53,6 +53,14 @@
     box-sizing: border-box;
 }
 
+html {
+    background-color: #f8f8f2;
+}
+
+[data-theme="dark"] html {
+    background-color: #282a36;
+}
+
 p {
     line-height: 1.75;
     margin-bottom: 1.25em;

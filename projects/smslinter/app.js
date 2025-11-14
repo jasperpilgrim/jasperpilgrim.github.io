@@ -472,8 +472,13 @@
         
         Object.entries(grouped).forEach(([type, typeIssues]) => {
             let uniqueExamples = [...new Set(typeIssues.map(i => i.text))];
+            
             if (type === 'formatting') {
                 uniqueExamples.sort((a, b) => {
+                    const aIsPunct = /^[!?.]+$/.test(a);
+                    const bIsPunct = /^[!?.]+$/.test(b);
+                    if (aIsPunct && !bIsPunct) return -1;
+                    if (!aIsPunct && bIsPunct) return 1;
                     const aHasMixed = a.includes('!') && a.includes('?');
                     const bHasMixed = b.includes('!') && b.includes('?');
                     if (aHasMixed && !bHasMixed) return -1;
@@ -481,6 +486,7 @@
                     return b.length - a.length;
                 });
             }
+            
             uniqueExamples = uniqueExamples.slice(0, 5);
             const description = typeIssues[0].description;
             
@@ -493,19 +499,8 @@
                     <div class="warning-description">${description}</div>
                     <div class="warning-examples">
                         ${uniqueExamples.map(ex => {
-                            if (type === 'formatting' && /^[!?]x\d+$/.test(ex)) {
-                                const match = ex.match(/^([!?])x(\d+)$/);
-                                if (match) {
-                                    const punct = match[1];
-                                    const count = parseInt(match[2], 10);
-                                    const repeatedPunct = punct.repeat(count);
-                                    return `<span class="warning-example">${escapeHtml(repeatedPunct)}</span>`;
-                                }
-                            }
-                            if (type === 'formatting' && /^[!?]+$/.test(ex) && ex.length >= 2) {
-                                return `<span class="warning-example">${escapeHtml(ex)}</span>`;
-                            }
-                            return `<span class="warning-example">${escapeHtml(ex)}</span>`;
+                            const isPunct = type === 'formatting' && /^[!?.]+$/.test(ex);
+                            return `<span class="warning-example ${isPunct ? 'punctuation-example' : ''}">${escapeHtml(ex)}</span>`;
                         }).join('')}
                     </div>
                 </div>

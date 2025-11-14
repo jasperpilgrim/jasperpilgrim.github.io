@@ -899,7 +899,7 @@ body {
 .warning-examples {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.625rem;
+    gap: 0.5rem;
     margin-top: 0.5rem;
 }
 
@@ -916,10 +916,13 @@ body {
     display: inline-block;
 }
 
-.warning-example:hover {
-    opacity: 1;
-    border-color: var(--accent);
+.warning-example.punctuation-example {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    opacity: 0.9;
 }
+
 
 
 .tab-content::-webkit-scrollbar,

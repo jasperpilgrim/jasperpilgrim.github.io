@@ -672,6 +672,38 @@ body {
     border-left: 2px solid var(--border);
 }
 
+.preview-controls {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background-color: var(--bg);
+}
+
+.preview-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    color: var(--text-secondary);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.preview-toggle:hover {
+    border-color: var(--accent);
+    color: var(--text);
+}
+
+.preview-toggle.active {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+}
+
 .preview-container {
     display: flex;
     justify-content: center;

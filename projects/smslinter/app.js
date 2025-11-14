@@ -537,14 +537,36 @@
 
     function renderPreview(text) {
         const previewMessageEl = document.getElementById('preview-message');
-        if (!previewMessageEl) return;
+        const segmentsMessagesEl = document.getElementById('segments-messages');
         
         if (text.length === 0) {
-            previewMessageEl.textContent = 'Your message will appear here';
-            previewMessageEl.style.opacity = '0.5';
-        } else {
+            if (previewMessageEl) {
+                previewMessageEl.textContent = 'Your message will appear here';
+                previewMessageEl.style.opacity = '0.5';
+            }
+            if (segmentsMessagesEl) {
+                segmentsMessagesEl.innerHTML = '<div class="message-bubble"><div class="message-text" style="opacity: 0.5;">Your message will appear here</div><div class="message-time">Now</div></div>';
+            }
+            return;
+        }
+        
+        if (previewMessageEl) {
             previewMessageEl.textContent = text;
             previewMessageEl.style.opacity = '1';
+        }
+        
+        if (segmentsMessagesEl) {
+            const segments = splitIntoSegments(text);
+            let html = '';
+            segments.forEach((segment, index) => {
+                html += `
+                    <div class="message-bubble">
+                        <div class="message-text">${escapeHtml(segment.text)}</div>
+                        <div class="message-time">${index + 1}/${segments.length}</div>
+                    </div>
+                `;
+            });
+            segmentsMessagesEl.innerHTML = html;
         }
     }
 
@@ -627,6 +649,26 @@
             textareaWrapper.style.backgroundColor = 'var(--card-bg)';
         });
     }
+
+    const previewToggles = document.querySelectorAll('.preview-toggle');
+    const singlePreview = document.getElementById('single-preview');
+    const segmentsPreview = document.getElementById('segments-preview');
+    
+    previewToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            previewToggles.forEach(t => t.classList.remove('active'));
+            toggle.classList.add('active');
+            
+            const mode = toggle.dataset.mode;
+            if (mode === 'single') {
+                if (singlePreview) singlePreview.style.display = 'block';
+                if (segmentsPreview) segmentsPreview.style.display = 'none';
+            } else {
+                if (singlePreview) singlePreview.style.display = 'none';
+                if (segmentsPreview) segmentsPreview.style.display = 'block';
+            }
+        });
+    });
 
     auditText('');
 })();

@@ -77,7 +77,6 @@
                 <div class="input-section">
                     <div class="input-label-row">
                         <label for="sms-input">Message</label>
-                        <span class="paste-hint">⌘V to paste</span>
                     </div>
                     <div class="textarea-wrapper">
                         <textarea 
@@ -121,8 +120,12 @@
                         <div class="tab-placeholder">Segments view coming soon</div>
                     </div>
                     <div id="preview-tab" class="tab-pane preview-pane">
+                        <div class="preview-controls">
+                            <button class="preview-toggle active" data-mode="single">Single Message</button>
+                            <button class="preview-toggle" data-mode="segments">Segments</button>
+                        </div>
                         <div id="preview-container" class="preview-container">
-                            <div class="phone-preview">
+                            <div class="phone-preview" id="single-preview">
                                 <div class="phone-header">
                                     <div class="phone-notch"></div>
                                 </div>
@@ -133,6 +136,14 @@
                                             <div class="message-time">Now</div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="phone-preview segments-preview" id="segments-preview" style="display: none;">
+                                <div class="phone-header">
+                                    <div class="phone-notch"></div>
+                                </div>
+                                <div class="phone-content">
+                                    <div class="phone-messages" id="segments-messages"></div>
                                 </div>
                             </div>
                         </div>

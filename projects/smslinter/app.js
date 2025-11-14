@@ -24,8 +24,7 @@
         'AM', 'PM', 'EST', 'CST', 'MST', 'PST', 'EDT', 'CDT', 'MDT', 'PDT',
         'LLC', 'INC', 'LTD', 'CORP',
         'CEO', 'CFO', 'CTO', 'COO', 'VP', 'HR', 'IT', 'PR', 'QA',
-        'ASAP', 'ETA', 'FYI', 'FAQ', 'URL', 'PDF', 'SMS', 'MMS', 'API', 'SQL',
-        'TEAM', 'STAFF', 'FULL', 'STEAM'
+        'FAQ', 'URL', 'PDF', 'SMS', 'MMS', 'API', 'SQL'
     ]);
 
     function detectHighRiskLanguage(text) {

@@ -410,11 +410,15 @@ p {
 
 .footer {
     text-align: center;
-    padding: 2rem;
+    padding: 1rem 0;
     font-size: 0.9rem;
     color: var(--text-secondary);
     border-top: 1px solid var(--border);
     margin-top: auto;
+}
+
+.footer p {
+    margin-bottom: 0;
 }
 
 @media (max-width: 768px) {

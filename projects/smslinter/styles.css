@@ -53,6 +53,11 @@
     box-sizing: border-box;
 }
 
+p {
+    line-height: 1.75;
+    margin-bottom: 1.25em;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
     background-color: var(--bg);
@@ -949,12 +954,15 @@ body {
 
 .footer {
     text-align: center;
-    padding: 1.5rem 2rem;
+    padding: 1rem 0;
     font-size: 0.9rem;
     color: var(--text-secondary);
     border-top: 1px solid var(--border);
-    flex-shrink: 0;
-    background-color: var(--bg);
+    margin-top: auto;
+}
+
+.footer p {
+    margin-bottom: 0;
 }
 
 .left-panel::-webkit-scrollbar,

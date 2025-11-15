@@ -933,7 +933,7 @@ body {
 }
 
 .warning-description {
-    font-size: 0.8125rem;
+    font-size: 0.9375rem;
     line-height: 1.5;
     color: var(--warning-text);
     opacity: 0.85;
@@ -953,7 +953,7 @@ body {
     }
     
     .warning-description {
-        font-size: 0.875rem;
+        font-size: 0.9375rem;
         line-height: 1.6;
     }
     

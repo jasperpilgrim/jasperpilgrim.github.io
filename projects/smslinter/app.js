@@ -1,4 +1,4 @@
-(function() {
+(function () {
     const smsInput = document.getElementById('sms-input');
     const highlightOverlay = document.getElementById('highlight-overlay');
     const warningsContainer = document.getElementById('warnings-container');
@@ -30,7 +30,7 @@
     function detectHighRiskLanguage(text) {
         const issues = [];
         const highRiskPattern = /\b(win|winner|prize|claim\s+your\s+prize|cash|loan|debt\s*relief|credit\s+repair|refinance|work\s+from\s+home|make\s+money|passive\s+income|guaranteed\s+return|double\s+your\s+money|investment\s+opportunity|apply\s+now|act\s+now|limited\s+time|limited\s+offer|last\s+chance|hurry|exclusive|urgent|reply\s+now|buy\s+now|subscribe\s+now|casino|bet|gamble|jackpot|slots|poker|sportsbook|free\s+bet|spin\s+to\s+win|kush|weed|marijuana|cannabis|thc|cbd|vape|vaping|heroin|cocaine|meth|fentanyl|xanax|percocet|oxycodone|molly|adderall|alcohol|beer|wine|liquor|tobacco|cigarettes?|e-?cig(arette)?|porn|xxx|escort|hookup|adult|nude|erotic|viagra|cialis|sildenafil|tadalafil|cure|miracle\s+cure|lose\s+weight\s+(fast|now)|burn\s+fat|guaranteed\s+cure|no\s+prescription)\b/gi;
-        
+
         let match;
         while ((match = highRiskPattern.exec(text)) !== null) {
             issues.push({
@@ -41,7 +41,7 @@
                 description: 'High-risk language may trigger spam filters.'
             });
         }
-        
+
         return issues;
     }
 
@@ -49,17 +49,17 @@
         const issues = [];
         const seenIndices = new Set();
         const shorteners = ['bit.ly', 'tinyurl.com', 't.co', 'goo.gl', 'is.gd', 'ow.ly', 'rebrand.ly', 'cutt.ly'];
-        
+
         const urlPattern = /(https?:\/\/[^\s]+)|(www\.[^\s]+)|(\b[a-z0-9-]+\.(?:com|org|net|edu|gov|io|co|app|dev|ai|xyz|me|tv|info|biz)(?:\/[^\s]*)?)/gi;
-        
+
         let match;
         while ((match = urlPattern.exec(text)) !== null) {
             const matchText = match[0];
             const start = match.index;
             const end = start + matchText.length;
-            
+
             if (seenIndices.has(start)) continue;
-            
+
             const emailPattern = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
             if (start > 0) {
                 const before = text.substring(Math.max(0, start - 30), start);
@@ -67,9 +67,9 @@
                     continue;
                 }
             }
-            
+
             seenIndices.add(start);
-            
+
             issues.push({
                 type: 'url',
                 text: matchText,
@@ -78,14 +78,14 @@
                 description: 'Links can trigger additional carrier scrutiny. Avoid URL shortening services (bit.ly, tinyurl, etc.) as they are frequently flagged.'
             });
         }
-        
+
         return issues;
     }
 
     function detectSymbols(text) {
         const issues = [];
         const seenIndices = new Set();
-        
+
         const emailPattern = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
         let match;
         while ((match = emailPattern.exec(text)) !== null) {
@@ -100,7 +100,7 @@
                 description: 'Currency symbols and email addresses may reduce deliverability. Consider using "USD" or "CAN" instead of currency symbols.'
             });
         }
-        
+
         const dollarPattern = /\$/g;
         while ((match = dollarPattern.exec(text)) !== null) {
             if (!seenIndices.has(match.index)) {
@@ -113,7 +113,7 @@
                 });
             }
         }
-        
+
         const atSymbolPattern = /@/g;
         while ((match = atSymbolPattern.exec(text)) !== null) {
             if (!seenIndices.has(match.index)) {
@@ -130,13 +130,13 @@
                 }
             }
         }
-        
+
         return issues;
     }
 
     function detectFormatting(text) {
         const issues = [];
-        
+
         const minLen = 3;
         const regex = new RegExp(`\\b[A-Z]{${minLen},}\\b`, 'g');
         let match;
@@ -152,11 +152,11 @@
                 });
             }
         }
-        
+
         const punctuationSequences = [];
         let currentSequence = '';
         let currentStart = -1;
-        
+
         for (let i = 0; i < text.length; i++) {
             const char = text[i];
             if (char === '!' || char === '?' || char === '.') {
@@ -178,7 +178,7 @@
                 }
             }
         }
-        
+
         if (currentSequence.length > 0) {
             punctuationSequences.push({
                 start: currentStart,
@@ -188,7 +188,7 @@
                 char: currentSequence[0]
             });
         }
-        
+
         punctuationSequences.forEach(seq => {
             if (seq.length >= 2) {
                 issues.push({
@@ -211,7 +211,7 @@
                 }
             }
         });
-        
+
         return issues;
     }
 
@@ -220,17 +220,17 @@
         const GSM7_BASIC = "@£$¥èéùìòÇ\nØø\rÅåΔ_ΦΓΛΩΠΨΣΘΞ\x1BÆæßÉ !\"#¤%&'()*+,-./0123456789:;<=>?¡ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§¿abcdefghijklmnopqrstuvwxyzäöñüà";
         const GSM7_EXTENDED = "^{}\\[~]|€";
         const allGSM = GSM7_BASIC + GSM7_EXTENDED;
-        
+
         if (text.length === 0) return issues;
-        
+
         const seen = new Set();
         const codePoints = Array.from(text);
         let position = 0;
-        
+
         for (let i = 0; i < codePoints.length; i++) {
             const char = codePoints[i];
             const charLen = char.length;
-            
+
             if (!allGSM.includes(char) && char.trim() !== '') {
                 const code = char.codePointAt(0);
                 if (code > 0x7F) {
@@ -246,10 +246,10 @@
                     }
                 }
             }
-            
+
             position += charLen;
         }
-        
+
         return issues;
     }
 
@@ -261,9 +261,9 @@
             ...detectFormatting(text),
             ...detectEncoding(text)
         ];
-        
+
         allIssues.sort((a, b) => a.start - b.start);
-        
+
         return allIssues;
     }
 
@@ -273,18 +273,18 @@
 
     function splitIntoSegments(text) {
         if (text.length === 0) return [];
-        
+
         const hasUnicodeChars = hasUnicode(text);
         const segments = [];
-        
+
         if (hasUnicodeChars) {
             const firstSegmentLimit = 70;
             const subsequentSegmentLimit = 67;
             const maxSegments = 10;
-            
+
             let remaining = text;
             let segmentIndex = 0;
-            
+
             while (remaining.length > 0 && segmentIndex < maxSegments) {
                 const limit = segmentIndex === 0 ? firstSegmentLimit : subsequentSegmentLimit;
                 const segment = remaining.substring(0, limit);
@@ -301,10 +301,10 @@
             const firstSegmentLimit = 160;
             const subsequentSegmentLimit = 153;
             const maxSegments = 10;
-            
+
             let remaining = text;
             let segmentIndex = 0;
-            
+
             while (remaining.length > 0 && segmentIndex < maxSegments) {
                 const limit = segmentIndex === 0 ? firstSegmentLimit : subsequentSegmentLimit;
                 const segment = remaining.substring(0, limit);
@@ -318,7 +318,7 @@
                 segmentIndex++;
             }
         }
-        
+
         return segments;
     }
 
@@ -332,7 +332,7 @@
         const segmentCount = calculateSegments(text);
         const encoding = hasUnicode(text) ? 'Unicode' : 'GSM-7';
         const hasUnicodeChars = hasUnicode(text);
-        
+
         let maxChars, maxTotalChars;
         if (hasUnicodeChars) {
             maxChars = 70;
@@ -341,9 +341,9 @@
             maxChars = 160;
             maxTotalChars = 1600;
         }
-        
+
         const progress = Math.min((charCount / maxTotalChars) * 100, 100);
-        
+
         charCountEl.textContent = charCount;
         charMaxEl.textContent = `/${maxChars}`;
         segmentCountEl.textContent = segmentCount;
@@ -359,14 +359,14 @@
 
     function mergeRanges(ranges) {
         if (ranges.length === 0) return [];
-        
+
         const sorted = [...ranges].sort((a, b) => a.start - b.start);
         const merged = [sorted[0]];
-        
+
         for (let i = 1; i < sorted.length; i++) {
             const current = sorted[i];
             const last = merged[merged.length - 1];
-            
+
             if (current.start <= last.end) {
                 last.end = Math.max(last.end, current.end);
                 if (!last.types) last.types = new Set([last.type]);
@@ -375,7 +375,7 @@
                 merged.push(current);
             }
         }
-        
+
         return merged;
     }
 
@@ -384,40 +384,40 @@
             console.warn('Highlight overlay not found');
             return;
         }
-        
+
         if (text.length === 0 || issues.length === 0) {
             highlightOverlay.textContent = '';
             return;
         }
-        
+
         const ranges = issues.map(issue => ({
             start: issue.start,
             end: issue.end,
             type: issue.type
         }));
-        
+
         const merged = mergeRanges(ranges);
-        
+
         let html = '';
         let lastIndex = 0;
-        
+
         merged.forEach(range => {
             if (range.start > lastIndex) {
                 html += escapeHtml(text.substring(lastIndex, range.start));
             }
-            
+
             const rangeText = text.substring(range.start, range.end);
             const types = range.types ? Array.from(range.types) : [range.type];
             const primaryType = types[0];
-            
+
             html += `<span class="highlight ${primaryType}">${escapeHtml(rangeText)}</span>`;
             lastIndex = range.end;
         });
-        
+
         if (lastIndex < text.length) {
             html += escapeHtml(text.substring(lastIndex));
         }
-        
+
         highlightOverlay.innerHTML = html;
     }
 
@@ -465,13 +465,13 @@
             `;
             return;
         }
-        
+
         const grouped = groupIssuesByType(issues);
         let html = '';
-        
+
         Object.entries(grouped).forEach(([type, typeIssues]) => {
             let uniqueExamples = [...new Set(typeIssues.map(i => i.text))];
-            
+
             if (type === 'formatting') {
                 uniqueExamples.sort((a, b) => {
                     const aIsPunct = /^[!?.]+$/.test(a);
@@ -485,39 +485,37 @@
                     return b.length - a.length;
                 });
             }
-            
-            uniqueExamples = uniqueExamples.slice(0, 5);
             const description = typeIssues[0].description;
-            
+
             html += `
                 <div class="warning-item">
                     <div class="warning-item-header">
                         <span class="warning-icon">${getWarningIcon(type)}</span>
                         <span class="warning-title">${getWarningTitle(type)}</span>
-                        <div class="warning-examples">
-                            ${uniqueExamples.map(ex => {
-                                const isPunct = type === 'formatting' && /^[!?.]+$/.test(ex);
-                                return `<span class="warning-example ${isPunct ? 'punctuation-example' : ''}">${escapeHtml(ex)}</span>`;
-                            }).join('')}
-                        </div>
                     </div>
                     <div class="warning-description">${description}</div>
+                    <div class="warning-examples">
+                        ${uniqueExamples.map(ex => {
+                const isPunct = type === 'formatting' && /^[!?.]+$/.test(ex);
+                return `<span class="warning-example ${isPunct ? 'punctuation-example' : ''}">${escapeHtml(ex)}</span>`;
+            }).join('')}
+                    </div>
                 </div>
             `;
         });
-        
+
         warningsContainer.innerHTML = html;
     }
 
     function renderSegments(text) {
         const segmentsContainer = document.getElementById('segments-tab');
         const segments = splitIntoSegments(text);
-        
+
         if (segments.length === 0) {
             segmentsContainer.innerHTML = '<div class="tab-placeholder">No message to segment</div>';
             return;
         }
-        
+
         let html = '<div class="segments-list">';
         segments.forEach(segment => {
             html += `
@@ -531,14 +529,14 @@
             `;
         });
         html += '</div>';
-        
+
         segmentsContainer.innerHTML = html;
     }
 
     function renderPreview(text) {
         const previewMessageEl = document.getElementById('preview-message');
         const segmentsMessagesEl = document.getElementById('segments-messages');
-        
+
         if (text.length === 0) {
             if (previewMessageEl) {
                 previewMessageEl.textContent = 'Your message will appear here';
@@ -549,12 +547,12 @@
             }
             return;
         }
-        
+
         if (previewMessageEl) {
             previewMessageEl.textContent = text;
             previewMessageEl.style.opacity = '1';
         }
-        
+
         if (segmentsMessagesEl) {
             const segments = splitIntoSegments(text);
             let html = '';
@@ -578,10 +576,10 @@
         renderPreview(text);
         renderHighlights(text, issues);
         syncScroll();
-        
+
         const uniqueCategories = new Set(issues.map(issue => issue.type));
         const warningCount = uniqueCategories.size;
-        
+
         warningCountEl.textContent = warningCount;
         warningsBadgeEl.textContent = warningCount;
     }
@@ -589,10 +587,10 @@
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             const targetTab = tab.dataset.tab;
-            
+
             tabs.forEach(t => t.classList.remove('active'));
             tabPanes.forEach(p => p.classList.remove('active'));
-            
+
             tab.classList.add('active');
             document.getElementById(`${targetTab}-tab`).classList.add('active');
         });
@@ -642,7 +640,7 @@
             textareaWrapper.style.boxShadow = '0 0 0 2px rgba(189, 147, 249, 0.15)';
             textareaWrapper.style.backgroundColor = 'var(--bg-secondary)';
         });
-        
+
         smsInput.addEventListener('blur', () => {
             textareaWrapper.style.borderColor = 'var(--border)';
             textareaWrapper.style.boxShadow = 'none';
@@ -653,12 +651,12 @@
     const previewToggles = document.querySelectorAll('.preview-toggle');
     const singlePreview = document.getElementById('single-preview');
     const segmentsPreview = document.getElementById('segments-preview');
-    
+
     previewToggles.forEach(toggle => {
         toggle.addEventListener('click', () => {
             previewToggles.forEach(t => t.classList.remove('active'));
             toggle.classList.add('active');
-            
+
             const mode = toggle.dataset.mode;
             if (mode === 'single') {
                 if (singlePreview) singlePreview.style.display = 'block';

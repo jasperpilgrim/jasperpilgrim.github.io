@@ -490,18 +490,18 @@
             const description = typeIssues[0].description;
             
             html += `
-                <div class="warning-card">
-                    <div class="warning-header">
+                <div class="warning-item">
+                    <div class="warning-item-header">
                         <span class="warning-icon">${getWarningIcon(type)}</span>
                         <span class="warning-title">${getWarningTitle(type)}</span>
+                        <div class="warning-examples">
+                            ${uniqueExamples.map(ex => {
+                                const isPunct = type === 'formatting' && /^[!?.]+$/.test(ex);
+                                return `<span class="warning-example ${isPunct ? 'punctuation-example' : ''}">${escapeHtml(ex)}</span>`;
+                            }).join('')}
+                        </div>
                     </div>
                     <div class="warning-description">${description}</div>
-                    <div class="warning-examples">
-                        ${uniqueExamples.map(ex => {
-                            const isPunct = type === 'formatting' && /^[!?.]+$/.test(ex);
-                            return `<span class="warning-example ${isPunct ? 'punctuation-example' : ''}">${escapeHtml(ex)}</span>`;
-                        }).join('')}
-                    </div>
                 </div>
             `;
         });

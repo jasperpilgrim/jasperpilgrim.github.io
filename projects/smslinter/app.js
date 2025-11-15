@@ -348,6 +348,13 @@
         charMaxEl.textContent = `/${maxChars}`;
         segmentCountEl.textContent = segmentCount;
         encodingTypeEl.textContent = encoding;
+
+        if (hasUnicodeChars) {
+            encodingTypeEl.classList.add('unicode');
+        } else {
+            encodingTypeEl.classList.remove('unicode');
+        }
+
         progressFillEl.style.width = `${progress}%`;
     }
 

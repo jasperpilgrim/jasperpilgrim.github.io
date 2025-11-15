@@ -289,6 +289,11 @@ body {
     text-align: center;
     font-family: inherit;
     letter-spacing: 0.02em;
+    transition: all 0.2s ease;
+}
+
+.encoding-badge.unicode {
+    color: var(--warning-text);
 }
 
 .char-display {

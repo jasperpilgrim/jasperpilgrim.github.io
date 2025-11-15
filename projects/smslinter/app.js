@@ -8,7 +8,6 @@
     const encodingTypeEl = document.getElementById('encoding-badge');
     const warningCountEl = document.getElementById('warning-count');
     const warningsBadgeEl = document.getElementById('warnings-badge');
-    const progressFillEl = document.getElementById('progress-fill');
     const tabs = document.querySelectorAll('.tab');
     const tabPanes = document.querySelectorAll('.tab-pane');
 
@@ -342,8 +341,6 @@
             maxTotalChars = 1600;
         }
 
-        const progress = Math.min((charCount / maxTotalChars) * 100, 100);
-
         charCountEl.textContent = charCount;
         charMaxEl.textContent = `/${maxChars}`;
         segmentCountEl.textContent = segmentCount;
@@ -355,7 +352,11 @@
             encodingTypeEl.classList.remove('unicode');
         }
 
-        progressFillEl.style.width = `${progress}%`;
+        if (charCount > maxChars) {
+            charCountEl.classList.add('exceeded');
+        } else {
+            charCountEl.classList.remove('exceeded');
+        }
     }
 
     function escapeHtml(text) {

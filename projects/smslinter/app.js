@@ -75,7 +75,7 @@
                 text: matchText,
                 start: start,
                 end: end,
-                description: 'Links can trigger additional carrier scrutiny. Avoid URL shortening services (bit.ly, tinyurl, etc.) as they are frequently flagged'
+                description: 'Links can trigger additional carrier scrutiny. Avoid URL shortening services (bit.ly, tinyurl, etc.) as they are frequently flagged.'
             });
         }
         
@@ -97,7 +97,7 @@
                 text: match[0],
                 start: match.index,
                 end: match.index + match[0].length,
-                description: 'Currency symbols and email addresses may reduce deliverability. Consider using "USD" or "CAN" instead of $ symbols.'
+                description: 'Currency symbols and email addresses may reduce deliverability. Consider using "USD" or "CAN" instead of currency symbols.'
             });
         }
         
@@ -109,7 +109,7 @@
                     text: '$',
                     start: match.index,
                     end: match.index + 1,
-                    description: 'Currency symbols and email addresses may reduce deliverability. Consider using "USD" or "CAN" instead of $ symbols.'
+                    description: 'Currency symbols and email addresses may reduce deliverability. Consider using "USD" or "CAN" instead of currency symbols.'
                 });
             }
         }
@@ -125,7 +125,7 @@
                         text: '@',
                         start: match.index,
                         end: match.index + 1,
-                        description: 'Currency symbols and email addresses may reduce deliverability. Consider using "USD" or "CAN" instead of $ symbols.'
+                        description: 'Currency symbols and email addresses may reduce deliverability. Consider using "USD" or "CAN" instead of currency symbols.'
                     });
                 }
             }
@@ -148,7 +148,7 @@
                     text: word,
                     start: match.index,
                     end: match.index + word.length,
-                    description: 'Excessive capitalization, multiple punctuation marks (!!, ???), or aggressive formatting may be flagged by carriers as potential spam.'
+                    description: 'Excessive capitalization or multiple punctuation marks (!!, ???) may be flagged by carriers as potential spam.'
                 });
             }
         }
@@ -196,7 +196,7 @@
                     text: seq.text,
                     start: seq.start,
                     end: seq.end,
-                    description: 'Excessive capitalization, multiple punctuation marks (!!, ???), or aggressive formatting may be flagged by carriers as potential spam.'
+                    description: 'Excessive capitalization or multiple punctuation marks (!!, ???) may be flagged by carriers as potential spam.'
                 });
             } else if (seq.length === 1 && seq.char === '!') {
                 const totalExclamations = punctuationSequences.filter(s => s.char === '!').length;
@@ -206,7 +206,7 @@
                         text: seq.text,
                         start: seq.start,
                         end: seq.end,
-                        description: 'Excessive capitalization, multiple punctuation marks (!!, ???), or aggressive formatting may be flagged by carriers as potential spam.'
+                        description: 'Excessive capitalization or multiple punctuation marks (!!, ???) may be flagged by carriers as potential spam.'
                     });
                 }
             }

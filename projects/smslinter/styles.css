@@ -948,7 +948,7 @@ body {
     border: 1px solid var(--warning-border);
     border-radius: 3px;
     padding: 0.25rem 0.5rem;
-    font-size: 0.8125rem;
+    font-size: 0.78125rem;
     font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
     color: var(--warning-text);
     opacity: 0.8;
@@ -958,7 +958,7 @@ body {
 
 .warning-example.punctuation-example {
     padding: 0.2rem 0.4rem;
-    font-size: 0.8125rem;
+    font-size: 0.78125rem;
     letter-spacing: 0.05em;
     opacity: 0.9;
 }

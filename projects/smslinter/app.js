@@ -465,12 +465,12 @@
     function renderWarnings(issues) {
         if (issues.length === 0) {
             warningsContainer.innerHTML = `
-                <div class="empty-state">
-                    <div class="empty-icon">✓</div>
-                    <div class="empty-title">No issues detected</div>
-                    <div class="empty-message">Your message looks clean!</div>
-                </div>
-            `;
+                        <div class="empty-state">
+                            <div class="empty-icon">✓</div>
+                            <div class="empty-title">No issues detected</div>
+                            <div class="empty-message">Your message looks clean!</div>
+                        </div>
+                    `;
             return;
         }
 
@@ -496,13 +496,14 @@
             const description = typeIssues[0].description;
 
             html += `
-                <div class="warning-item">
-                    <div class="warning-item-header">
+                <div class="warning-list-item">
+                    <div class="warning-list-header">
                         <span class="warning-icon">${getWarningIcon(type)}</span>
                         <span class="warning-title">${getWarningTitle(type)}</span>
                     </div>
-                    <div class="warning-description">${description}</div>
-                    <div class="warning-examples">
+                    <div class="warning-list-description">${description}</div>
+                    <div class="warning-list-examples">
+                        <span class="warning-examples-label">Found:</span>
                         ${uniqueExamples.map(ex => {
                 const isPunct = type === 'formatting' && /^[!?.]+$/.test(ex);
                 return `<span class="warning-example ${isPunct ? 'punctuation-example' : ''}">${escapeHtml(ex)}</span>`;

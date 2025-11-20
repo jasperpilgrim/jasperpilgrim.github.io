@@ -631,11 +631,6 @@
 
     function shareMessage() {
         const text = smsInput.value;
-        if (!text.trim()) {
-            alert('Please enter a message to share');
-            return;
-        }
-        
         const encoded = encodeURIComponent(text);
         const shareUrl = window.location.origin + window.location.pathname + '?share=' + encoded;
 

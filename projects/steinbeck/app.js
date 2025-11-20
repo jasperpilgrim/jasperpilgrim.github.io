@@ -2,6 +2,7 @@
 	const markdownInput = document.getElementById('markdown-input');
 	const markdownPreview = document.getElementById('markdown-preview');
 	const editorContainer = document.getElementById('editor-container');
+	const editorPanelsWrapper = document.querySelector('.editor-panels-wrapper');
 	const editorPanel = document.getElementById('editor-panel');
 	const previewPanel = document.getElementById('preview-panel');
 	const clearBtn = document.getElementById('clear-btn');
@@ -12,8 +13,7 @@
 	const editorOnlyBtn = document.getElementById('editor-only-btn');
 	const splitViewBtn = document.getElementById('split-view-btn');
 	const previewOnlyBtn = document.getElementById('preview-only-btn');
-	const fullscreenEditorBtn = document.getElementById('fullscreen-editor-btn');
-	const fullscreenPreviewBtn = document.getElementById('fullscreen-preview-btn');
+	const fullscreenBtn = document.getElementById('fullscreen-btn');
 	const exportMenu = document.getElementById('export-menu');
 	const toolbarBtns = document.querySelectorAll('.toolbar-btn');
 	const STORAGE_KEY = 'steinbeck-markdown-content';
@@ -216,23 +216,23 @@
 			editorOnlyBtn.classList.add('active');
 			editorPanel.style.display = 'flex';
 			previewPanel.style.display = 'none';
-			editorContainer.style.gridTemplateColumns = '1fr';
+			editorPanelsWrapper.style.gridTemplateColumns = '1fr';
 		} else if (mode === 'preview') {
 			previewOnlyBtn.classList.add('active');
 			editorPanel.style.display = 'none';
 			previewPanel.style.display = 'flex';
-			editorContainer.style.gridTemplateColumns = '1fr';
+			editorPanelsWrapper.style.gridTemplateColumns = '1fr';
 		} else {
 			splitViewBtn.classList.add('active');
 			editorPanel.style.display = 'flex';
 			previewPanel.style.display = 'flex';
-			editorContainer.style.gridTemplateColumns = '1fr 1fr';
+			editorPanelsWrapper.style.gridTemplateColumns = '1fr 1fr';
 		}
 	}
 
-	function toggleFullscreen(element) {
+	function toggleFullscreen() {
 		if (!document.fullscreenElement) {
-			element.requestFullscreen().catch(err => {
+			editorContainer.requestFullscreen().catch(err => {
 				console.error('Error attempting to enable fullscreen:', err);
 			});
 		} else {
@@ -567,8 +567,7 @@ ${html}
 	splitViewBtn.addEventListener('click', () => setViewMode('split'));
 	previewOnlyBtn.addEventListener('click', () => setViewMode('preview'));
 
-	fullscreenEditorBtn.addEventListener('click', () => toggleFullscreen(editorPanel));
-	fullscreenPreviewBtn.addEventListener('click', () => toggleFullscreen(previewPanel));
+	fullscreenBtn.addEventListener('click', toggleFullscreen);
 
 	exportBtn.addEventListener('click', function (e) {
 		e.stopPropagation();

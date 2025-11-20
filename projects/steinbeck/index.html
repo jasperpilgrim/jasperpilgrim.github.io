@@ -48,18 +48,20 @@
             <p>Markdown editor with live preview</p>
         </header>
 
-        <div class="view-controls">
-            <button class="view-btn" id="editor-only-btn" title="Editor only">Editor</button>
-            <button class="view-btn active" id="split-view-btn" title="Split view">Split</button>
-            <button class="view-btn" id="preview-only-btn" title="Preview only">Preview</button>
-        </div>
-
         <div class="editor-container" id="editor-container">
+            <div class="container-header">
+                <div class="view-controls">
+                    <button class="view-btn" id="editor-only-btn" title="Editor only">Editor</button>
+                    <button class="view-btn active" id="split-view-btn" title="Split view">Split</button>
+                    <button class="view-btn" id="preview-only-btn" title="Preview only">Preview</button>
+                    <button class="view-btn" id="fullscreen-btn" title="Fullscreen">⛶</button>
+                </div>
+            </div>
+            <div class="editor-panels-wrapper">
             <div class="editor-panel" id="editor-panel">
                 <div class="panel-header">
                     <span class="panel-title">Editor</span>
                     <div class="panel-actions">
-                        <button class="action-btn" id="fullscreen-editor-btn" title="Fullscreen">⛶</button>
                         <button class="action-btn" id="clear-btn">Clear</button>
                         <button class="action-btn" id="copy-btn">Copy</button>
                     </div>
@@ -83,7 +85,6 @@
                     <span class="panel-title">Preview</span>
                     <div class="panel-actions">
                         <button class="action-btn" id="share-btn" title="Share">Share</button>
-                        <button class="action-btn" id="fullscreen-preview-btn" title="Fullscreen">⛶</button>
                         <button class="action-btn" id="print-btn">Print</button>
                         <div class="export-dropdown">
                             <button class="action-btn" id="export-btn">Export ▼</button>
@@ -96,6 +97,7 @@
                     </div>
                 </div>
                 <div id="markdown-preview" class="markdown-preview"></div>
+            </div>
             </div>
         </div>
     </main>

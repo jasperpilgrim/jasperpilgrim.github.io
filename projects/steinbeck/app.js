@@ -296,31 +296,6 @@ ${html}
 			a.click();
 			document.body.removeChild(a);
 			URL.revokeObjectURL(url);
-		} else if (format === 'pdf') {
-			const printWindow = window.open('', '_blank');
-			printWindow.document.write(`
-				<!DOCTYPE html>
-				<html>
-				<head>
-					<meta charset="UTF-8">
-					<title>Document</title>
-					<style>
-						body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem; line-height: 1.75; }
-						h1, h2, h3 { margin-top: 1.5em; }
-						code { background: #f5f5f5; padding: 0.2em 0.4em; border-radius: 3px; }
-						pre { background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto; }
-						@media print { body { padding: 1rem; } }
-					</style>
-				</head>
-				<body>
-					${html}
-				</body>
-				</html>
-			`);
-			printWindow.document.close();
-			setTimeout(() => {
-				printWindow.print();
-			}, 250);
 		}
 	}
 

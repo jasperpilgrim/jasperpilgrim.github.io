@@ -60,29 +60,33 @@
             <div class="editor-panels-wrapper">
             <div class="editor-panel" id="editor-panel">
                 <div class="panel-header">
-                    <span class="panel-title">Editor</span>
+                    <div class="panel-header-left">
+                        <span class="panel-title">Editor</span>
+                        <div class="toolbar">
+                            <button class="toolbar-btn" data-action="h1" title="Heading 1">H1</button>
+                            <button class="toolbar-btn" data-action="h2" title="Heading 2">H2</button>
+                            <button class="toolbar-btn" data-action="h3" title="Heading 3">H3</button>
+                            <button class="toolbar-btn" data-action="bold" title="Bold">B</button>
+                            <button class="toolbar-btn" data-action="italic" title="Italic">I</button>
+                            <button class="toolbar-btn" data-action="code" title="Inline code">`</button>
+                            <button class="toolbar-btn" data-action="link" title="Link">🔗</button>
+                            <button class="toolbar-btn" data-action="list" title="List">•</button>
+                            <button class="toolbar-btn" data-action="quote" title="Quote">"</button>
+                        </div>
+                    </div>
                     <div class="panel-actions">
                         <button class="action-btn" id="clear-btn">Clear</button>
                         <button class="action-btn" id="copy-btn">Copy</button>
                     </div>
-                </div>
-                <div class="toolbar">
-                    <button class="toolbar-btn" data-action="h1" title="Heading 1">H1</button>
-                    <button class="toolbar-btn" data-action="h2" title="Heading 2">H2</button>
-                    <button class="toolbar-btn" data-action="h3" title="Heading 3">H3</button>
-                    <button class="toolbar-btn" data-action="bold" title="Bold">B</button>
-                    <button class="toolbar-btn" data-action="italic" title="Italic">I</button>
-                    <button class="toolbar-btn" data-action="code" title="Inline code">`</button>
-                    <button class="toolbar-btn" data-action="link" title="Link">🔗</button>
-                    <button class="toolbar-btn" data-action="list" title="List">•</button>
-                    <button class="toolbar-btn" data-action="quote" title="Quote">"</button>
                 </div>
                 <textarea id="markdown-input" class="markdown-editor" placeholder="Start writing your markdown here..."></textarea>
             </div>
 
             <div class="preview-panel" id="preview-panel">
                 <div class="panel-header">
-                    <span class="panel-title">Preview</span>
+                    <div class="panel-header-left">
+                        <span class="panel-title">Preview</span>
+                    </div>
                     <div class="panel-actions">
                         <button class="action-btn" id="share-btn" title="Share">Share</button>
                         <button class="action-btn" id="print-btn">Print</button>
@@ -91,7 +95,6 @@
                             <div class="export-menu" id="export-menu">
                                 <button class="export-option" data-format="md">Markdown</button>
                                 <button class="export-option" data-format="html">HTML</button>
-                                <button class="export-option" data-format="pdf">PDF</button>
                             </div>
                         </div>
                     </div>

@@ -191,7 +191,6 @@ body {
 .app-header {
     padding: 1rem 2rem;
     flex-shrink: 0;
-    border-bottom: 1px solid var(--border);
     background-color: var(--bg);
 }
 
@@ -219,9 +218,9 @@ body {
 }
 
 .view-btn {
-    background: none;
-    border: 1px solid var(--border);
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    border-radius: 6px;
     padding: 0.5rem 1rem;
     font-size: 0.8125rem;
     font-weight: 500;
@@ -232,14 +231,13 @@ body {
 }
 
 .view-btn:hover {
-    background-color: var(--border);
+    background-color: rgba(255, 255, 255, 0.1);
     color: var(--text);
 }
 
 .view-btn.active {
     background-color: var(--accent);
     color: var(--bg);
-    border-color: var(--accent);
 }
 
 .editor-container {
@@ -250,16 +248,15 @@ body {
     max-height: 100%;
     overflow: hidden;
     background-color: #282a36;
-    border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: 12px;
     margin: 1.5rem 2rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
 }
 
 .container-header {
     display: flex;
     justify-content: center;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--border);
+    padding: 1rem 1rem;
     background-color: transparent;
 }
 
@@ -283,16 +280,24 @@ body {
 }
 
 .editor-panel {
-    border-right: 1px solid var(--border);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .panel-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--border);
-    background-color: transparent;
+    padding: 0.875rem 1.25rem;
+    background-color: rgba(255, 255, 255, 0.02);
+    gap: 1rem;
+    min-height: 3.5rem;
+}
+
+.panel-header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
 }
 
 .panel-title {
@@ -309,10 +314,10 @@ body {
 }
 
 .action-btn {
-    background: none;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 0.375rem 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 0.875rem;
     font-size: 0.8125rem;
     font-weight: 500;
     color: var(--text-secondary);
@@ -322,38 +327,34 @@ body {
 }
 
 .action-btn:hover {
-    background-color: var(--border);
+    background-color: rgba(255, 255, 255, 0.1);
     color: var(--text);
-    border-color: var(--accent);
 }
 
 .toolbar {
     display: flex;
-    gap: 0.25rem;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--border);
-    background-color: transparent;
+    gap: 0.375rem;
     flex-wrap: wrap;
 }
 
 .toolbar-btn {
-    background: none;
-    border: 1px solid var(--border);
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    border-radius: 6px;
     padding: 0.375rem 0.625rem;
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     font-weight: 500;
     color: var(--text-secondary);
     cursor: pointer;
     transition: all 0.2s ease;
     font-family: inherit;
     min-width: 2rem;
+    height: 1.875rem;
 }
 
 .toolbar-btn:hover {
-    background-color: var(--border);
+    background-color: rgba(255, 255, 255, 0.12);
     color: var(--text);
-    border-color: var(--accent);
 }
 
 .export-dropdown {
@@ -366,13 +367,15 @@ body {
     position: absolute;
     top: 100%;
     right: 0;
-    margin-top: 0.25rem;
-    background-color: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 4px;
+    margin-top: 0.5rem;
+    background-color: rgba(40, 42, 54, 0.98);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 8px;
     min-width: 120px;
     z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
 }
 
 .export-option {
@@ -441,13 +444,13 @@ body {
 
 .markdown-preview h1 {
     font-size: 2em;
-    border-bottom: 2px solid var(--border);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding-bottom: 0.5em;
 }
 
 .markdown-preview h2 {
     font-size: 1.5em;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     padding-bottom: 0.5em;
 }
 
@@ -470,9 +473,9 @@ body {
 }
 
 .markdown-preview code {
-    background-color: var(--bg-secondary);
-    border: 1px solid var(--border);
-    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: none;
+    border-radius: 4px;
     padding: 0.125rem 0.375rem;
     font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
     font-size: 0.875em;
@@ -480,9 +483,9 @@ body {
 }
 
 .markdown-preview pre {
-    background-color: var(--bg-secondary);
-    border: 1px solid var(--border);
-    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: none;
+    border-radius: 8px;
     padding: 1rem;
     overflow-x: auto;
     margin-bottom: 1em;
@@ -498,7 +501,7 @@ body {
 
 .markdown-preview pre[class*="language-"] {
     background: #282a36 !important;
-    border: 1px solid var(--border);
+    border: none;
 }
 
 .markdown-preview code[class*="language-"] {
@@ -603,19 +606,19 @@ body {
 
 .markdown-preview table th,
 .markdown-preview table td {
-    border: 1px solid var(--border);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 0.5rem;
     text-align: left;
 }
 
 .markdown-preview table th {
-    background-color: var(--bg-secondary);
+    background-color: rgba(255, 255, 255, 0.05);
     font-weight: 600;
 }
 
 .markdown-preview hr {
     border: none;
-    border-top: 2px solid var(--border);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     margin: 2em 0;
 }
 
@@ -670,7 +673,7 @@ body {
 
     .editor-panel {
         border-right: none;
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .editor-panel,

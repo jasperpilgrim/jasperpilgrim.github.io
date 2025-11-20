@@ -629,61 +629,35 @@
         auditText('');
     });
 
-    async function shareMessage() {
+    function shareMessage() {
         const text = smsInput.value;
         if (!text.trim()) {
             alert('Please enter a message to share');
             return;
         }
         
-        shareBtn.textContent = 'Sharing...';
-        shareBtn.disabled = true;
+        const encoded = encodeURIComponent(text);
+        const shareUrl = window.location.origin + window.location.pathname + '?share=' + encoded;
 
-        try {
-            const formData = new FormData();
-            formData.append('content', text);
-            formData.append('lexer', 'text');
-            formData.append('expires', '7');
-
-            const response = await fetch('https://dpaste.com/api/v2/', {
-                method: 'POST',
-                body: formData
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to create share link');
-            }
-
-            const shareId = await response.text();
-            const shareUrl = window.location.origin + window.location.pathname + '?share=' + shareId.trim();
-
-            await navigator.clipboard.writeText(shareUrl);
+        navigator.clipboard.writeText(shareUrl).then(() => {
             shareBtn.textContent = 'Copied!';
             setTimeout(() => {
                 shareBtn.textContent = 'Share';
-                shareBtn.disabled = false;
             }, 2000);
-        } catch (err) {
-            console.error('Failed to share:', err);
-            shareBtn.textContent = 'Share';
-            shareBtn.disabled = false;
-            alert('Failed to create share link. Please try again.');
-        }
+        }).catch(err => {
+            console.error('Failed to copy:', err);
+            alert('Share URL: ' + shareUrl);
+        });
     }
 
-    async function loadSharedContent() {
+    function loadSharedContent() {
         const params = new URLSearchParams(window.location.search);
-        const shareId = params.get('share');
-        if (shareId) {
+        const shared = params.get('share');
+        if (shared) {
             try {
-                const response = await fetch(`https://dpaste.com/${shareId}.txt`);
-                if (response.ok) {
-                    const text = await response.text();
-                    smsInput.value = text;
-                    auditText(text);
-                } else {
-                    console.error('Failed to load shared content');
-                }
+                const decoded = decodeURIComponent(shared);
+                smsInput.value = decoded;
+                auditText(decoded);
             } catch (err) {
                 console.error('Failed to load shared content:', err);
             }
@@ -691,7 +665,6 @@
     }
 
     shareBtn.addEventListener('click', shareMessage);
-    loadSharedContent();
 
     smsInput.addEventListener('input', (e) => {
         const text = e.target.value;
@@ -742,5 +715,11 @@
         });
     });
 
-    auditText('');
+    const params = new URLSearchParams(window.location.search);
+    const shared = params.get('share');
+    if (shared) {
+        loadSharedContent();
+    } else {
+        auditText('');
+    }
 })();

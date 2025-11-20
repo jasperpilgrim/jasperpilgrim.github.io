@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - Jasper Pilgrim</title>
+    <title>Steinbeck - Jasper Pilgrim</title>
     <script>
         (function() {
             const savedTheme = localStorage.getItem('theme');
@@ -17,12 +17,12 @@
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">JP</a>
+            <a href="../../" class="nav-logo">JP</a>
             <div class="nav-links">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="projects.html" class="nav-link active">Projects</a>
-                <a href="resources.html" class="nav-link">Resources</a>
-                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="../../" class="nav-link">Home</a>
+                <a href="../../projects.html" class="nav-link">Projects</a>
+                <a href="../../resources.html" class="nav-link">Resources</a>
+                <a href="../../contact.html" class="nav-link">Contact</a>
             </div>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
                 <svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -42,28 +42,41 @@
     </nav>
 
     <main class="main-content">
-        <section class="page-header">
-            <h1>Projects</h1>
-            <p>Tools and toys</p>
-        </section>
+        <header class="app-header">
+            <h1>Steinbeck</h1>
+            <p>Markdown editor with live preview</p>
+        </header>
 
-        <section class="projects-grid">
-            <a href="projects/smslinter/" class="project-card">
-                <h2>SMS Linter</h2>
-                <p>Analyze your SMS content for encoding issues, segment counts, and common filtering triggers.</p>
-            </a>
-            <a href="projects/steinbeck/" class="project-card">
-                <h2>Steinbeck</h2>
-                <p>Markdown editor with live preview. Write and see your formatted content in real-time.</p>
-            </a>
-        </section>
+        <div class="editor-container">
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <span class="panel-title">Editor</span>
+                    <div class="panel-actions">
+                        <button class="action-btn" id="clear-btn">Clear</button>
+                        <button class="action-btn" id="copy-btn">Copy</button>
+                    </div>
+                </div>
+                <textarea id="markdown-input" class="markdown-editor" placeholder="Start writing your markdown here..."></textarea>
+            </div>
+
+            <div class="preview-panel">
+                <div class="panel-header">
+                    <span class="panel-title">Preview</span>
+                    <div class="panel-actions">
+                        <button class="action-btn" id="export-btn">Export</button>
+                    </div>
+                </div>
+                <div id="markdown-preview" class="markdown-preview"></div>
+            </div>
+        </div>
     </main>
 
     <footer class="footer">
         <p>&copy; 2025 Jasper Pilgrim | A Place for Things</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="../../script.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
 

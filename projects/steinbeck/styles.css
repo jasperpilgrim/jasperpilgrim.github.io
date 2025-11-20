@@ -179,44 +179,44 @@ body {
 
 .main-content {
     flex: 1;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 2rem;
-    width: 100%;
-    min-height: 0;
     overflow: hidden;
+    min-height: 0;
 }
 
 .app-header {
-    text-align: center;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
+    padding: 1.25rem 2rem;
+    flex-shrink: 0;
     border-bottom: 1px solid var(--border);
+    background-color: var(--bg);
 }
 
 .app-header h1 {
-    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-size: 1.5rem;
     font-weight: 700;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
     line-height: 1.2;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
     color: var(--accent);
 }
 
 .app-header p {
-    font-size: 1rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
     color: var(--text-secondary);
 }
 
 .editor-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    gap: 2rem;
     flex: 1;
     min-height: 0;
     overflow: hidden;
+    padding: 2rem;
 }
 
 .editor-panel,
@@ -274,7 +274,7 @@ body {
 .markdown-editor {
     flex: 1;
     width: 100%;
-    padding: 1.25rem;
+    padding: 1.5rem;
     background-color: var(--card-bg);
     border: none;
     color: var(--text);
@@ -289,7 +289,7 @@ body {
 
 .markdown-preview {
     flex: 1;
-    padding: 1.25rem;
+    padding: 1.5rem;
     overflow-y: auto;
     font-size: 0.9375rem;
     line-height: 1.75;
@@ -448,13 +448,10 @@ body {
         font-size: 0.9rem;
     }
 
-    .main-content {
-        padding: 1rem;
-    }
-
     .editor-container {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 1.5rem;
+        padding: 1.5rem;
     }
 
     .editor-panel,

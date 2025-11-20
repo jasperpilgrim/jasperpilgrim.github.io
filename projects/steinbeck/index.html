@@ -13,6 +13,7 @@
         })();
     </script>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 </head>
 <body>
     <nav class="navbar">
@@ -47,24 +48,51 @@
             <p>Markdown editor with live preview</p>
         </header>
 
-        <div class="editor-container">
-            <div class="editor-panel">
+        <div class="view-controls">
+            <button class="view-btn" id="editor-only-btn" title="Editor only">Editor</button>
+            <button class="view-btn active" id="split-view-btn" title="Split view">Split</button>
+            <button class="view-btn" id="preview-only-btn" title="Preview only">Preview</button>
+        </div>
+
+        <div class="editor-container" id="editor-container">
+            <div class="editor-panel" id="editor-panel">
                 <div class="panel-header">
                     <span class="panel-title">Editor</span>
                     <div class="panel-actions">
+                        <button class="action-btn" id="fullscreen-editor-btn" title="Fullscreen">⛶</button>
                         <button class="action-btn" id="clear-btn">Clear</button>
                         <button class="action-btn" id="copy-btn">Copy</button>
                     </div>
                 </div>
+                <div class="toolbar">
+                    <button class="toolbar-btn" data-action="h1" title="Heading 1">H1</button>
+                    <button class="toolbar-btn" data-action="h2" title="Heading 2">H2</button>
+                    <button class="toolbar-btn" data-action="h3" title="Heading 3">H3</button>
+                    <button class="toolbar-btn" data-action="bold" title="Bold">B</button>
+                    <button class="toolbar-btn" data-action="italic" title="Italic">I</button>
+                    <button class="toolbar-btn" data-action="code" title="Inline code">`</button>
+                    <button class="toolbar-btn" data-action="link" title="Link">🔗</button>
+                    <button class="toolbar-btn" data-action="list" title="List">•</button>
+                    <button class="toolbar-btn" data-action="quote" title="Quote">"</button>
+                </div>
                 <textarea id="markdown-input" class="markdown-editor" placeholder="Start writing your markdown here..."></textarea>
             </div>
 
-            <div class="preview-panel">
+            <div class="preview-panel" id="preview-panel">
                 <div class="panel-header">
                     <span class="panel-title">Preview</span>
                     <div class="panel-actions">
+                        <button class="action-btn" id="share-btn" title="Share">Share</button>
+                        <button class="action-btn" id="fullscreen-preview-btn" title="Fullscreen">⛶</button>
                         <button class="action-btn" id="print-btn">Print</button>
-                        <button class="action-btn" id="export-btn">Export</button>
+                        <div class="export-dropdown">
+                            <button class="action-btn" id="export-btn">Export ▼</button>
+                            <div class="export-menu" id="export-menu">
+                                <button class="export-option" data-format="md">Markdown</button>
+                                <button class="export-option" data-format="html">HTML</button>
+                                <button class="export-option" data-format="pdf">PDF</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div id="markdown-preview" class="markdown-preview"></div>
@@ -76,6 +104,19 @@
         <p>&copy; 2025 Jasper Pilgrim | A Place for Things</p>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-ruby.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"></script>
     <script src="../../script.js"></script>
     <script src="app.js"></script>
 </body>

@@ -249,7 +249,7 @@ body {
     min-height: 0;
     max-height: 100%;
     overflow: hidden;
-    background-color: var(--card-bg);
+    background-color: #282a36;
     border: 1px solid var(--border);
     border-radius: 8px;
     margin: 1.5rem 2rem;

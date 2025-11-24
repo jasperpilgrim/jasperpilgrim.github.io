@@ -280,6 +280,12 @@ async function loadNamUsData() {
             <div class="loading">
                 <div class="loading-spinner"></div>
                 <div class="loading-text">Loading case data...</div>
+                <div class="loading-progress-container">
+                    <div class="loading-progress-bar">
+                        <div class="loading-progress-fill" id="loadingProgressBar" style="width: 0%"></div>
+                    </div>
+                    <div class="loading-progress-text" id="loadingProgress">0%</div>
+                </div>
             </div>
         `;
 
@@ -453,12 +459,25 @@ async function loadNamUsData() {
             'assets/data/unclaimed/us-virgin-islands.csv'
         ];
 
-        for (const file of csvFiles) {
+        const loadingProgressEl = document.getElementById('loadingProgress');
+        let loadedCount = 0;
+        const totalFiles = csvFiles.length;
+
+        const loadPromises = csvFiles.map(async (file) => {
             try {
                 const response = await fetch(file);
                 if (!response.ok) {
                     console.warn(`Failed to load ${file}: ${response.status}`);
-                    continue;
+                    loadedCount++;
+                    if (loadingProgressEl) {
+                        const percentage = Math.round((loadedCount / totalFiles) * 100);
+                        loadingProgressEl.textContent = `${percentage}% (${loadedCount} / ${totalFiles} files)`;
+                        const progressBar = document.getElementById('loadingProgressBar');
+                        if (progressBar) {
+                            progressBar.style.width = `${percentage}%`;
+                        }
+                    }
+                    return null;
                 }
 
                 const csvText = await response.text();
@@ -466,7 +485,16 @@ async function loadNamUsData() {
 
                 if (csvData.length === 0) {
                     console.warn(`No data found in ${file}`);
-                    continue;
+                    loadedCount++;
+                    if (loadingProgressEl) {
+                        const percentage = Math.round((loadedCount / totalFiles) * 100);
+                        loadingProgressEl.textContent = `${percentage}% (${loadedCount} / ${totalFiles} files)`;
+                        const progressBar = document.getElementById('loadingProgressBar');
+                        if (progressBar) {
+                            progressBar.style.width = `${percentage}%`;
+                        }
+                    }
+                    return null;
                 }
 
                 const firstCaseNumber = csvData[0]['Case Number'] || csvData[0]['Case'] || '';
@@ -477,13 +505,34 @@ async function loadNamUsData() {
                 else if (file.includes('/unclaimed/')) detectedCaseType = 'unclaimed';
 
                 const cases = csvData.map(row => csvRowToCase(row, detectedCaseType));
-                allResults.push(...cases);
-
                 console.log(`Loaded ${cases.length} ${detectedCaseType} cases from ${file}`);
+                loadedCount++;
+                if (loadingProgressEl) {
+                    const percentage = Math.round((loadedCount / totalFiles) * 100);
+                    loadingProgressEl.textContent = `${percentage}% (${loadedCount} / ${totalFiles} files)`;
+                    const progressBar = document.getElementById('loadingProgressBar');
+                    if (progressBar) {
+                        progressBar.style.width = `${percentage}%`;
+                    }
+                }
+                return cases;
             } catch (error) {
                 console.error(`Error loading ${file}:`, error);
+                loadedCount++;
+                if (loadingProgressEl) {
+                    const percentage = Math.round((loadedCount / totalFiles) * 100);
+                    loadingProgressEl.textContent = `${percentage}% (${loadedCount} / ${totalFiles} files)`;
+                    const progressBar = document.getElementById('loadingProgressBar');
+                    if (progressBar) {
+                        progressBar.style.width = `${percentage}%`;
+                    }
+                }
+                return null;
             }
-        }
+        });
+
+        const results = await Promise.all(loadPromises);
+        allResults = results.filter(r => r !== null).flat();
 
         console.log(`Total loaded: ${allResults.length} cases`);
 

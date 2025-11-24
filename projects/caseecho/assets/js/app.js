@@ -292,12 +292,6 @@ async function loadNamUsData() {
         allResults = [];
 
         const csvFiles = [
-            'assets/data/missing/mississippi.csv',
-            'assets/data/unidentified/mississippi.csv',
-            'assets/data/unclaimed/mississippi.csv',
-            'assets/data/missing/california.csv',
-            'assets/data/unidentified/california.csv',
-            'assets/data/unclaimed/california.csv',
             'assets/data/missing/alabama.csv',
             'assets/data/unidentified/alabama.csv',
             'assets/data/unclaimed/alabama.csv',
@@ -310,6 +304,9 @@ async function loadNamUsData() {
             'assets/data/missing/arkansas.csv',
             'assets/data/unidentified/arkansas.csv',
             'assets/data/unclaimed/arkansas.csv',
+            'assets/data/missing/california.csv',
+            'assets/data/unidentified/california.csv',
+            'assets/data/unclaimed/california.csv',
             'assets/data/missing/colorado.csv',
             'assets/data/unidentified/colorado.csv',
             'assets/data/unclaimed/colorado.csv',
@@ -370,6 +367,9 @@ async function loadNamUsData() {
             'assets/data/missing/minnesota.csv',
             'assets/data/unidentified/minnesota.csv',
             'assets/data/unclaimed/minnesota.csv',
+            'assets/data/missing/mississippi.csv',
+            'assets/data/unidentified/mississippi.csv',
+            'assets/data/unclaimed/mississippi.csv',
             'assets/data/missing/missouri.csv',
             'assets/data/unidentified/missouri.csv',
             'assets/data/unclaimed/missouri.csv',
@@ -379,6 +379,9 @@ async function loadNamUsData() {
             'assets/data/missing/nebraska.csv',
             'assets/data/unidentified/nebraska.csv',
             'assets/data/unclaimed/nebraska.csv',
+            'assets/data/missing/nevada.csv',
+            'assets/data/unidentified/nevada.csv',
+            'assets/data/unclaimed/nevada.csv',
             'assets/data/missing/new-hampshire.csv',
             'assets/data/unidentified/new-hampshire.csv',
             'assets/data/unclaimed/new-hampshire.csv',
@@ -388,9 +391,6 @@ async function loadNamUsData() {
             'assets/data/missing/new-mexico.csv',
             'assets/data/unidentified/new-mexico.csv',
             'assets/data/unclaimed/new-mexico.csv',
-            'assets/data/missing/nevada.csv',
-            'assets/data/unidentified/nevada.csv',
-            'assets/data/unclaimed/nevada.csv',
             'assets/data/missing/new-york.csv',
             'assets/data/unidentified/new-york.csv',
             'assets/data/unclaimed/new-york.csv',
@@ -400,6 +400,9 @@ async function loadNamUsData() {
             'assets/data/missing/north-dakota.csv',
             'assets/data/unidentified/north-dakota.csv',
             'assets/data/unclaimed/north-dakota.csv',
+            'assets/data/missing/northern-mariana-islands.csv',
+            'assets/data/unidentified/northern-mariana-islands.csv',
+            'assets/data/unclaimed/northern-mariana-islands.csv',
             'assets/data/missing/ohio.csv',
             'assets/data/unidentified/ohio.csv',
             'assets/data/unclaimed/ohio.csv',
@@ -412,6 +415,9 @@ async function loadNamUsData() {
             'assets/data/missing/pennsylvania.csv',
             'assets/data/unidentified/pennsylvania.csv',
             'assets/data/unclaimed/pennsylvania.csv',
+            'assets/data/missing/puerto-rico.csv',
+            'assets/data/unidentified/puerto-rico.csv',
+            'assets/data/unclaimed/puerto-rico.csv',
             'assets/data/missing/rhode-island.csv',
             'assets/data/unidentified/rhode-island.csv',
             'assets/data/unclaimed/rhode-island.csv',
@@ -427,6 +433,9 @@ async function loadNamUsData() {
             'assets/data/missing/texas.csv',
             'assets/data/unidentified/texas.csv',
             'assets/data/unclaimed/texas.csv',
+            'assets/data/missing/us-virgin-islands.csv',
+            'assets/data/unidentified/us-virgin-islands.csv',
+            'assets/data/unclaimed/us-virgin-islands.csv',
             'assets/data/missing/utah.csv',
             'assets/data/unidentified/utah.csv',
             'assets/data/unclaimed/utah.csv',
@@ -447,16 +456,7 @@ async function loadNamUsData() {
             'assets/data/unclaimed/wisconsin.csv',
             'assets/data/missing/wyoming.csv',
             'assets/data/unidentified/wyoming.csv',
-            'assets/data/unclaimed/wyoming.csv',
-            'assets/data/missing/puerto-rico.csv',
-            'assets/data/unidentified/puerto-rico.csv',
-            'assets/data/unclaimed/puerto-rico.csv',
-            'assets/data/missing/northern-mariana-islands.csv',
-            'assets/data/unidentified/northern-mariana-islands.csv',
-            'assets/data/unclaimed/northern-mariana-islands.csv',
-            'assets/data/missing/us-virgin-islands.csv',
-            'assets/data/unidentified/us-virgin-islands.csv',
-            'assets/data/unclaimed/us-virgin-islands.csv'
+            'assets/data/unclaimed/wyoming.csv'
         ];
 
         const loadingProgressEl = document.getElementById('loadingProgress');
@@ -1431,7 +1431,11 @@ function calculateMatchScore(case1, case2) {
             if (rangeWidth === 0) {
 
                 const ageDiff = Math.abs(ageToCheck - case2.ageFrom);
-                if (ageDiff <= 1) {
+                if (ageDiff === 0) {
+                    ageMatchScore = 30;
+                    hasStrongAgeMatch = true;
+                    ageReason = 'Same age';
+                } else if (ageDiff <= 1) {
                     ageMatchScore = 30;
                     hasStrongAgeMatch = true;
                     ageReason = `Age ${Math.round(ageToCheck)} matches age ${case2.ageFrom}`;
@@ -1487,7 +1491,11 @@ function calculateMatchScore(case1, case2) {
             const ageDiff2 = Math.abs(case1.age - expectedAge2);
             const ageDiff = Math.min(ageDiff1, ageDiff2);
 
-            if (ageDiff <= 1) {
+            if (ageDiff === 0 || (Math.abs(case1.age - case2.age) === 0 && !date1 && !date2)) {
+                ageMatchScore = 30;
+                hasStrongAgeMatch = true;
+                ageReason = 'Same age';
+            } else if (ageDiff <= 1) {
                 ageMatchScore = 30;
                 hasStrongAgeMatch = true;
                 ageReason = `Age matches: ${case1.age} at disappearance, ${case2.age} when found`;

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CaseEcho - Jasper Pilgrim</title>
     <script>
-        (function() {
+        (function () {
             const savedTheme = localStorage.getItem('theme');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const theme = savedTheme || (prefersDark ? 'dark' : 'light');
@@ -15,6 +16,7 @@
     <link rel="stylesheet" href="../../assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="nav-container">
@@ -48,7 +50,7 @@
         </header>
 
         <div class="app-container">
-            
+
             <section class="search-section">
                 <div class="search-container">
                     <div class="search-input-wrapper">
@@ -56,17 +58,11 @@
                             <circle cx="11" cy="11" r="8"></circle>
                             <path d="m21 21-4.35-4.35"></path>
                         </svg>
-                        <input 
-                            type="text" 
-                            id="searchInput" 
-                            class="search-input" 
-                            placeholder="Search by name, location, case number..."
-                            autocomplete="off"
-                        >
+                        <input type="text" id="searchInput" class="search-input" placeholder="Search by name, location, case number..." autocomplete="off">
                     </div>
                 </div>
 
-                
+
                 <div class="filters-container">
                     <div class="filter-group">
                         <label class="filter-label">Case Type</label>
@@ -156,11 +152,11 @@
                     <button id="clearFilters" class="clear-filters-btn">Clear All</button>
                 </div>
 
-                
+
                 <div id="activeFilters" class="active-filters"></div>
             </section>
 
-            
+
             <section class="stats-section">
                 <div class="stats-grid">
                     <div class="stat-card">
@@ -194,7 +190,7 @@
                 </div>
             </section>
 
-            
+
             <section class="results-section">
                 <div class="results-header">
                     <div class="results-info">
@@ -253,5 +249,5 @@
     <script src="../../assets/js/script.js"></script>
     <script src="assets/js/app.js"></script>
 </body>
-</html>
 
+</html>

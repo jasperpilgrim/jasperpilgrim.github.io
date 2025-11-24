@@ -837,6 +837,7 @@ function clearAllFilters() {
     ageTo.value = '';
     if (dateFrom) dateFrom.value = '';
     if (dateTo) dateTo.value = '';
+    updateActiveFilters();
     showEmptyState();
     filteredResults = [];
     updateStats();

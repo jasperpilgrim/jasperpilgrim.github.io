@@ -1,0 +1,7502 @@
+[
+  {
+    "city": "bronx",
+    "state": "NEW YORK",
+    "cases": 2536
+  },
+  {
+    "city": "new york",
+    "state": "NEW YORK",
+    "cases": 2037
+  },
+  {
+    "city": "brooklyn",
+    "state": "NEW YORK",
+    "cases": 1831
+  },
+  {
+    "city": "queens",
+    "state": "NEW YORK",
+    "cases": 1267
+  },
+  {
+    "city": "dallas",
+    "state": "TEXAS",
+    "cases": 957
+  },
+  {
+    "city": "houston",
+    "state": "TEXAS",
+    "cases": 920
+  },
+  {
+    "city": "los angeles",
+    "state": "CALIFORNIA",
+    "cases": 703
+  },
+  {
+    "city": "tacoma",
+    "state": "WASHINGTON",
+    "cases": 519
+  },
+  {
+    "city": "houston",
+    "state": "TX",
+    "cases": 492
+  },
+  {
+    "city": "manhattan",
+    "state": "NEW YORK",
+    "cases": 470
+  },
+  {
+    "city": "los angeles",
+    "state": "CA",
+    "cases": 462
+  },
+  {
+    "city": "dallas",
+    "state": "TX",
+    "cases": 423
+  },
+  {
+    "city": "knoxville",
+    "state": "TENNESSEE",
+    "cases": 376
+  },
+  {
+    "city": "san diego",
+    "state": "CALIFORNIA",
+    "cases": 361
+  },
+  {
+    "city": "san bernardino",
+    "state": "CALIFORNIA",
+    "cases": 346
+  },
+  {
+    "city": "honolulu",
+    "state": "HAWAII",
+    "cases": 322
+  },
+  {
+    "city": "reno",
+    "state": "NEVADA",
+    "cases": 311
+  },
+  {
+    "city": "chicago",
+    "state": "ILLINOIS",
+    "cases": 310
+  },
+  {
+    "city": "memphis",
+    "state": "TENNESSEE",
+    "cases": 297
+  },
+  {
+    "city": "atlanta",
+    "state": "GEORGIA",
+    "cases": 276
+  },
+  {
+    "city": "detroit",
+    "state": "MICHIGAN",
+    "cases": 267
+  },
+  {
+    "city": "san francisco",
+    "state": "CA",
+    "cases": 255
+  },
+  {
+    "city": "washington",
+    "state": "DISTRICT OF COLUMBIA",
+    "cases": 246
+  },
+  {
+    "city": "philadelphia",
+    "state": "PENNSYLVANIA",
+    "cases": 242
+  },
+  {
+    "city": "boise",
+    "state": "IDAHO",
+    "cases": 239
+  },
+  {
+    "city": "fort worth",
+    "state": "TEXAS",
+    "cases": 227
+  },
+  {
+    "city": "memphis",
+    "state": "TN",
+    "cases": 226
+  },
+  {
+    "city": "denver",
+    "state": "COLORADO",
+    "cases": 222
+  },
+  {
+    "city": "boston",
+    "state": "MASSACHUSETTS",
+    "cases": 212
+  },
+  {
+    "city": "spokane",
+    "state": "WASHINGTON",
+    "cases": 208
+  },
+  {
+    "city": "phoenix",
+    "state": "AZ",
+    "cases": 204
+  },
+  {
+    "city": "mcallen",
+    "state": "TX",
+    "cases": 197
+  },
+  {
+    "city": "san juan",
+    "state": "PUERTO RICO",
+    "cases": 189
+  },
+  {
+    "city": "birmingham",
+    "state": "ALABAMA",
+    "cases": 189
+  },
+  {
+    "city": "baltimore",
+    "state": "MARYLAND",
+    "cases": 185
+  },
+  {
+    "city": "chicago",
+    "state": "IL",
+    "cases": 180
+  },
+  {
+    "city": "miami",
+    "state": "FLORIDA",
+    "cases": 164
+  },
+  {
+    "city": "tulsa",
+    "state": "OK",
+    "cases": 164
+  },
+  {
+    "city": "phoenix",
+    "state": "ARIZONA",
+    "cases": 154
+  },
+  {
+    "city": "las vegas",
+    "state": "NV",
+    "cases": 147
+  },
+  {
+    "city": "anchorage",
+    "state": "AK",
+    "cases": 145
+  },
+  {
+    "city": "miami",
+    "state": "FL",
+    "cases": 140
+  },
+  {
+    "city": "anaheim",
+    "state": "CALIFORNIA",
+    "cases": 133
+  },
+  {
+    "city": "ajo",
+    "state": "ARIZONA",
+    "cases": 132
+  },
+  {
+    "city": "philadelphia",
+    "state": "PA",
+    "cases": 130
+  },
+  {
+    "city": "jacksonville",
+    "state": "FL",
+    "cases": 129
+  },
+  {
+    "city": "las vegas",
+    "state": "NEVADA",
+    "cases": 128
+  },
+  {
+    "city": "columbus",
+    "state": "OHIO",
+    "cases": 127
+  },
+  {
+    "city": "san antonio",
+    "state": "TX",
+    "cases": 126
+  },
+  {
+    "city": "detroit",
+    "state": "MI",
+    "cases": 125
+  },
+  {
+    "city": "staten island",
+    "state": "NEW YORK",
+    "cases": 123
+  },
+  {
+    "city": "san francisco",
+    "state": "CALIFORNIA",
+    "cases": 123
+  },
+  {
+    "city": "san diego",
+    "state": "CA",
+    "cases": 120
+  },
+  {
+    "city": "winterhaven",
+    "state": "CALIFORNIA",
+    "cases": 118
+  },
+  {
+    "city": "dillingham",
+    "state": "AK",
+    "cases": 118
+  },
+  {
+    "city": "oklahoma city",
+    "state": "OK",
+    "cases": 112
+  },
+  {
+    "city": "seattle",
+    "state": "WA",
+    "cases": 112
+  },
+  {
+    "city": "nashville",
+    "state": "TN",
+    "cases": 110
+  },
+  {
+    "city": "tucson",
+    "state": "ARIZONA",
+    "cases": 108
+  },
+  {
+    "city": "knoxville",
+    "state": "TN",
+    "cases": 107
+  },
+  {
+    "city": "baton rouge",
+    "state": "LA",
+    "cases": 106
+  },
+  {
+    "city": "yakima",
+    "state": "WASHINGTON",
+    "cases": 102
+  },
+  {
+    "city": "lakewood",
+    "state": "WASHINGTON",
+    "cases": 99
+  },
+  {
+    "city": "kodiak",
+    "state": "AK",
+    "cases": 99
+  },
+  {
+    "city": "el paso",
+    "state": "TEXAS",
+    "cases": 98
+  },
+  {
+    "city": "calexico",
+    "state": "CALIFORNIA",
+    "cases": 98
+  },
+  {
+    "city": "falfurrias",
+    "state": "TX",
+    "cases": 98
+  },
+  {
+    "city": "atlanta",
+    "state": "GA",
+    "cases": 97
+  },
+  {
+    "city": "juneau",
+    "state": "AK",
+    "cases": 97
+  },
+  {
+    "city": "orlando",
+    "state": "FL",
+    "cases": 95
+  },
+  {
+    "city": "gila bend",
+    "state": "ARIZONA",
+    "cases": 94
+  },
+  {
+    "city": "tampa",
+    "state": "FLORIDA",
+    "cases": 92
+  },
+  {
+    "city": "puyallup",
+    "state": "WASHINGTON",
+    "cases": 91
+  },
+  {
+    "city": "portland",
+    "state": "OR",
+    "cases": 89
+  },
+  {
+    "city": "santa ana",
+    "state": "CALIFORNIA",
+    "cases": 86
+  },
+  {
+    "city": "tampa",
+    "state": "FL",
+    "cases": 84
+  },
+  {
+    "city": "new york",
+    "state": "NY",
+    "cases": 84
+  },
+  {
+    "city": "tucson",
+    "state": "AZ",
+    "cases": 84
+  },
+  {
+    "city": "sacramento",
+    "state": "CA",
+    "cases": 84
+  },
+  {
+    "city": "el paso",
+    "state": "TX",
+    "cases": 82
+  },
+  {
+    "city": "brooklyn",
+    "state": "NY",
+    "cases": 82
+  },
+  {
+    "city": "fresno",
+    "state": "CALIFORNIA",
+    "cases": 81
+  },
+  {
+    "city": "laredo",
+    "state": "TX",
+    "cases": 81
+  },
+  {
+    "city": "long beach",
+    "state": "CALIFORNIA",
+    "cases": 80
+  },
+  {
+    "city": "santa cruz",
+    "state": "CALIFORNIA",
+    "cases": 80
+  },
+  {
+    "city": "austin",
+    "state": "TEXAS",
+    "cases": 79
+  },
+  {
+    "city": "winter haven",
+    "state": "FL",
+    "cases": 78
+  },
+  {
+    "city": "albuquerque",
+    "state": "NM",
+    "cases": 77
+  },
+  {
+    "city": "nogales",
+    "state": "AZ",
+    "cases": 77
+  },
+  {
+    "city": "austin",
+    "state": "TX",
+    "cases": 76
+  },
+  {
+    "city": "victorville",
+    "state": "CALIFORNIA",
+    "cases": 75
+  },
+  {
+    "city": "washington d.c.",
+    "state": "DISTRICT OF COLUMBIA",
+    "cases": 74
+  },
+  {
+    "city": "portland",
+    "state": "OREGON",
+    "cases": 74
+  },
+  {
+    "city": "far rockaway",
+    "state": "NEW YORK",
+    "cases": 73
+  },
+  {
+    "city": "colton",
+    "state": "CALIFORNIA",
+    "cases": 73
+  },
+  {
+    "city": "sells",
+    "state": "ARIZONA",
+    "cases": 72
+  },
+  {
+    "city": "lukeville",
+    "state": "AZ",
+    "cases": 72
+  },
+  {
+    "city": "newark",
+    "state": "NEW JERSEY",
+    "cases": 71
+  },
+  {
+    "city": "vancouver",
+    "state": "WASHINGTON",
+    "cases": 71
+  },
+  {
+    "city": "kansas city",
+    "state": "MO",
+    "cases": 71
+  },
+  {
+    "city": "redlands",
+    "state": "CALIFORNIA",
+    "cases": 69
+  },
+  {
+    "city": "tacoma",
+    "state": "WA",
+    "cases": 69
+  },
+  {
+    "city": "loma linda",
+    "state": "CALIFORNIA",
+    "cases": 67
+  },
+  {
+    "city": "honolulu",
+    "state": "HI",
+    "cases": 67
+  },
+  {
+    "city": "oakland",
+    "state": "CA",
+    "cases": 67
+  },
+  {
+    "city": "fairbanks",
+    "state": "AK",
+    "cases": 67
+  },
+  {
+    "city": "irving",
+    "state": "TEXAS",
+    "cases": 66
+  },
+  {
+    "city": "indianapolis",
+    "state": "IN",
+    "cases": 66
+  },
+  {
+    "city": "kansas city",
+    "state": "KANSAS",
+    "cases": 65
+  },
+  {
+    "city": "falfurrias",
+    "state": "TEXAS",
+    "cases": 65
+  },
+  {
+    "city": "baltimore",
+    "state": "MD",
+    "cases": 65
+  },
+  {
+    "city": "reading",
+    "state": "PENNSYLVANIA",
+    "cases": 64
+  },
+  {
+    "city": "tulsa",
+    "state": "OKLAHOMA",
+    "cases": 64
+  },
+  {
+    "city": "stockton",
+    "state": "CALIFORNIA",
+    "cases": 64
+  },
+  {
+    "city": "ocotillo",
+    "state": "CALIFORNIA",
+    "cases": 64
+  },
+  {
+    "city": "west palm beach",
+    "state": "FL",
+    "cases": 64
+  },
+  {
+    "city": "fort lauderdale",
+    "state": "FL",
+    "cases": 64
+  },
+  {
+    "city": "hartford",
+    "state": "CONNECTICUT",
+    "cases": 63
+  },
+  {
+    "city": "denver",
+    "state": "CO",
+    "cases": 63
+  },
+  {
+    "city": "buffalo",
+    "state": "NY",
+    "cases": 62
+  },
+  {
+    "city": "sasabe",
+    "state": "AZ",
+    "cases": 62
+  },
+  {
+    "city": "st. louis",
+    "state": "MO",
+    "cases": 62
+  },
+  {
+    "city": "naples",
+    "state": "FL",
+    "cases": 61
+  },
+  {
+    "city": "ontario",
+    "state": "CALIFORNIA",
+    "cases": 59
+  },
+  {
+    "city": "oklahoma city",
+    "state": "OKLAHOMA",
+    "cases": 58
+  },
+  {
+    "city": "fort worth",
+    "state": "TX",
+    "cases": 58
+  },
+  {
+    "city": "louisville",
+    "state": "KY",
+    "cases": 57
+  },
+  {
+    "city": "fontana",
+    "state": "CALIFORNIA",
+    "cases": 56
+  },
+  {
+    "city": "barstow",
+    "state": "CALIFORNIA",
+    "cases": 55
+  },
+  {
+    "city": "columbus",
+    "state": "OH",
+    "cases": 54
+  },
+  {
+    "city": "sparks",
+    "state": "NEVADA",
+    "cases": 52
+  },
+  {
+    "city": "bronx",
+    "state": "NY",
+    "cases": 52
+  },
+  {
+    "city": "niagara falls",
+    "state": "NY",
+    "cases": 51
+  },
+  {
+    "city": "spring",
+    "state": "TX",
+    "cases": 50
+  },
+  {
+    "city": "laredo",
+    "state": "TEXAS",
+    "cases": 49
+  },
+  {
+    "city": "jacksonville",
+    "state": "FLORIDA",
+    "cases": 48
+  },
+  {
+    "city": "cleveland",
+    "state": "OHIO",
+    "cases": 48
+  },
+  {
+    "city": "seattle",
+    "state": "WASHINGTON",
+    "cases": 48
+  },
+  {
+    "city": "trenton",
+    "state": "NEW JERSEY",
+    "cases": 47
+  },
+  {
+    "city": "atlantic city",
+    "state": "NEW JERSEY",
+    "cases": 47
+  },
+  {
+    "city": "fort myers",
+    "state": "FL",
+    "cases": 47
+  },
+  {
+    "city": "greensboro",
+    "state": "NC",
+    "cases": 47
+  },
+  {
+    "city": "santa ana",
+    "state": "CA",
+    "cases": 47
+  },
+  {
+    "city": "soldotna",
+    "state": "AK",
+    "cases": 47
+  },
+  {
+    "city": "winston-salem",
+    "state": "NORTH CAROLINA",
+    "cases": 46
+  },
+  {
+    "city": "eagle pass",
+    "state": "TX",
+    "cases": 46
+  },
+  {
+    "city": "rochester",
+    "state": "NY",
+    "cases": 46
+  },
+  {
+    "city": "new orleans",
+    "state": "LA",
+    "cases": 46
+  },
+  {
+    "city": "unknown",
+    "state": "AZ",
+    "cases": 46
+  },
+  {
+    "city": "garland",
+    "state": "TEXAS",
+    "cases": 45
+  },
+  {
+    "city": "stockton",
+    "state": "CA",
+    "cases": 45
+  },
+  {
+    "city": "bethel",
+    "state": "AK",
+    "cases": 45
+  },
+  {
+    "city": "upland",
+    "state": "CALIFORNIA",
+    "cases": 44
+  },
+  {
+    "city": "everett",
+    "state": "WASHINGTON",
+    "cases": 44
+  },
+  {
+    "city": "santa teresa",
+    "state": "NEW MEXICO",
+    "cases": 44
+  },
+  {
+    "city": "pensacola",
+    "state": "FL",
+    "cases": 43
+  },
+  {
+    "city": "san jose",
+    "state": "CA",
+    "cases": 43
+  },
+  {
+    "city": "apple valley",
+    "state": "CALIFORNIA",
+    "cases": 42
+  },
+  {
+    "city": "garden grove",
+    "state": "CALIFORNIA",
+    "cases": 42
+  },
+  {
+    "city": "norman",
+    "state": "OK",
+    "cases": 42
+  },
+  {
+    "city": "cleveland",
+    "state": "OH",
+    "cases": 41
+  },
+  {
+    "city": "santa rosa",
+    "state": "CA",
+    "cases": 41
+  },
+  {
+    "city": "watsonville",
+    "state": "CALIFORNIA",
+    "cases": 40
+  },
+  {
+    "city": "milwaukee",
+    "state": "WI",
+    "cases": 40
+  },
+  {
+    "city": "little rock",
+    "state": "AR",
+    "cases": 40
+  },
+  {
+    "city": "santa cruz",
+    "state": "CA",
+    "cases": 40
+  },
+  {
+    "city": "ketchikan",
+    "state": "AK",
+    "cases": 40
+  },
+  {
+    "city": "spokane",
+    "state": "WA",
+    "cases": 40
+  },
+  {
+    "city": "san ysidro",
+    "state": "CALIFORNIA",
+    "cases": 39
+  },
+  {
+    "city": "st. louis",
+    "state": "MISSOURI",
+    "cases": 39
+  },
+  {
+    "city": "lukeville",
+    "state": "ARIZONA",
+    "cases": 39
+  },
+  {
+    "city": "lakeland",
+    "state": "FL",
+    "cases": 39
+  },
+  {
+    "city": "san bernardino",
+    "state": "CA",
+    "cases": 39
+  },
+  {
+    "city": "mesquite",
+    "state": "TEXAS",
+    "cases": 38
+  },
+  {
+    "city": "virginia beach",
+    "state": "VA",
+    "cases": 38
+  },
+  {
+    "city": "needles",
+    "state": "CALIFORNIA",
+    "cases": 37
+  },
+  {
+    "city": "sacramento",
+    "state": "CALIFORNIA",
+    "cases": 37
+  },
+  {
+    "city": "colorado springs",
+    "state": "CO",
+    "cases": 37
+  },
+  {
+    "city": "modesto",
+    "state": "CA",
+    "cases": 37
+  },
+  {
+    "city": "long beach",
+    "state": "CA",
+    "cases": 37
+  },
+  {
+    "city": "dutch harbor",
+    "state": "AK",
+    "cases": 37
+  },
+  {
+    "city": "eugene",
+    "state": "OR",
+    "cases": 37
+  },
+  {
+    "city": "bridgeport",
+    "state": "CONNECTICUT",
+    "cases": 36
+  },
+  {
+    "city": "montclair",
+    "state": "CALIFORNIA",
+    "cases": 36
+  },
+  {
+    "city": "webb county",
+    "state": "TEXAS",
+    "cases": 36
+  },
+  {
+    "city": "immokalee",
+    "state": "FL",
+    "cases": 36
+  },
+  {
+    "city": "brownsville",
+    "state": "TEXAS",
+    "cases": 35
+  },
+  {
+    "city": "aberdeen",
+    "state": "WASHINGTON",
+    "cases": 35
+  },
+  {
+    "city": "jackson",
+    "state": "MS",
+    "cases": 35
+  },
+  {
+    "city": "fresno",
+    "state": "CA",
+    "cases": 35
+  },
+  {
+    "city": "sitka",
+    "state": "AK",
+    "cases": 35
+  },
+  {
+    "city": "san antonio",
+    "state": "TEXAS",
+    "cases": 34
+  },
+  {
+    "city": "fayetteville",
+    "state": "NC",
+    "cases": 34
+  },
+  {
+    "city": "salt lake city",
+    "state": "UT",
+    "cases": 34
+  },
+  {
+    "city": "york",
+    "state": "PENNSYLVANIA",
+    "cases": 33
+  },
+  {
+    "city": "chattanooga",
+    "state": "TENNESSEE",
+    "cases": 33
+  },
+  {
+    "city": "san jose",
+    "state": "CALIFORNIA",
+    "cases": 33
+  },
+  {
+    "city": "buena park",
+    "state": "CALIFORNIA",
+    "cases": 33
+  },
+  {
+    "city": "university place",
+    "state": "WASHINGTON",
+    "cases": 33
+  },
+  {
+    "city": "richland",
+    "state": "WASHINGTON",
+    "cases": 33
+  },
+  {
+    "city": "kennewick",
+    "state": "WASHINGTON",
+    "cases": 33
+  },
+  {
+    "city": "queens",
+    "state": "NY",
+    "cases": 33
+  },
+  {
+    "city": "charlotte",
+    "state": "NC",
+    "cases": 33
+  },
+  {
+    "city": "altar",
+    "state": "AZ",
+    "cases": 33
+  },
+  {
+    "city": "chula vista",
+    "state": "CA",
+    "cases": 33
+  },
+  {
+    "city": "new haven",
+    "state": "CONNECTICUT",
+    "cases": 32
+  },
+  {
+    "city": "salt lake city",
+    "state": "UTAH",
+    "cases": 32
+  },
+  {
+    "city": "yucca valley",
+    "state": "CALIFORNIA",
+    "cases": 32
+  },
+  {
+    "city": "irving",
+    "state": "TX",
+    "cases": 32
+  },
+  {
+    "city": "reno",
+    "state": "NV",
+    "cases": 32
+  },
+  {
+    "city": "cambridge",
+    "state": "MASSACHUSETTS",
+    "cases": 31
+  },
+  {
+    "city": "albuquerque",
+    "state": "NEW MEXICO",
+    "cases": 31
+  },
+  {
+    "city": "gig harbor",
+    "state": "WASHINGTON",
+    "cases": 31
+  },
+  {
+    "city": "tallahassee",
+    "state": "FL",
+    "cases": 31
+  },
+  {
+    "city": "cincinnati",
+    "state": "OH",
+    "cases": 31
+  },
+  {
+    "city": "omaha",
+    "state": "NE",
+    "cases": 31
+  },
+  {
+    "city": "washington",
+    "state": "DC",
+    "cases": 31
+  },
+  {
+    "city": "south gate",
+    "state": "CA",
+    "cases": 31
+  },
+  {
+    "city": "rialto",
+    "state": "CALIFORNIA",
+    "cases": 30
+  },
+  {
+    "city": "chula vista",
+    "state": "CALIFORNIA",
+    "cases": 30
+  },
+  {
+    "city": "brownsville",
+    "state": "TX",
+    "cases": 30
+  },
+  {
+    "city": "aurora",
+    "state": "CO",
+    "cases": 30
+  },
+  {
+    "city": "nome",
+    "state": "AK",
+    "cases": 30
+  },
+  {
+    "city": "arlington",
+    "state": "TEXAS",
+    "cases": 29
+  },
+  {
+    "city": "waianae",
+    "state": "HAWAII",
+    "cases": 29
+  },
+  {
+    "city": "flushing",
+    "state": "NEW YORK",
+    "cases": 29
+  },
+  {
+    "city": "springfield",
+    "state": "MASSACHUSETTS",
+    "cases": 29
+  },
+  {
+    "city": "worcester",
+    "state": "MASSACHUSETTS",
+    "cases": 29
+  },
+  {
+    "city": "mesa",
+    "state": "ARIZONA",
+    "cases": 29
+  },
+  {
+    "city": "ellensburg",
+    "state": "WASHINGTON",
+    "cases": 29
+  },
+  {
+    "city": "pittsburgh",
+    "state": "PA",
+    "cases": 29
+  },
+  {
+    "city": "chattanooga",
+    "state": "TN",
+    "cases": 29
+  },
+  {
+    "city": "anaheim",
+    "state": "CA",
+    "cases": 29
+  },
+  {
+    "city": "waipahu",
+    "state": "HAWAII",
+    "cases": 28
+  },
+  {
+    "city": "bellingham",
+    "state": "WA",
+    "cases": 28
+  },
+  {
+    "city": "desoto",
+    "state": "TEXAS",
+    "cases": 27
+  },
+  {
+    "city": "mission",
+    "state": "TEXAS",
+    "cases": 27
+  },
+  {
+    "city": "el cajon",
+    "state": "CALIFORNIA",
+    "cases": 27
+  },
+  {
+    "city": "oakland",
+    "state": "CALIFORNIA",
+    "cases": 27
+  },
+  {
+    "city": "orlando",
+    "state": "FLORIDA",
+    "cases": 27
+  },
+  {
+    "city": "yuma",
+    "state": "ARIZONA",
+    "cases": 27
+  },
+  {
+    "city": "columbia",
+    "state": "SC",
+    "cases": 27
+  },
+  {
+    "city": "minneapolis",
+    "state": "MN",
+    "cases": 27
+  },
+  {
+    "city": "garland",
+    "state": "TX",
+    "cases": 27
+  },
+  {
+    "city": "mesa",
+    "state": "AZ",
+    "cases": 27
+  },
+  {
+    "city": "redding",
+    "state": "CA",
+    "cases": 27
+  },
+  {
+    "city": "camden",
+    "state": "NJ",
+    "cases": 27
+  },
+  {
+    "city": "everett",
+    "state": "WA",
+    "cases": 27
+  },
+  {
+    "city": "elmhurst",
+    "state": "NEW YORK",
+    "cases": 26
+  },
+  {
+    "city": "norfolk",
+    "state": "VIRGINIA",
+    "cases": 26
+  },
+  {
+    "city": "richmond",
+    "state": "VIRGINIA",
+    "cases": 26
+  },
+  {
+    "city": "near ajo",
+    "state": "ARIZONA",
+    "cases": 26
+  },
+  {
+    "city": "kansas city",
+    "state": "MISSOURI",
+    "cases": 26
+  },
+  {
+    "city": "riverside",
+    "state": "CA",
+    "cases": 26
+  },
+  {
+    "city": "san leandro",
+    "state": "CA",
+    "cases": 26
+  },
+  {
+    "city": "wichita",
+    "state": "KS",
+    "cases": 26
+  },
+  {
+    "city": "jamaica",
+    "state": "NEW YORK",
+    "cases": 25
+  },
+  {
+    "city": "arivaca",
+    "state": "ARIZONA",
+    "cases": 25
+  },
+  {
+    "city": "oceanside",
+    "state": "CALIFORNIA",
+    "cases": 25
+  },
+  {
+    "city": "costa mesa",
+    "state": "CALIFORNIA",
+    "cases": 25
+  },
+  {
+    "city": "new orleans",
+    "state": "LOUISIANA",
+    "cases": 25
+  },
+  {
+    "city": "robles junction",
+    "state": "ARIZONA",
+    "cases": 25
+  },
+  {
+    "city": "daytona beach",
+    "state": "FL",
+    "cases": 25
+  },
+  {
+    "city": "pueblo",
+    "state": "CO",
+    "cases": 25
+  },
+  {
+    "city": "raleigh",
+    "state": "NC",
+    "cases": 25
+  },
+  {
+    "city": "montebello",
+    "state": "CA",
+    "cases": 25
+  },
+  {
+    "city": "north charleston",
+    "state": "SOUTH CAROLINA",
+    "cases": 24
+  },
+  {
+    "city": "dulzura",
+    "state": "CALIFORNIA",
+    "cases": 24
+  },
+  {
+    "city": "joshua tree",
+    "state": "CALIFORNIA",
+    "cases": 24
+  },
+  {
+    "city": "westminster",
+    "state": "CALIFORNIA",
+    "cases": 24
+  },
+  {
+    "city": "fullerton",
+    "state": "CALIFORNIA",
+    "cases": 24
+  },
+  {
+    "city": "three points",
+    "state": "ARIZONA",
+    "cases": 24
+  },
+  {
+    "city": "asheville",
+    "state": "NC",
+    "cases": 24
+  },
+  {
+    "city": "mobile",
+    "state": "AL",
+    "cases": 24
+  },
+  {
+    "city": "douglas",
+    "state": "AZ",
+    "cases": 24
+  },
+  {
+    "city": "bakersfield",
+    "state": "CA",
+    "cases": 24
+  },
+  {
+    "city": "newark",
+    "state": "NJ",
+    "cases": 24
+  },
+  {
+    "city": "charleston",
+    "state": "SOUTH CAROLINA",
+    "cases": 23
+  },
+  {
+    "city": "caguas",
+    "state": "PUERTO RICO",
+    "cases": 23
+  },
+  {
+    "city": "lowell",
+    "state": "MASSACHUSETTS",
+    "cases": 23
+  },
+  {
+    "city": "orange",
+    "state": "CALIFORNIA",
+    "cases": 23
+  },
+  {
+    "city": "huntington beach",
+    "state": "CALIFORNIA",
+    "cases": 23
+  },
+  {
+    "city": "bradenton",
+    "state": "FL",
+    "cases": 23
+  },
+  {
+    "city": "staten island",
+    "state": "NY",
+    "cases": 23
+  },
+  {
+    "city": "durham",
+    "state": "NC",
+    "cases": 23
+  },
+  {
+    "city": "winston-salem",
+    "state": "NC",
+    "cases": 23
+  },
+  {
+    "city": "richmond",
+    "state": "VA",
+    "cases": 23
+  },
+  {
+    "city": "seward",
+    "state": "AK",
+    "cases": 23
+  },
+  {
+    "city": "vancouver",
+    "state": "WA",
+    "cases": 23
+  },
+  {
+    "city": "hesperia",
+    "state": "CALIFORNIA",
+    "cases": 22
+  },
+  {
+    "city": "santa monica",
+    "state": "CALIFORNIA",
+    "cases": 22
+  },
+  {
+    "city": "yucaipa",
+    "state": "CALIFORNIA",
+    "cases": 22
+  },
+  {
+    "city": "riverside",
+    "state": "CALIFORNIA",
+    "cases": 22
+  },
+  {
+    "city": "little rock",
+    "state": "ARKANSAS",
+    "cases": 22
+  },
+  {
+    "city": "stanfield",
+    "state": "ARIZONA",
+    "cases": 22
+  },
+  {
+    "city": "humble",
+    "state": "TX",
+    "cases": 22
+  },
+  {
+    "city": "wilmington",
+    "state": "NC",
+    "cases": 22
+  },
+  {
+    "city": "fontana",
+    "state": "CA",
+    "cases": 22
+  },
+  {
+    "city": "paterson",
+    "state": "NJ",
+    "cases": 22
+  },
+  {
+    "city": "ponce",
+    "state": "PUERTO RICO",
+    "cases": 21
+  },
+  {
+    "city": "lynn",
+    "state": "MASSACHUSETTS",
+    "cases": 21
+  },
+  {
+    "city": "imperial beach",
+    "state": "CALIFORNIA",
+    "cases": 21
+  },
+  {
+    "city": "eureka",
+    "state": "CALIFORNIA",
+    "cases": 21
+  },
+  {
+    "city": "nampa",
+    "state": "IDAHO",
+    "cases": 21
+  },
+  {
+    "city": "jersey city",
+    "state": "NEW JERSEY",
+    "cases": 21
+  },
+  {
+    "city": "las cruces",
+    "state": "NM",
+    "cases": 21
+  },
+  {
+    "city": "birmingham",
+    "state": "AL",
+    "cases": 21
+  },
+  {
+    "city": "concord",
+    "state": "CA",
+    "cases": 21
+  },
+  {
+    "city": "youngstown",
+    "state": "OHIO",
+    "cases": 20
+  },
+  {
+    "city": "new bedford",
+    "state": "MASSACHUSETTS",
+    "cases": 20
+  },
+  {
+    "city": "highland",
+    "state": "CALIFORNIA",
+    "cases": 20
+  },
+  {
+    "city": "palm springs",
+    "state": "CALIFORNIA",
+    "cases": 20
+  },
+  {
+    "city": "escondido",
+    "state": "CALIFORNIA",
+    "cases": 20
+  },
+  {
+    "city": "chino",
+    "state": "CALIFORNIA",
+    "cases": 20
+  },
+  {
+    "city": "new brunswick",
+    "state": "NEW JERSEY",
+    "cases": 20
+  },
+  {
+    "city": "joliet",
+    "state": "ILLINOIS",
+    "cases": 20
+  },
+  {
+    "city": "meridian",
+    "state": "IDAHO",
+    "cases": 20
+  },
+  {
+    "city": "media",
+    "state": "PENNSYLVANIA",
+    "cases": 20
+  },
+  {
+    "city": "boca raton",
+    "state": "FLORIDA",
+    "cases": 20
+  },
+  {
+    "city": "augusta",
+    "state": "GA",
+    "cases": 20
+  },
+  {
+    "city": "tyler",
+    "state": "TX",
+    "cases": 20
+  },
+  {
+    "city": "lansing",
+    "state": "MI",
+    "cases": 20
+  },
+  {
+    "city": "kingsport",
+    "state": "TN",
+    "cases": 20
+  },
+  {
+    "city": "youngstown",
+    "state": "OH",
+    "cases": 20
+  },
+  {
+    "city": "syracuse",
+    "state": "NY",
+    "cases": 20
+  },
+  {
+    "city": "lawton",
+    "state": "OK",
+    "cases": 20
+  },
+  {
+    "city": "yuma",
+    "state": "AZ",
+    "cases": 20
+  },
+  {
+    "city": "orange",
+    "state": "CA",
+    "cases": 20
+  },
+  {
+    "city": "eureka",
+    "state": "CA",
+    "cases": 20
+  },
+  {
+    "city": "bremerton",
+    "state": "WA",
+    "cases": 20
+  },
+  {
+    "city": "yakima",
+    "state": "WA",
+    "cases": 20
+  },
+  {
+    "city": "ewa beach",
+    "state": "HAWAII",
+    "cases": 19
+  },
+  {
+    "city": "waterbury",
+    "state": "CONNECTICUT",
+    "cases": 19
+  },
+  {
+    "city": "brockton",
+    "state": "MASSACHUSETTS",
+    "cases": 19
+  },
+  {
+    "city": "pomona",
+    "state": "CALIFORNIA",
+    "cases": 19
+  },
+  {
+    "city": "daly city",
+    "state": "CALIFORNIA",
+    "cases": 19
+  },
+  {
+    "city": "el centro",
+    "state": "CALIFORNIA",
+    "cases": 19
+  },
+  {
+    "city": "topawa",
+    "state": "ARIZONA",
+    "cases": 19
+  },
+  {
+    "city": "w of ajo",
+    "state": "ARIZONA",
+    "cases": 19
+  },
+  {
+    "city": "lehigh acres",
+    "state": "FL",
+    "cases": 19
+  },
+  {
+    "city": "north little rock",
+    "state": "AR",
+    "cases": 19
+  },
+  {
+    "city": "west memphis",
+    "state": "AR",
+    "cases": 19
+  },
+  {
+    "city": "fort smith",
+    "state": "AR",
+    "cases": 19
+  },
+  {
+    "city": "wilmington",
+    "state": "DE",
+    "cases": 19
+  },
+  {
+    "city": "covington",
+    "state": "KY",
+    "cases": 19
+  },
+  {
+    "city": "lancaster",
+    "state": "CA",
+    "cases": 19
+  },
+  {
+    "city": "santa monica",
+    "state": "CA",
+    "cases": 19
+  },
+  {
+    "city": "ventura",
+    "state": "CA",
+    "cases": 19
+  },
+  {
+    "city": "oxnard",
+    "state": "CA",
+    "cases": 19
+  },
+  {
+    "city": "des moines",
+    "state": "IA",
+    "cases": 19
+  },
+  {
+    "city": "carrollton",
+    "state": "TEXAS",
+    "cases": 18
+  },
+  {
+    "city": "lancaster",
+    "state": "TEXAS",
+    "cases": 18
+  },
+  {
+    "city": "key west",
+    "state": "FLORIDA",
+    "cases": 18
+  },
+  {
+    "city": "casa grande",
+    "state": "ARIZONA",
+    "cases": 18
+  },
+  {
+    "city": "sausalito",
+    "state": "CALIFORNIA",
+    "cases": 18
+  },
+  {
+    "city": "baker",
+    "state": "CALIFORNIA",
+    "cases": 18
+  },
+  {
+    "city": "spanaway",
+    "state": "WASHINGTON",
+    "cases": 18
+  },
+  {
+    "city": "nogales",
+    "state": "ARIZONA",
+    "cases": 18
+  },
+  {
+    "city": "west of ajo",
+    "state": "ARIZONA",
+    "cases": 18
+  },
+  {
+    "city": "boynton beach",
+    "state": "FL",
+    "cases": 18
+  },
+  {
+    "city": "st. petersburg",
+    "state": "FL",
+    "cases": 18
+  },
+  {
+    "city": "toledo",
+    "state": "OH",
+    "cases": 18
+  },
+  {
+    "city": "charleston",
+    "state": "WV",
+    "cases": 18
+  },
+  {
+    "city": "culpeper",
+    "state": "VA",
+    "cases": 18
+  },
+  {
+    "city": "palmer",
+    "state": "AK",
+    "cases": 18
+  },
+  {
+    "city": "kansas city",
+    "state": "KS",
+    "cases": 18
+  },
+  {
+    "city": "immokalee",
+    "state": "FLORIDA",
+    "cases": 17
+  },
+  {
+    "city": "roosevelt island",
+    "state": "NEW YORK",
+    "cases": 17
+  },
+  {
+    "city": "unknown",
+    "state": "WEST VIRGINIA",
+    "cases": 17
+  },
+  {
+    "city": "danbury",
+    "state": "CONNECTICUT",
+    "cases": 17
+  },
+  {
+    "city": "rural",
+    "state": "NEW MEXICO",
+    "cases": 17
+  },
+  {
+    "city": "bessemer",
+    "state": "ALABAMA",
+    "cases": 17
+  },
+  {
+    "city": "eloy",
+    "state": "ARIZONA",
+    "cases": 17
+  },
+  {
+    "city": "rancho cucamonga",
+    "state": "CALIFORNIA",
+    "cases": 17
+  },
+  {
+    "city": "stanton",
+    "state": "CALIFORNIA",
+    "cases": 17
+  },
+  {
+    "city": "des moines",
+    "state": "IOWA",
+    "cases": 17
+  },
+  {
+    "city": "deming",
+    "state": "NEW MEXICO",
+    "cases": 17
+  },
+  {
+    "city": "why",
+    "state": "ARIZONA",
+    "cases": 17
+  },
+  {
+    "city": "cowlic village",
+    "state": "ARIZONA",
+    "cases": 17
+  },
+  {
+    "city": "jamul",
+    "state": "CALIFORNIA",
+    "cases": 17
+  },
+  {
+    "city": "salton city",
+    "state": "CALIFORNIA",
+    "cases": 17
+  },
+  {
+    "city": "marietta",
+    "state": "GA",
+    "cases": 17
+  },
+  {
+    "city": "myrtle beach",
+    "state": "SC",
+    "cases": 17
+  },
+  {
+    "city": "davie",
+    "state": "FL",
+    "cases": 17
+  },
+  {
+    "city": "grand rapids",
+    "state": "MI",
+    "cases": 17
+  },
+  {
+    "city": "murfreesboro",
+    "state": "TN",
+    "cases": 17
+  },
+  {
+    "city": "billings",
+    "state": "MT",
+    "cases": 17
+  },
+  {
+    "city": "fort wayne",
+    "state": "IN",
+    "cases": 17
+  },
+  {
+    "city": "new haven",
+    "state": "CT",
+    "cases": 17
+  },
+  {
+    "city": "metairie",
+    "state": "LA",
+    "cases": 17
+  },
+  {
+    "city": "prince of wales",
+    "state": "AK",
+    "cases": 17
+  },
+  {
+    "city": "yakutat",
+    "state": "AK",
+    "cases": 17
+  },
+  {
+    "city": "grants pass",
+    "state": "OR",
+    "cases": 17
+  },
+  {
+    "city": "olympia",
+    "state": "WA",
+    "cases": 17
+  },
+  {
+    "city": "pottsville",
+    "state": "PENNSYLVANIA",
+    "cases": 16
+  },
+  {
+    "city": "miami beach",
+    "state": "FLORIDA",
+    "cases": 16
+  },
+  {
+    "city": "nashville",
+    "state": "TENNESSEE",
+    "cases": 16
+  },
+  {
+    "city": "wilmington",
+    "state": "DELAWARE",
+    "cases": 16
+  },
+  {
+    "city": "chelsea",
+    "state": "MASSACHUSETTS",
+    "cases": 16
+  },
+  {
+    "city": "dorchester",
+    "state": "MASSACHUSETTS",
+    "cases": 16
+  },
+  {
+    "city": "quincy",
+    "state": "MASSACHUSETTS",
+    "cases": 16
+  },
+  {
+    "city": "marana",
+    "state": "ARIZONA",
+    "cases": 16
+  },
+  {
+    "city": "glendale",
+    "state": "CALIFORNIA",
+    "cases": 16
+  },
+  {
+    "city": "henderson",
+    "state": "NEVADA",
+    "cases": 16
+  },
+  {
+    "city": "woodbridge township",
+    "state": "NEW JERSEY",
+    "cases": 16
+  },
+  {
+    "city": "minneapolis",
+    "state": "MINNESOTA",
+    "cases": 16
+  },
+  {
+    "city": "sasabe",
+    "state": "ARIZONA",
+    "cases": 16
+  },
+  {
+    "city": "harrisburg",
+    "state": "PA",
+    "cases": 16
+  },
+  {
+    "city": "gainesville",
+    "state": "FL",
+    "cases": 16
+  },
+  {
+    "city": "clarksville",
+    "state": "TN",
+    "cases": 16
+  },
+  {
+    "city": "la vergne",
+    "state": "TN",
+    "cases": 16
+  },
+  {
+    "city": "lincoln",
+    "state": "NE",
+    "cases": 16
+  },
+  {
+    "city": "gastonia",
+    "state": "NC",
+    "cases": 16
+  },
+  {
+    "city": "shreveport",
+    "state": "LA",
+    "cases": 16
+  },
+  {
+    "city": "boston",
+    "state": "MA",
+    "cases": 16
+  },
+  {
+    "city": "scottsdale",
+    "state": "AZ",
+    "cases": 16
+  },
+  {
+    "city": "pomona",
+    "state": "CA",
+    "cases": 16
+  },
+  {
+    "city": "newport",
+    "state": "OR",
+    "cases": 16
+  },
+  {
+    "city": "bellevue",
+    "state": "WA",
+    "cases": 16
+  },
+  {
+    "city": "haleiwa",
+    "state": "HAWAII",
+    "cases": 15
+  },
+  {
+    "city": "indianapolis",
+    "state": "INDIANA",
+    "cases": 15
+  },
+  {
+    "city": "everett",
+    "state": "MASSACHUSETTS",
+    "cases": 15
+  },
+  {
+    "city": "green valley",
+    "state": "ARIZONA",
+    "cases": 15
+  },
+  {
+    "city": "inglewood",
+    "state": "CALIFORNIA",
+    "cases": 15
+  },
+  {
+    "city": "lancaster",
+    "state": "CALIFORNIA",
+    "cases": 15
+  },
+  {
+    "city": "oxnard",
+    "state": "CALIFORNIA",
+    "cases": 15
+  },
+  {
+    "city": "mount vernon",
+    "state": "WASHINGTON",
+    "cases": 15
+  },
+  {
+    "city": "savannah",
+    "state": "GEORGIA",
+    "cases": 15
+  },
+  {
+    "city": "louisville",
+    "state": "KENTUCKY",
+    "cases": 15
+  },
+  {
+    "city": "sumter",
+    "state": "SC",
+    "cases": 15
+  },
+  {
+    "city": "greenville",
+    "state": "SC",
+    "cases": 15
+  },
+  {
+    "city": "cypress",
+    "state": "TX",
+    "cases": 15
+  },
+  {
+    "city": "conroe",
+    "state": "TX",
+    "cases": 15
+  },
+  {
+    "city": "odessa",
+    "state": "TX",
+    "cases": 15
+  },
+  {
+    "city": "corpus christi",
+    "state": "TX",
+    "cases": 15
+  },
+  {
+    "city": "sarita",
+    "state": "TX",
+    "cases": 15
+  },
+  {
+    "city": "sanford",
+    "state": "FL",
+    "cases": 15
+  },
+  {
+    "city": "riviera beach",
+    "state": "FL",
+    "cases": 15
+  },
+  {
+    "city": "new port richey",
+    "state": "FL",
+    "cases": 15
+  },
+  {
+    "city": "fort pierce",
+    "state": "FL",
+    "cases": 15
+  },
+  {
+    "city": "haleiwa",
+    "state": "HI",
+    "cases": 15
+  },
+  {
+    "city": "dayton",
+    "state": "OH",
+    "cases": 15
+  },
+  {
+    "city": "manhattan",
+    "state": "NY",
+    "cases": 15
+  },
+  {
+    "city": "hartford",
+    "state": "CT",
+    "cases": 15
+  },
+  {
+    "city": "new britain",
+    "state": "CT",
+    "cases": 15
+  },
+  {
+    "city": "lexington",
+    "state": "KY",
+    "cases": 15
+  },
+  {
+    "city": "farmington",
+    "state": "NM",
+    "cases": 15
+  },
+  {
+    "city": "san rafael",
+    "state": "CA",
+    "cases": 15
+  },
+  {
+    "city": "chino",
+    "state": "CA",
+    "cases": 15
+  },
+  {
+    "city": "henderson",
+    "state": "NV",
+    "cases": 15
+  },
+  {
+    "city": "kenai",
+    "state": "AK",
+    "cases": 15
+  },
+  {
+    "city": "peoria",
+    "state": "IL",
+    "cases": 15
+  },
+  {
+    "city": "boise",
+    "state": "ID",
+    "cases": 15
+  },
+  {
+    "city": "medford",
+    "state": "OR",
+    "cases": 15
+  },
+  {
+    "city": "auburn",
+    "state": "WA",
+    "cases": 15
+  },
+  {
+    "city": "florissant",
+    "state": "MO",
+    "cases": 15
+  },
+  {
+    "city": "la crosse",
+    "state": "WISCONSIN",
+    "cases": 14
+  },
+  {
+    "city": "grand prairie",
+    "state": "TEXAS",
+    "cases": 14
+  },
+  {
+    "city": "fort myers",
+    "state": "FLORIDA",
+    "cases": 14
+  },
+  {
+    "city": "wahiawa",
+    "state": "HAWAII",
+    "cases": 14
+  },
+  {
+    "city": "kaneohe",
+    "state": "HAWAII",
+    "cases": 14
+  },
+  {
+    "city": "fayetteville",
+    "state": "ARKANSAS",
+    "cases": 14
+  },
+  {
+    "city": "new britain",
+    "state": "CONNECTICUT",
+    "cases": 14
+  },
+  {
+    "city": "bayamon",
+    "state": "PUERTO RICO",
+    "cases": 14
+  },
+  {
+    "city": "mayaguez",
+    "state": "PUERTO RICO",
+    "cases": 14
+  },
+  {
+    "city": "somerville",
+    "state": "MASSACHUSETTS",
+    "cases": 14
+  },
+  {
+    "city": "lawrence",
+    "state": "MASSACHUSETTS",
+    "cases": 14
+  },
+  {
+    "city": "pasadena",
+    "state": "CALIFORNIA",
+    "cases": 14
+  },
+  {
+    "city": "carlsbad",
+    "state": "CALIFORNIA",
+    "cases": 14
+  },
+  {
+    "city": "lucerne valley",
+    "state": "CALIFORNIA",
+    "cases": 14
+  },
+  {
+    "city": "holtville",
+    "state": "CALIFORNIA",
+    "cases": 14
+  },
+  {
+    "city": "ventura",
+    "state": "CALIFORNIA",
+    "cases": 14
+  },
+  {
+    "city": "garden city",
+    "state": "IDAHO",
+    "cases": 14
+  },
+  {
+    "city": "caldwell",
+    "state": "IDAHO",
+    "cases": 14
+  },
+  {
+    "city": "blythe",
+    "state": "CALIFORNIA",
+    "cases": 14
+  },
+  {
+    "city": "bakersfield",
+    "state": "CALIFORNIA",
+    "cases": 14
+  },
+  {
+    "city": "columbus",
+    "state": "GA",
+    "cases": 14
+  },
+  {
+    "city": "panama city",
+    "state": "FL",
+    "cases": 14
+  },
+  {
+    "city": "cookeville",
+    "state": "TN",
+    "cases": 14
+  },
+  {
+    "city": "lakewood",
+    "state": "CO",
+    "cases": 14
+  },
+  {
+    "city": "portland",
+    "state": "ME",
+    "cases": 14
+  },
+  {
+    "city": "santa fe",
+    "state": "NM",
+    "cases": 14
+  },
+  {
+    "city": "tempe",
+    "state": "AZ",
+    "cases": 14
+  },
+  {
+    "city": "fairfield",
+    "state": "CA",
+    "cases": 14
+  },
+  {
+    "city": "unknown",
+    "state": "CA",
+    "cases": 14
+  },
+  {
+    "city": "gardena",
+    "state": "CA",
+    "cases": 14
+  },
+  {
+    "city": "santa maria",
+    "state": "CA",
+    "cases": 14
+  },
+  {
+    "city": "oceanside",
+    "state": "CA",
+    "cases": 14
+  },
+  {
+    "city": "oroville",
+    "state": "CA",
+    "cases": 14
+  },
+  {
+    "city": "homer",
+    "state": "AK",
+    "cases": 14
+  },
+  {
+    "city": "aurora",
+    "state": "IL",
+    "cases": 14
+  },
+  {
+    "city": "anacortes",
+    "state": "WA",
+    "cases": 14
+  },
+  {
+    "city": "port angeles",
+    "state": "WA",
+    "cases": 14
+  },
+  {
+    "city": "columbia",
+    "state": "SOUTH CAROLINA",
+    "cases": 13
+  },
+  {
+    "city": "mcallen",
+    "state": "TEXAS",
+    "cases": 13
+  },
+  {
+    "city": "ft myers",
+    "state": "FLORIDA",
+    "cases": 13
+  },
+  {
+    "city": "alpena",
+    "state": "MICHIGAN",
+    "cases": 13
+  },
+  {
+    "city": "aiea",
+    "state": "HAWAII",
+    "cases": 13
+  },
+  {
+    "city": "charleston",
+    "state": "WEST VIRGINIA",
+    "cases": 13
+  },
+  {
+    "city": "stamford",
+    "state": "CONNECTICUT",
+    "cases": 13
+  },
+  {
+    "city": "chicopee",
+    "state": "MASSACHUSETTS",
+    "cases": 13
+  },
+  {
+    "city": "framingham",
+    "state": "MASSACHUSETTS",
+    "cases": 13
+  },
+  {
+    "city": "holyoke",
+    "state": "MASSACHUSETTS",
+    "cases": 13
+  },
+  {
+    "city": "las cruces",
+    "state": "NEW MEXICO",
+    "cases": 13
+  },
+  {
+    "city": "gardena",
+    "state": "CALIFORNIA",
+    "cases": 13
+  },
+  {
+    "city": "compton",
+    "state": "CALIFORNIA",
+    "cases": 13
+  },
+  {
+    "city": "palmdale",
+    "state": "CALIFORNIA",
+    "cases": 13
+  },
+  {
+    "city": "corona",
+    "state": "CALIFORNIA",
+    "cases": 13
+  },
+  {
+    "city": "van nuys",
+    "state": "CALIFORNIA",
+    "cases": 13
+  },
+  {
+    "city": "eagle pass",
+    "state": "TEXAS",
+    "cases": 13
+  },
+  {
+    "city": "newport news",
+    "state": "VIRGINIA",
+    "cases": 13
+  },
+  {
+    "city": "near lukeville",
+    "state": "ARIZONA",
+    "cases": 13
+  },
+  {
+    "city": "douglas",
+    "state": "ARIZONA",
+    "cases": 13
+  },
+  {
+    "city": "north las vegas",
+    "state": "NEVADA",
+    "cases": 13
+  },
+  {
+    "city": "pasadena",
+    "state": "TX",
+    "cases": 13
+  },
+  {
+    "city": "abilene",
+    "state": "TX",
+    "cases": 13
+  },
+  {
+    "city": "waco",
+    "state": "TX",
+    "cases": 13
+  },
+  {
+    "city": "melbourne",
+    "state": "FL",
+    "cases": 13
+  },
+  {
+    "city": "deltona",
+    "state": "FL",
+    "cases": 13
+  },
+  {
+    "city": "sarasota",
+    "state": "FL",
+    "cases": 13
+  },
+  {
+    "city": "stuart",
+    "state": "FL",
+    "cases": 13
+  },
+  {
+    "city": "homestead",
+    "state": "FL",
+    "cases": 13
+  },
+  {
+    "city": "key west",
+    "state": "FL",
+    "cases": 13
+  },
+  {
+    "city": "battle creek",
+    "state": "MI",
+    "cases": 13
+  },
+  {
+    "city": "redford",
+    "state": "MI",
+    "cases": 13
+  },
+  {
+    "city": "flint",
+    "state": "MI",
+    "cases": 13
+  },
+  {
+    "city": "missoula",
+    "state": "MT",
+    "cases": 13
+  },
+  {
+    "city": "spring valley",
+    "state": "NY",
+    "cases": 13
+  },
+  {
+    "city": "east hartford",
+    "state": "CT",
+    "cases": 13
+  },
+  {
+    "city": "del city",
+    "state": "OK",
+    "cases": 13
+  },
+  {
+    "city": "muskogee",
+    "state": "OK",
+    "cases": 13
+  },
+  {
+    "city": "boulder",
+    "state": "CO",
+    "cases": 13
+  },
+  {
+    "city": "morganton",
+    "state": "NC",
+    "cases": 13
+  },
+  {
+    "city": "lowell",
+    "state": "MA",
+    "cases": 13
+  },
+  {
+    "city": "worcester",
+    "state": "MA",
+    "cases": 13
+  },
+  {
+    "city": "montgomery",
+    "state": "AL",
+    "cases": 13
+  },
+  {
+    "city": "inglewood",
+    "state": "CA",
+    "cases": 13
+  },
+  {
+    "city": "novato",
+    "state": "CA",
+    "cases": 13
+  },
+  {
+    "city": "north bergen",
+    "state": "NJ",
+    "cases": 13
+  },
+  {
+    "city": "cordova",
+    "state": "AK",
+    "cases": 13
+  },
+  {
+    "city": "kotzebue",
+    "state": "AK",
+    "cases": 13
+  },
+  {
+    "city": "springfield",
+    "state": "OR",
+    "cases": 13
+  },
+  {
+    "city": "roseburg",
+    "state": "OR",
+    "cases": 13
+  },
+  {
+    "city": "coos bay",
+    "state": "OR",
+    "cases": 13
+  },
+  {
+    "city": "anderson",
+    "state": "SOUTH CAROLINA",
+    "cases": 12
+  },
+  {
+    "city": "harlingen",
+    "state": "TEXAS",
+    "cases": 12
+  },
+  {
+    "city": "pasadena",
+    "state": "TEXAS",
+    "cases": 12
+  },
+  {
+    "city": "conroe",
+    "state": "TEXAS",
+    "cases": 12
+  },
+  {
+    "city": "hidalgo",
+    "state": "TEXAS",
+    "cases": 12
+  },
+  {
+    "city": "kapolei",
+    "state": "HAWAII",
+    "cases": 12
+  },
+  {
+    "city": "middletown",
+    "state": "CONNECTICUT",
+    "cases": 12
+  },
+  {
+    "city": "norwich",
+    "state": "CONNECTICUT",
+    "cases": 12
+  },
+  {
+    "city": "carolina",
+    "state": "PUERTO RICO",
+    "cases": 12
+  },
+  {
+    "city": "arecibo",
+    "state": "PUERTO RICO",
+    "cases": 12
+  },
+  {
+    "city": "charlotte",
+    "state": "NORTH CAROLINA",
+    "cases": 12
+  },
+  {
+    "city": "fall river",
+    "state": "MASSACHUSETTS",
+    "cases": 12
+  },
+  {
+    "city": "brookline",
+    "state": "MASSACHUSETTS",
+    "cases": 12
+  },
+  {
+    "city": "boulevard",
+    "state": "CALIFORNIA",
+    "cases": 12
+  },
+  {
+    "city": "torrance",
+    "state": "CALIFORNIA",
+    "cases": 12
+  },
+  {
+    "city": "la mesa",
+    "state": "CALIFORNIA",
+    "cases": 12
+  },
+  {
+    "city": "newport beach",
+    "state": "CALIFORNIA",
+    "cases": 12
+  },
+  {
+    "city": "asbury park",
+    "state": "NEW JERSEY",
+    "cases": 12
+  },
+  {
+    "city": "springfield",
+    "state": "ILLINOIS",
+    "cases": 12
+  },
+  {
+    "city": "lynnwood",
+    "state": "WASHINGTON",
+    "cases": 12
+  },
+  {
+    "city": "sarita",
+    "state": "TEXAS",
+    "cases": 12
+  },
+  {
+    "city": "alexandria",
+    "state": "VIRGINIA",
+    "cases": 12
+  },
+  {
+    "city": "laveen",
+    "state": "ARIZONA",
+    "cases": 12
+  },
+  {
+    "city": "vamori",
+    "state": "ARIZONA",
+    "cases": 12
+  },
+  {
+    "city": "red rock",
+    "state": "ARIZONA",
+    "cases": 12
+  },
+  {
+    "city": "near marana",
+    "state": "ARIZONA",
+    "cases": 12
+  },
+  {
+    "city": "alpine",
+    "state": "CALIFORNIA",
+    "cases": 12
+  },
+  {
+    "city": "malibu",
+    "state": "CALIFORNIA",
+    "cases": 12
+  },
+  {
+    "city": "unknown",
+    "state": "TX",
+    "cases": 12
+  },
+  {
+    "city": "plano",
+    "state": "TX",
+    "cases": 12
+  },
+  {
+    "city": "winter park",
+    "state": "FL",
+    "cases": 12
+  },
+  {
+    "city": "bonita springs",
+    "state": "FL",
+    "cases": 12
+  },
+  {
+    "city": "lake worth",
+    "state": "FL",
+    "cases": 12
+  },
+  {
+    "city": "poughkeepsie",
+    "state": "NY",
+    "cases": 12
+  },
+  {
+    "city": "gulfport",
+    "state": "MS",
+    "cases": 12
+  },
+  {
+    "city": "newport news",
+    "state": "VA",
+    "cases": 12
+  },
+  {
+    "city": "washington d.c.",
+    "state": "DC",
+    "cases": 12
+  },
+  {
+    "city": "bowling green",
+    "state": "KY",
+    "cases": 12
+  },
+  {
+    "city": "new bedford",
+    "state": "MA",
+    "cases": 12
+  },
+  {
+    "city": "kingman",
+    "state": "AZ",
+    "cases": 12
+  },
+  {
+    "city": "glendale",
+    "state": "AZ",
+    "cases": 12
+  },
+  {
+    "city": "palmdale",
+    "state": "CA",
+    "cases": 12
+  },
+  {
+    "city": "hayward",
+    "state": "CA",
+    "cases": 12
+  },
+  {
+    "city": "san luis obispo",
+    "state": "CA",
+    "cases": 12
+  },
+  {
+    "city": "half moon bay",
+    "state": "CA",
+    "cases": 12
+  },
+  {
+    "city": "fort bragg",
+    "state": "CA",
+    "cases": 12
+  },
+  {
+    "city": "berkeley",
+    "state": "CA",
+    "cases": 12
+  },
+  {
+    "city": "watsonville",
+    "state": "CA",
+    "cases": 12
+  },
+  {
+    "city": "calexico",
+    "state": "CA",
+    "cases": 12
+  },
+  {
+    "city": "unalaska",
+    "state": "AK",
+    "cases": 12
+  },
+  {
+    "city": "glennallen",
+    "state": "AK",
+    "cases": 12
+  },
+  {
+    "city": "rochester",
+    "state": "VT",
+    "cases": 12
+  },
+  {
+    "city": "port orchard",
+    "state": "WA",
+    "cases": 12
+  },
+  {
+    "city": "independence",
+    "state": "MO",
+    "cases": 12
+  },
+  {
+    "city": "columbia",
+    "state": "MO",
+    "cases": 12
+  },
+  {
+    "city": "norcross",
+    "state": "GEORGIA",
+    "cases": 11
+  },
+  {
+    "city": "east point",
+    "state": "GEORGIA",
+    "cases": 11
+  },
+  {
+    "city": "milwaukee",
+    "state": "WISCONSIN",
+    "cases": 11
+  },
+  {
+    "city": "baytown",
+    "state": "TEXAS",
+    "cases": 11
+  },
+  {
+    "city": "denton",
+    "state": "TEXAS",
+    "cases": 11
+  },
+  {
+    "city": "big rapids",
+    "state": "MICHIGAN",
+    "cases": 11
+  },
+  {
+    "city": "clare",
+    "state": "MICHIGAN",
+    "cases": 11
+  },
+  {
+    "city": "highland park",
+    "state": "MICHIGAN",
+    "cases": 11
+  },
+  {
+    "city": "oak ridge",
+    "state": "TENNESSEE",
+    "cases": 11
+  },
+  {
+    "city": "astoria",
+    "state": "NEW YORK",
+    "cases": 11
+  },
+  {
+    "city": "norwalk",
+    "state": "CONNECTICUT",
+    "cases": 11
+  },
+  {
+    "city": "muskogee",
+    "state": "OKLAHOMA",
+    "cases": 11
+  },
+  {
+    "city": "bayam\u00f3n",
+    "state": "PUERTO RICO",
+    "cases": 11
+  },
+  {
+    "city": "gallup",
+    "state": "NEW MEXICO",
+    "cases": 11
+  },
+  {
+    "city": "arcadia",
+    "state": "CALIFORNIA",
+    "cases": 11
+  },
+  {
+    "city": "modesto",
+    "state": "CALIFORNIA",
+    "cases": 11
+  },
+  {
+    "city": "carson",
+    "state": "CALIFORNIA",
+    "cases": 11
+  },
+  {
+    "city": "sylmar",
+    "state": "CALIFORNIA",
+    "cases": 11
+  },
+  {
+    "city": "west palm beach",
+    "state": "FLORIDA",
+    "cases": 11
+  },
+  {
+    "city": "broward",
+    "state": "FLORIDA",
+    "cases": 11
+  },
+  {
+    "city": "rural",
+    "state": "UTAH",
+    "cases": 11
+  },
+  {
+    "city": "virginia beach",
+    "state": "VIRGINIA",
+    "cases": 11
+  },
+  {
+    "city": "tacna",
+    "state": "ARIZONA",
+    "cases": 11
+  },
+  {
+    "city": "amado",
+    "state": "ARIZONA",
+    "cases": 11
+  },
+  {
+    "city": "maricopa",
+    "state": "ARIZONA",
+    "cases": 11
+  },
+  {
+    "city": "angeles national forest",
+    "state": "CALIFORNIA",
+    "cases": 11
+  },
+  {
+    "city": "anchorage",
+    "state": "ALASKA",
+    "cases": 11
+  },
+  {
+    "city": "savannah",
+    "state": "GA",
+    "cases": 11
+  },
+  {
+    "city": "cleveland",
+    "state": "TX",
+    "cases": 11
+  },
+  {
+    "city": "beaumont",
+    "state": "TX",
+    "cases": 11
+  },
+  {
+    "city": "amarillo",
+    "state": "TX",
+    "cases": 11
+  },
+  {
+    "city": "grand prairie",
+    "state": "TX",
+    "cases": 11
+  },
+  {
+    "city": "arlington",
+    "state": "TX",
+    "cases": 11
+  },
+  {
+    "city": "lubbock",
+    "state": "TX",
+    "cases": 11
+  },
+  {
+    "city": "marshall",
+    "state": "TX",
+    "cases": 11
+  },
+  {
+    "city": "largo",
+    "state": "FL",
+    "cases": 11
+  },
+  {
+    "city": "north miami beach",
+    "state": "FL",
+    "cases": 11
+  },
+  {
+    "city": "hollywood",
+    "state": "FL",
+    "cases": 11
+  },
+  {
+    "city": "pompano beach",
+    "state": "FL",
+    "cases": 11
+  },
+  {
+    "city": "st. augustine",
+    "state": "FL",
+    "cases": 11
+  },
+  {
+    "city": "clearwater",
+    "state": "FL",
+    "cases": 11
+  },
+  {
+    "city": "marathon",
+    "state": "FL",
+    "cases": 11
+  },
+  {
+    "city": "hialeah",
+    "state": "FL",
+    "cases": 11
+  },
+  {
+    "city": "ann arbor",
+    "state": "MI",
+    "cases": 11
+  },
+  {
+    "city": "inkster",
+    "state": "MI",
+    "cases": 11
+  },
+  {
+    "city": "waianae",
+    "state": "HI",
+    "cases": 11
+  },
+  {
+    "city": "johnson city",
+    "state": "TN",
+    "cases": 11
+  },
+  {
+    "city": "shelbyville",
+    "state": "TN",
+    "cases": 11
+  },
+  {
+    "city": "cleveland",
+    "state": "TN",
+    "cases": 11
+  },
+  {
+    "city": "pine bluff",
+    "state": "AR",
+    "cases": 11
+  },
+  {
+    "city": "springdale",
+    "state": "AR",
+    "cases": 11
+  },
+  {
+    "city": "stamford",
+    "state": "CT",
+    "cases": 11
+  },
+  {
+    "city": "grand junction",
+    "state": "CO",
+    "cases": 11
+  },
+  {
+    "city": "lexington",
+    "state": "NC",
+    "cases": 11
+  },
+  {
+    "city": "salisbury",
+    "state": "NC",
+    "cases": 11
+  },
+  {
+    "city": "lake charles",
+    "state": "LA",
+    "cases": 11
+  },
+  {
+    "city": "gallup",
+    "state": "NM",
+    "cases": 11
+  },
+  {
+    "city": "sells",
+    "state": "AZ",
+    "cases": 11
+  },
+  {
+    "city": "goodyear",
+    "state": "AZ",
+    "cases": 11
+  },
+  {
+    "city": "vallejo",
+    "state": "CA",
+    "cases": 11
+  },
+  {
+    "city": "fremont",
+    "state": "CA",
+    "cases": 11
+  },
+  {
+    "city": "escondido",
+    "state": "CA",
+    "cases": 11
+  },
+  {
+    "city": "whittier",
+    "state": "CA",
+    "cases": 11
+  },
+  {
+    "city": "el cajon",
+    "state": "CA",
+    "cases": 11
+  },
+  {
+    "city": "santa barbara",
+    "state": "CA",
+    "cases": 11
+  },
+  {
+    "city": "fullerton",
+    "state": "CA",
+    "cases": 11
+  },
+  {
+    "city": "morristown",
+    "state": "NJ",
+    "cases": 11
+  },
+  {
+    "city": "gresham",
+    "state": "OR",
+    "cases": 11
+  },
+  {
+    "city": "overland park",
+    "state": "KS",
+    "cases": 11
+  },
+  {
+    "city": "topeka",
+    "state": "KS",
+    "cases": 11
+  },
+  {
+    "city": "kennewick",
+    "state": "WA",
+    "cases": 11
+  },
+  {
+    "city": "springfield",
+    "state": "MO",
+    "cases": 11
+  },
+  {
+    "city": "college park",
+    "state": "GEORGIA",
+    "cases": 10
+  },
+  {
+    "city": "cheyenne",
+    "state": "WYOMING",
+    "cases": 10
+  },
+  {
+    "city": "richardson",
+    "state": "TEXAS",
+    "cases": 10
+  },
+  {
+    "city": "galveston",
+    "state": "TEXAS",
+    "cases": 10
+  },
+  {
+    "city": "kailua",
+    "state": "HAWAII",
+    "cases": 10
+  },
+  {
+    "city": "clinton",
+    "state": "TENNESSEE",
+    "cases": 10
+  },
+  {
+    "city": "rochester",
+    "state": "NEW YORK",
+    "cases": 10
+  },
+  {
+    "city": "east hartford",
+    "state": "CONNECTICUT",
+    "cases": 10
+  },
+  {
+    "city": "fitchburg",
+    "state": "MASSACHUSETTS",
+    "cases": 10
+  },
+  {
+    "city": "revere",
+    "state": "MASSACHUSETTS",
+    "cases": 10
+  },
+  {
+    "city": "alabaster",
+    "state": "ALABAMA",
+    "cases": 10
+  },
+  {
+    "city": "pleasant grove",
+    "state": "ALABAMA",
+    "cases": 10
+  },
+  {
+    "city": "scottsdale",
+    "state": "ARIZONA",
+    "cases": 10
+  },
+  {
+    "city": "west hollywood",
+    "state": "CALIFORNIA",
+    "cases": 10
+  },
+  {
+    "city": "norwalk",
+    "state": "CALIFORNIA",
+    "cases": 10
+  },
+  {
+    "city": "north hollywood",
+    "state": "CALIFORNIA",
+    "cases": 10
+  },
+  {
+    "city": "burbank",
+    "state": "CALIFORNIA",
+    "cases": 10
+  },
+  {
+    "city": "national city",
+    "state": "CALIFORNIA",
+    "cases": 10
+  },
+  {
+    "city": "burlingame",
+    "state": "CALIFORNIA",
+    "cases": 10
+  },
+  {
+    "city": "bloomington",
+    "state": "CALIFORNIA",
+    "cases": 10
+  },
+  {
+    "city": "niland",
+    "state": "CALIFORNIA",
+    "cases": 10
+  },
+  {
+    "city": "wapato",
+    "state": "WASHINGTON",
+    "cases": 10
+  },
+  {
+    "city": "dateland",
+    "state": "ARIZONA",
+    "cases": 10
+  },
+  {
+    "city": "kingman",
+    "state": "ARIZONA",
+    "cases": 10
+  },
+  {
+    "city": "flagstaff",
+    "state": "ARIZONA",
+    "cases": 10
+  },
+  {
+    "city": "desert center",
+    "state": "CALIFORNIA",
+    "cases": 10
+  },
+  {
+    "city": "lawrenceville",
+    "state": "GA",
+    "cases": 10
+  },
+  {
+    "city": "brunswick",
+    "state": "GA",
+    "cases": 10
+  },
+  {
+    "city": "macon",
+    "state": "GA",
+    "cases": 10
+  },
+  {
+    "city": "decatur",
+    "state": "GA",
+    "cases": 10
+  },
+  {
+    "city": "charleston",
+    "state": "SC",
+    "cases": 10
+  },
+  {
+    "city": "madison",
+    "state": "WI",
+    "cases": 10
+  },
+  {
+    "city": "scranton",
+    "state": "PA",
+    "cases": 10
+  },
+  {
+    "city": "midland",
+    "state": "TX",
+    "cases": 10
+  },
+  {
+    "city": "roma",
+    "state": "TX",
+    "cases": 10
+  },
+  {
+    "city": "kissimmee",
+    "state": "FL",
+    "cases": 10
+  },
+  {
+    "city": "vero beach",
+    "state": "FL",
+    "cases": 10
+  },
+  {
+    "city": "plantation",
+    "state": "FL",
+    "cases": 10
+  },
+  {
+    "city": "sevierville",
+    "state": "TN",
+    "cases": 10
+  },
+  {
+    "city": "columbia",
+    "state": "TN",
+    "cases": 10
+  },
+  {
+    "city": "rapid city",
+    "state": "SD",
+    "cases": 10
+  },
+  {
+    "city": "albany",
+    "state": "NY",
+    "cases": 10
+  },
+  {
+    "city": "huntington",
+    "state": "WV",
+    "cases": 10
+  },
+  {
+    "city": "meriden",
+    "state": "CT",
+    "cases": 10
+  },
+  {
+    "city": "lumberton",
+    "state": "NC",
+    "cases": 10
+  },
+  {
+    "city": "henrico",
+    "state": "VA",
+    "cases": 10
+  },
+  {
+    "city": "norfolk",
+    "state": "VA",
+    "cases": 10
+  },
+  {
+    "city": "huntsville",
+    "state": "AL",
+    "cases": 10
+  },
+  {
+    "city": "simi valley",
+    "state": "CA",
+    "cases": 10
+  },
+  {
+    "city": "sausalito",
+    "state": "CA",
+    "cases": 10
+  },
+  {
+    "city": "pacifica",
+    "state": "CA",
+    "cases": 10
+  },
+  {
+    "city": "south lake tahoe",
+    "state": "CA",
+    "cases": 10
+  },
+  {
+    "city": "daly city",
+    "state": "CA",
+    "cases": 10
+  },
+  {
+    "city": "pasadena",
+    "state": "CA",
+    "cases": 10
+  },
+  {
+    "city": "jersey city",
+    "state": "NJ",
+    "cases": 10
+  },
+  {
+    "city": "talkeetna",
+    "state": "AK",
+    "cases": 10
+  },
+  {
+    "city": "joliet",
+    "state": "IL",
+    "cases": 10
+  },
+  {
+    "city": "grangeville",
+    "state": "ID",
+    "cases": 10
+  },
+  {
+    "city": "beaverton",
+    "state": "OR",
+    "cases": 10
+  },
+  {
+    "city": "albany",
+    "state": "OR",
+    "cases": 10
+  },
+  {
+    "city": "renton",
+    "state": "WA",
+    "cases": 10
+  },
+  {
+    "city": "baldwin",
+    "state": "MICHIGAN",
+    "cases": 9
+  },
+  {
+    "city": "cadillac",
+    "state": "MICHIGAN",
+    "cases": 9
+  },
+  {
+    "city": "stratford",
+    "state": "CONNECTICUT",
+    "cases": 9
+  },
+  {
+    "city": "malden",
+    "state": "MASSACHUSETTS",
+    "cases": 9
+  },
+  {
+    "city": "salem",
+    "state": "MASSACHUSETTS",
+    "cases": 9
+  },
+  {
+    "city": "santee",
+    "state": "CALIFORNIA",
+    "cases": 9
+  },
+  {
+    "city": "adelanto",
+    "state": "CALIFORNIA",
+    "cases": 9
+  },
+  {
+    "city": "vista",
+    "state": "CALIFORNIA",
+    "cases": 9
+  },
+  {
+    "city": "twentynine palms",
+    "state": "CALIFORNIA",
+    "cases": 9
+  },
+  {
+    "city": "redwood city",
+    "state": "CALIFORNIA",
+    "cases": 9
+  },
+  {
+    "city": "san pedro",
+    "state": "CALIFORNIA",
+    "cases": 9
+  },
+  {
+    "city": "san marcos",
+    "state": "CALIFORNIA",
+    "cases": 9
+  },
+  {
+    "city": "borrego springs",
+    "state": "CALIFORNIA",
+    "cases": 9
+  },
+  {
+    "city": "laguna beach",
+    "state": "CALIFORNIA",
+    "cases": 9
+  },
+  {
+    "city": "laughlin",
+    "state": "NEVADA",
+    "cases": 9
+  },
+  {
+    "city": "edison",
+    "state": "NEW JERSEY",
+    "cases": 9
+  },
+  {
+    "city": "freehold",
+    "state": "NEW JERSEY",
+    "cases": 9
+  },
+  {
+    "city": "north bergen",
+    "state": "NEW JERSEY",
+    "cases": 9
+  },
+  {
+    "city": "orting",
+    "state": "WASHINGTON",
+    "cases": 9
+  },
+  {
+    "city": "hoquiam",
+    "state": "WASHINGTON",
+    "cases": 9
+  },
+  {
+    "city": "upper marlboro",
+    "state": "MARYLAND",
+    "cases": 9
+  },
+  {
+    "city": "pensacola",
+    "state": "FLORIDA",
+    "cases": 9
+  },
+  {
+    "city": "ft lauderdale",
+    "state": "FLORIDA",
+    "cases": 9
+  },
+  {
+    "city": "baton rouge",
+    "state": "LOUISIANA",
+    "cases": 9
+  },
+  {
+    "city": "portsmouth",
+    "state": "VIRGINIA",
+    "cases": 9
+  },
+  {
+    "city": "hampton",
+    "state": "VIRGINIA",
+    "cases": 9
+  },
+  {
+    "city": "sw of ajo",
+    "state": "ARIZONA",
+    "cases": 9
+  },
+  {
+    "city": "near tucson",
+    "state": "ARIZONA",
+    "cases": 9
+  },
+  {
+    "city": "indio",
+    "state": "CALIFORNIA",
+    "cases": 9
+  },
+  {
+    "city": "coronado",
+    "state": "CALIFORNIA",
+    "cases": 9
+  },
+  {
+    "city": "wilmington",
+    "state": "CALIFORNIA",
+    "cases": 9
+  },
+  {
+    "city": "west deptford",
+    "state": "NEW JERSEY",
+    "cases": 9
+  },
+  {
+    "city": "ocean city",
+    "state": "NEW JERSEY",
+    "cases": 9
+  },
+  {
+    "city": "east point",
+    "state": "GA",
+    "cases": 9
+  },
+  {
+    "city": "norcross",
+    "state": "GA",
+    "cases": 9
+  },
+  {
+    "city": "duluth",
+    "state": "MN",
+    "cases": 9
+  },
+  {
+    "city": "denton",
+    "state": "TX",
+    "cases": 9
+  },
+  {
+    "city": "killeen",
+    "state": "TX",
+    "cases": 9
+  },
+  {
+    "city": "college station",
+    "state": "TX",
+    "cases": 9
+  },
+  {
+    "city": "davenport",
+    "state": "FL",
+    "cases": 9
+  },
+  {
+    "city": "bartow",
+    "state": "FL",
+    "cases": 9
+  },
+  {
+    "city": "miami beach",
+    "state": "FL",
+    "cases": 9
+  },
+  {
+    "city": "ocala",
+    "state": "FL",
+    "cases": 9
+  },
+  {
+    "city": "fort walton beach",
+    "state": "FL",
+    "cases": 9
+  },
+  {
+    "city": "lake worth beach",
+    "state": "FL",
+    "cases": 9
+  },
+  {
+    "city": "jupiter",
+    "state": "FL",
+    "cases": 9
+  },
+  {
+    "city": "lahaina",
+    "state": "HI",
+    "cases": 9
+  },
+  {
+    "city": "kaneohe",
+    "state": "HI",
+    "cases": 9
+  },
+  {
+    "city": "spring hill",
+    "state": "TN",
+    "cases": 9
+  },
+  {
+    "city": "crossville",
+    "state": "TN",
+    "cases": 9
+  },
+  {
+    "city": "greeneville",
+    "state": "TN",
+    "cases": 9
+  },
+  {
+    "city": "evansville",
+    "state": "IN",
+    "cases": 9
+  },
+  {
+    "city": "brentwood",
+    "state": "NY",
+    "cases": 9
+  },
+  {
+    "city": "biloxi",
+    "state": "MS",
+    "cases": 9
+  },
+  {
+    "city": "goldsboro",
+    "state": "NC",
+    "cases": 9
+  },
+  {
+    "city": "high point",
+    "state": "NC",
+    "cases": 9
+  },
+  {
+    "city": "kenner",
+    "state": "LA",
+    "cases": 9
+  },
+  {
+    "city": "lafayette",
+    "state": "LA",
+    "cases": 9
+  },
+  {
+    "city": "west valley city",
+    "state": "UT",
+    "cases": 9
+  },
+  {
+    "city": "roanoke",
+    "state": "VA",
+    "cases": 9
+  },
+  {
+    "city": "cathedral city",
+    "state": "CA",
+    "cases": 9
+  },
+  {
+    "city": "san mateo",
+    "state": "CA",
+    "cases": 9
+  },
+  {
+    "city": "westminster",
+    "state": "CA",
+    "cases": 9
+  },
+  {
+    "city": "ontario",
+    "state": "CA",
+    "cases": 9
+  },
+  {
+    "city": "mountain view",
+    "state": "CA",
+    "cases": 9
+  },
+  {
+    "city": "hawthorne",
+    "state": "CA",
+    "cases": 9
+  },
+  {
+    "city": "mill valley",
+    "state": "CA",
+    "cases": 9
+  },
+  {
+    "city": "atlantic city",
+    "state": "NJ",
+    "cases": 9
+  },
+  {
+    "city": "tukwila",
+    "state": "WA",
+    "cases": 9
+  },
+  {
+    "city": "spanaway",
+    "state": "WA",
+    "cases": 9
+  },
+  {
+    "city": "kirkland",
+    "state": "WA",
+    "cases": 9
+  },
+  {
+    "city": "longview",
+    "state": "WA",
+    "cases": 9
+  },
+  {
+    "city": "unknown",
+    "state": "WA",
+    "cases": 9
+  },
+  {
+    "city": "joplin",
+    "state": "MO",
+    "cases": 9
+  },
+  {
+    "city": "temple terrace",
+    "state": "FLORIDA",
+    "cases": 8
+  },
+  {
+    "city": "kahului",
+    "state": "HAWAII",
+    "cases": 8
+  },
+  {
+    "city": "wailuku",
+    "state": "HAWAII",
+    "cases": 8
+  },
+  {
+    "city": "sevierville",
+    "state": "TENNESSEE",
+    "cases": 8
+  },
+  {
+    "city": "forest hills",
+    "state": "NEW YORK",
+    "cases": 8
+  },
+  {
+    "city": "manchester",
+    "state": "CONNECTICUT",
+    "cases": 8
+  },
+  {
+    "city": "meriden",
+    "state": "CONNECTICUT",
+    "cases": 8
+  },
+  {
+    "city": "aguadilla",
+    "state": "PUERTO RICO",
+    "cases": 8
+  },
+  {
+    "city": "rio grande",
+    "state": "PUERTO RICO",
+    "cases": 8
+  },
+  {
+    "city": "dorchester (boston)",
+    "state": "MASSACHUSETTS",
+    "cases": 8
+  },
+  {
+    "city": "tempe",
+    "state": "ARIZONA",
+    "cases": 8
+  },
+  {
+    "city": "hawthorne",
+    "state": "CALIFORNIA",
+    "cases": 8
+  },
+  {
+    "city": "san mateo",
+    "state": "CALIFORNIA",
+    "cases": 8
+  },
+  {
+    "city": "half moon bay",
+    "state": "CALIFORNIA",
+    "cases": 8
+  },
+  {
+    "city": "pacoima",
+    "state": "CALIFORNIA",
+    "cases": 8
+  },
+  {
+    "city": "huntington park",
+    "state": "CALIFORNIA",
+    "cases": 8
+  },
+  {
+    "city": "hollywood",
+    "state": "CALIFORNIA",
+    "cases": 8
+  },
+  {
+    "city": "landers",
+    "state": "CALIFORNIA",
+    "cases": 8
+  },
+  {
+    "city": "tustin",
+    "state": "CALIFORNIA",
+    "cases": 8
+  },
+  {
+    "city": "la habra",
+    "state": "CALIFORNIA",
+    "cases": 8
+  },
+  {
+    "city": "middletown",
+    "state": "NEW JERSEY",
+    "cases": 8
+  },
+  {
+    "city": "hamilton township",
+    "state": "NEW JERSEY",
+    "cases": 8
+  },
+  {
+    "city": "kearny",
+    "state": "NEW JERSEY",
+    "cases": 8
+  },
+  {
+    "city": "fife",
+    "state": "WASHINGTON",
+    "cases": 8
+  },
+  {
+    "city": "pullman",
+    "state": "WASHINGTON",
+    "cases": 8
+  },
+  {
+    "city": "naples",
+    "state": "FLORIDA",
+    "cases": 8
+  },
+  {
+    "city": "boynton beach",
+    "state": "FLORIDA",
+    "cases": 8
+  },
+  {
+    "city": "fort lauderdale",
+    "state": "FLORIDA",
+    "cases": 8
+  },
+  {
+    "city": "lewiston",
+    "state": "NEW YORK",
+    "cases": 8
+  },
+  {
+    "city": "san miguel",
+    "state": "ARIZONA",
+    "cases": 8
+  },
+  {
+    "city": "pisinemo",
+    "state": "ARIZONA",
+    "cases": 8
+  },
+  {
+    "city": "near sells",
+    "state": "ARIZONA",
+    "cases": 8
+  },
+  {
+    "city": "twenty-nine palms",
+    "state": "CALIFORNIA",
+    "cases": 8
+  },
+  {
+    "city": "elizabeth",
+    "state": "NEW JERSEY",
+    "cases": 8
+  },
+  {
+    "city": "east st. louis",
+    "state": "ILLINOIS",
+    "cases": 8
+  },
+  {
+    "city": "albany",
+    "state": "GA",
+    "cases": 8
+  },
+  {
+    "city": "gainesville",
+    "state": "GA",
+    "cases": 8
+  },
+  {
+    "city": "north charleston",
+    "state": "SC",
+    "cases": 8
+  },
+  {
+    "city": "riverton",
+    "state": "WY",
+    "cases": 8
+  },
+  {
+    "city": "green bay",
+    "state": "WI",
+    "cases": 8
+  },
+  {
+    "city": "st. paul",
+    "state": "MN",
+    "cases": 8
+  },
+  {
+    "city": "bethesda",
+    "state": "MD",
+    "cases": 8
+  },
+  {
+    "city": "easton",
+    "state": "PA",
+    "cases": 8
+  },
+  {
+    "city": "erie",
+    "state": "PA",
+    "cases": 8
+  },
+  {
+    "city": "upper darby",
+    "state": "PA",
+    "cases": 8
+  },
+  {
+    "city": "tomball",
+    "state": "TX",
+    "cases": 8
+  },
+  {
+    "city": "galveston",
+    "state": "TX",
+    "cases": 8
+  },
+  {
+    "city": "del rio",
+    "state": "TX",
+    "cases": 8
+  },
+  {
+    "city": "apopka",
+    "state": "FL",
+    "cases": 8
+  },
+  {
+    "city": "cape coral",
+    "state": "FL",
+    "cases": 8
+  },
+  {
+    "city": "boca raton",
+    "state": "FL",
+    "cases": 8
+  },
+  {
+    "city": "hana",
+    "state": "HI",
+    "cases": 8
+  },
+  {
+    "city": "hot springs",
+    "state": "AR",
+    "cases": 8
+  },
+  {
+    "city": "canton",
+    "state": "OH",
+    "cases": 8
+  },
+  {
+    "city": "warren",
+    "state": "OH",
+    "cases": 8
+  },
+  {
+    "city": "akron",
+    "state": "OH",
+    "cases": 8
+  },
+  {
+    "city": "west hartford",
+    "state": "CT",
+    "cases": 8
+  },
+  {
+    "city": "waterbury",
+    "state": "CT",
+    "cases": 8
+  },
+  {
+    "city": "shelby",
+    "state": "NC",
+    "cases": 8
+  },
+  {
+    "city": "monroe",
+    "state": "LA",
+    "cases": 8
+  },
+  {
+    "city": "ogden",
+    "state": "UT",
+    "cases": 8
+  },
+  {
+    "city": "hampton",
+    "state": "VA",
+    "cases": 8
+  },
+  {
+    "city": "charlottesville",
+    "state": "VA",
+    "cases": 8
+  },
+  {
+    "city": "washington dc",
+    "state": "DC",
+    "cases": 8
+  },
+  {
+    "city": "lynn",
+    "state": "MA",
+    "cases": 8
+  },
+  {
+    "city": "apache junction",
+    "state": "AZ",
+    "cases": 8
+  },
+  {
+    "city": "buckeye",
+    "state": "AZ",
+    "cases": 8
+  },
+  {
+    "city": "flagstaff",
+    "state": "AZ",
+    "cases": 8
+  },
+  {
+    "city": "sonora",
+    "state": "AZ",
+    "cases": 8
+  },
+  {
+    "city": "redlands",
+    "state": "CA",
+    "cases": 8
+  },
+  {
+    "city": "thousand oaks",
+    "state": "CA",
+    "cases": 8
+  },
+  {
+    "city": "desert hot springs",
+    "state": "CA",
+    "cases": 8
+  },
+  {
+    "city": "barstow",
+    "state": "CA",
+    "cases": 8
+  },
+  {
+    "city": "costa mesa",
+    "state": "CA",
+    "cases": 8
+  },
+  {
+    "city": "san ysidro",
+    "state": "CA",
+    "cases": 8
+  },
+  {
+    "city": "porterville",
+    "state": "CA",
+    "cases": 8
+  },
+  {
+    "city": "san pedro",
+    "state": "CA",
+    "cases": 8
+  },
+  {
+    "city": "el centro",
+    "state": "CA",
+    "cases": 8
+  },
+  {
+    "city": "vacaville",
+    "state": "CA",
+    "cases": 8
+  },
+  {
+    "city": "richmond",
+    "state": "CA",
+    "cases": 8
+  },
+  {
+    "city": "alameda",
+    "state": "CA",
+    "cases": 8
+  },
+  {
+    "city": "hemet",
+    "state": "CA",
+    "cases": 8
+  },
+  {
+    "city": "paradise",
+    "state": "CA",
+    "cases": 8
+  },
+  {
+    "city": "dana point",
+    "state": "CA",
+    "cases": 8
+  },
+  {
+    "city": "menlo park",
+    "state": "CA",
+    "cases": 8
+  },
+  {
+    "city": "north las vegas",
+    "state": "NV",
+    "cases": 8
+  },
+  {
+    "city": "quinhagak",
+    "state": "AK",
+    "cases": 8
+  },
+  {
+    "city": "providence",
+    "state": "RI",
+    "cases": 8
+  },
+  {
+    "city": "sandpoint",
+    "state": "ID",
+    "cases": 8
+  },
+  {
+    "city": "astoria",
+    "state": "OR",
+    "cases": 8
+  },
+  {
+    "city": "lincoln city",
+    "state": "OR",
+    "cases": 8
+  },
+  {
+    "city": "lynnwood",
+    "state": "WA",
+    "cases": 8
+  },
+  {
+    "city": "federal way",
+    "state": "WA",
+    "cases": 8
+  },
+  {
+    "city": "oak harbor",
+    "state": "WA",
+    "cases": 8
+  },
+  {
+    "city": "aberdeen",
+    "state": "WA",
+    "cases": 8
+  },
+  {
+    "city": "st joseph",
+    "state": "MO",
+    "cases": 8
+  },
+  {
+    "city": "lawrenceville",
+    "state": "GEORGIA",
+    "cases": 7
+  },
+  {
+    "city": "riverton",
+    "state": "WYOMING",
+    "cases": 7
+  },
+  {
+    "city": "euless",
+    "state": "TEXAS",
+    "cases": 7
+  },
+  {
+    "city": "humble",
+    "state": "TEXAS",
+    "cases": 7
+  },
+  {
+    "city": "balch springs",
+    "state": "TEXAS",
+    "cases": 7
+  },
+  {
+    "city": "farmers branch",
+    "state": "TEXAS",
+    "cases": 7
+  },
+  {
+    "city": "seagoville",
+    "state": "TEXAS",
+    "cases": 7
+  },
+  {
+    "city": "penitas",
+    "state": "TEXAS",
+    "cases": 7
+  },
+  {
+    "city": "plant city",
+    "state": "FLORIDA",
+    "cases": 7
+  },
+  {
+    "city": "traverse city",
+    "state": "MICHIGAN",
+    "cases": 7
+  },
+  {
+    "city": "harrison",
+    "state": "MICHIGAN",
+    "cases": 7
+  },
+  {
+    "city": "huntington",
+    "state": "WEST VIRGINIA",
+    "cases": 7
+  },
+  {
+    "city": "bristol",
+    "state": "CONNECTICUT",
+    "cases": 7
+  },
+  {
+    "city": "lawton",
+    "state": "OKLAHOMA",
+    "cases": 7
+  },
+  {
+    "city": "toa baja",
+    "state": "PUERTO RICO",
+    "cases": 7
+  },
+  {
+    "city": "guaynabo",
+    "state": "PUERTO RICO",
+    "cases": 7
+  },
+  {
+    "city": "cabo rojo",
+    "state": "PUERTO RICO",
+    "cases": 7
+  },
+  {
+    "city": "plymouth",
+    "state": "MASSACHUSETTS",
+    "cases": 7
+  },
+  {
+    "city": "leominster",
+    "state": "MASSACHUSETTS",
+    "cases": 7
+  },
+  {
+    "city": "medford",
+    "state": "MASSACHUSETTS",
+    "cases": 7
+  },
+  {
+    "city": "apache junction",
+    "state": "ARIZONA",
+    "cases": 7
+  },
+  {
+    "city": "glendale",
+    "state": "ARIZONA",
+    "cases": 7
+  },
+  {
+    "city": "culver city",
+    "state": "CALIFORNIA",
+    "cases": 7
+  },
+  {
+    "city": "menlo park",
+    "state": "CALIFORNIA",
+    "cases": 7
+  },
+  {
+    "city": "merced",
+    "state": "CALIFORNIA",
+    "cases": 7
+  },
+  {
+    "city": "spring valley",
+    "state": "CALIFORNIA",
+    "cases": 7
+  },
+  {
+    "city": "midway city",
+    "state": "CALIFORNIA",
+    "cases": 7
+  },
+  {
+    "city": "fountain valley",
+    "state": "CALIFORNIA",
+    "cases": 7
+  },
+  {
+    "city": "east orange",
+    "state": "NEW JERSEY",
+    "cases": 7
+  },
+  {
+    "city": "paterson",
+    "state": "NEW JERSEY",
+    "cases": 7
+  },
+  {
+    "city": "wheaton",
+    "state": "ILLINOIS",
+    "cases": 7
+  },
+  {
+    "city": "edmonds",
+    "state": "WASHINGTON",
+    "cases": 7
+  },
+  {
+    "city": "decatur",
+    "state": "GEORGIA",
+    "cases": 7
+  },
+  {
+    "city": "hyattsville",
+    "state": "MARYLAND",
+    "cases": 7
+  },
+  {
+    "city": "lake worth",
+    "state": "FLORIDA",
+    "cases": 7
+  },
+  {
+    "city": "wyandotte",
+    "state": "MICHIGAN",
+    "cases": 7
+  },
+  {
+    "city": "west memphis",
+    "state": "ARKANSAS",
+    "cases": 7
+  },
+  {
+    "city": "north little rock",
+    "state": "ARKANSAS",
+    "cases": 7
+  },
+  {
+    "city": "colorado springs",
+    "state": "COLORADO",
+    "cases": 7
+  },
+  {
+    "city": "fayetteville",
+    "state": "NORTH CAROLINA",
+    "cases": 7
+  },
+  {
+    "city": "raleigh",
+    "state": "NORTH CAROLINA",
+    "cases": 7
+  },
+  {
+    "city": "chesapeake",
+    "state": "VIRGINIA",
+    "cases": 7
+  },
+  {
+    "city": "cowlic",
+    "state": "ARIZONA",
+    "cases": 7
+  },
+  {
+    "city": "santa rosa",
+    "state": "ARIZONA",
+    "cases": 7
+  },
+  {
+    "city": "gunsight village",
+    "state": "ARIZONA",
+    "cases": 7
+  },
+  {
+    "city": "topawa village",
+    "state": "ARIZONA",
+    "cases": 7
+  },
+  {
+    "city": "vamori village",
+    "state": "ARIZONA",
+    "cases": 7
+  },
+  {
+    "city": "benson",
+    "state": "ARIZONA",
+    "cases": 7
+  },
+  {
+    "city": "west sacramento",
+    "state": "CALIFORNIA",
+    "cases": 7
+  },
+  {
+    "city": "hemet",
+    "state": "CALIFORNIA",
+    "cases": 7
+  },
+  {
+    "city": "richmond",
+    "state": "CALIFORNIA",
+    "cases": 7
+  },
+  {
+    "city": "boulder city",
+    "state": "NEVADA",
+    "cases": 7
+  },
+  {
+    "city": "camden",
+    "state": "NEW JERSEY",
+    "cases": 7
+  },
+  {
+    "city": "bayonne",
+    "state": "NEW JERSEY",
+    "cases": 7
+  },
+  {
+    "city": "brigantine",
+    "state": "NEW JERSEY",
+    "cases": 7
+  },
+  {
+    "city": "stone mountain",
+    "state": "GA",
+    "cases": 7
+  },
+  {
+    "city": "florence",
+    "state": "SC",
+    "cases": 7
+  },
+  {
+    "city": "spartanburg",
+    "state": "SC",
+    "cases": 7
+  },
+  {
+    "city": "conway",
+    "state": "SC",
+    "cases": 7
+  },
+  {
+    "city": "casper",
+    "state": "WY",
+    "cases": 7
+  },
+  {
+    "city": "bowie",
+    "state": "MD",
+    "cases": 7
+  },
+  {
+    "city": "glen burnie",
+    "state": "MD",
+    "cases": 7
+  },
+  {
+    "city": "gaithersburg",
+    "state": "MD",
+    "cases": 7
+  },
+  {
+    "city": "allentown",
+    "state": "PA",
+    "cases": 7
+  },
+  {
+    "city": "freeport",
+    "state": "TX",
+    "cases": 7
+  },
+  {
+    "city": "deland",
+    "state": "FL",
+    "cases": 7
+  },
+  {
+    "city": "panama city beach",
+    "state": "FL",
+    "cases": 7
+  },
+  {
+    "city": "indiantown",
+    "state": "FL",
+    "cases": 7
+  },
+  {
+    "city": "crestview",
+    "state": "FL",
+    "cases": 7
+  },
+  {
+    "city": "hudson",
+    "state": "FL",
+    "cases": 7
+  },
+  {
+    "city": "ocoee",
+    "state": "FL",
+    "cases": 7
+  },
+  {
+    "city": "st petersburg",
+    "state": "FL",
+    "cases": 7
+  },
+  {
+    "city": "cocoa",
+    "state": "FL",
+    "cases": 7
+  },
+  {
+    "city": "arcadia",
+    "state": "FL",
+    "cases": 7
+  },
+  {
+    "city": "saginaw",
+    "state": "MI",
+    "cases": 7
+  },
+  {
+    "city": "kalamazoo",
+    "state": "MI",
+    "cases": 7
+  },
+  {
+    "city": "southfield",
+    "state": "MI",
+    "cases": 7
+  },
+  {
+    "city": "hilo",
+    "state": "HI",
+    "cases": 7
+  },
+  {
+    "city": "lihue",
+    "state": "HI",
+    "cases": 7
+  },
+  {
+    "city": "blountville",
+    "state": "TN",
+    "cases": 7
+  },
+  {
+    "city": "portland",
+    "state": "TN",
+    "cases": 7
+  },
+  {
+    "city": "lebanon",
+    "state": "TN",
+    "cases": 7
+  },
+  {
+    "city": "morristown",
+    "state": "TN",
+    "cases": 7
+  },
+  {
+    "city": "dyersburg",
+    "state": "TN",
+    "cases": 7
+  },
+  {
+    "city": "millington",
+    "state": "TN",
+    "cases": 7
+  },
+  {
+    "city": "franklin",
+    "state": "TN",
+    "cases": 7
+  },
+  {
+    "city": "fayetteville",
+    "state": "AR",
+    "cases": 7
+  },
+  {
+    "city": "middletown",
+    "state": "OH",
+    "cases": 7
+  },
+  {
+    "city": "bloomington",
+    "state": "IN",
+    "cases": 7
+  },
+  {
+    "city": "gary",
+    "state": "IN",
+    "cases": 7
+  },
+  {
+    "city": "central islip",
+    "state": "NY",
+    "cases": 7
+  },
+  {
+    "city": "white plains",
+    "state": "NY",
+    "cases": 7
+  },
+  {
+    "city": "parkersburg",
+    "state": "WV",
+    "cases": 7
+  },
+  {
+    "city": "manchester",
+    "state": "NH",
+    "cases": 7
+  },
+  {
+    "city": "bridgeport",
+    "state": "CT",
+    "cases": 7
+  },
+  {
+    "city": "middletown",
+    "state": "CT",
+    "cases": 7
+  },
+  {
+    "city": "new london",
+    "state": "CT",
+    "cases": 7
+  },
+  {
+    "city": "west haven",
+    "state": "CT",
+    "cases": 7
+  },
+  {
+    "city": "broken arrow",
+    "state": "OK",
+    "cases": 7
+  },
+  {
+    "city": "midwest city",
+    "state": "OK",
+    "cases": 7
+  },
+  {
+    "city": "moore",
+    "state": "OK",
+    "cases": 7
+  },
+  {
+    "city": "bismarck",
+    "state": "ND",
+    "cases": 7
+  },
+  {
+    "city": "fargo",
+    "state": "ND",
+    "cases": 7
+  },
+  {
+    "city": "carolina beach",
+    "state": "NC",
+    "cases": 7
+  },
+  {
+    "city": "slidell",
+    "state": "LA",
+    "cases": 7
+  },
+  {
+    "city": "marrero",
+    "state": "LA",
+    "cases": 7
+  },
+  {
+    "city": "alexandria",
+    "state": "LA",
+    "cases": 7
+  },
+  {
+    "city": "woodbridge",
+    "state": "VA",
+    "cases": 7
+  },
+  {
+    "city": "danville",
+    "state": "VA",
+    "cases": 7
+  },
+  {
+    "city": "fairfax",
+    "state": "VA",
+    "cases": 7
+  },
+  {
+    "city": "springfield",
+    "state": "MA",
+    "cases": 7
+  },
+  {
+    "city": "florence",
+    "state": "AL",
+    "cases": 7
+  },
+  {
+    "city": "anniston",
+    "state": "AL",
+    "cases": 7
+  },
+  {
+    "city": "peoria",
+    "state": "AZ",
+    "cases": 7
+  },
+  {
+    "city": "sonoita",
+    "state": "AZ",
+    "cases": 7
+  },
+  {
+    "city": "victorville",
+    "state": "CA",
+    "cases": 7
+  },
+  {
+    "city": "compton",
+    "state": "CA",
+    "cases": 7
+  },
+  {
+    "city": "redwood city",
+    "state": "CA",
+    "cases": 7
+  },
+  {
+    "city": "turlock",
+    "state": "CA",
+    "cases": 7
+  },
+  {
+    "city": "redondo beach",
+    "state": "CA",
+    "cases": 7
+  },
+  {
+    "city": "salinas",
+    "state": "CA",
+    "cases": 7
+  },
+  {
+    "city": "torrance",
+    "state": "CA",
+    "cases": 7
+  },
+  {
+    "city": "colton",
+    "state": "CA",
+    "cases": 7
+  },
+  {
+    "city": "arcata",
+    "state": "CA",
+    "cases": 7
+  },
+  {
+    "city": "palm springs",
+    "state": "CA",
+    "cases": 7
+  },
+  {
+    "city": "niland",
+    "state": "CA",
+    "cases": 7
+  },
+  {
+    "city": "hesperia",
+    "state": "CA",
+    "cases": 7
+  },
+  {
+    "city": "sonora",
+    "state": "CA",
+    "cases": 7
+  },
+  {
+    "city": "upland",
+    "state": "CA",
+    "cases": 7
+  },
+  {
+    "city": "needles",
+    "state": "CA",
+    "cases": 7
+  },
+  {
+    "city": "napa",
+    "state": "CA",
+    "cases": 7
+  },
+  {
+    "city": "yosemite national park",
+    "state": "CA",
+    "cases": 7
+  },
+  {
+    "city": "fort lee",
+    "state": "NJ",
+    "cases": 7
+  },
+  {
+    "city": "ocean city",
+    "state": "NJ",
+    "cases": 7
+  },
+  {
+    "city": "wasilla",
+    "state": "AK",
+    "cases": 7
+  },
+  {
+    "city": "whittier",
+    "state": "AK",
+    "cases": 7
+  },
+  {
+    "city": "haines",
+    "state": "AK",
+    "cases": 7
+  },
+  {
+    "city": "king salmon",
+    "state": "AK",
+    "cases": 7
+  },
+  {
+    "city": "st. george island",
+    "state": "AK",
+    "cases": 7
+  },
+  {
+    "city": "cold bay",
+    "state": "AK",
+    "cases": 7
+  },
+  {
+    "city": "aniak",
+    "state": "AK",
+    "cases": 7
+  },
+  {
+    "city": "nampa",
+    "state": "ID",
+    "cases": 7
+  },
+  {
+    "city": "bend",
+    "state": "OR",
+    "cases": 7
+  },
+  {
+    "city": "cedar rapids",
+    "state": "IA",
+    "cases": 7
+  },
+  {
+    "city": "sioux city",
+    "state": "IA",
+    "cases": 7
+  },
+  {
+    "city": "burlington",
+    "state": "VT",
+    "cases": 7
+  },
+  {
+    "city": "puyallup",
+    "state": "WA",
+    "cases": 7
+  },
+  {
+    "city": "concrete",
+    "state": "WA",
+    "cases": 7
+  },
+  {
+    "city": "redmond",
+    "state": "WA",
+    "cases": 7
+  },
+  {
+    "city": "buford",
+    "state": "GEORGIA",
+    "cases": 6
+  },
+  {
+    "city": "myrtle beach",
+    "state": "SOUTH CAROLINA",
+    "cases": 6
+  },
+  {
+    "city": "west reading",
+    "state": "PENNSYLVANIA",
+    "cases": 6
+  },
+  {
+    "city": "shenandoah",
+    "state": "PENNSYLVANIA",
+    "cases": 6
+  },
+  {
+    "city": "north richland hills",
+    "state": "TEXAS",
+    "cases": 6
+  },
+  {
+    "city": "brandon",
+    "state": "FLORIDA",
+    "cases": 6
+  },
+  {
+    "city": "cape coral",
+    "state": "FLORIDA",
+    "cases": 6
+  },
+  {
+    "city": "ocala",
+    "state": "FLORIDA",
+    "cases": 6
+  },
+  {
+    "city": "greenville",
+    "state": "MICHIGAN",
+    "cases": 6
+  },
+  {
+    "city": "powell",
+    "state": "TENNESSEE",
+    "cases": 6
+  },
+  {
+    "city": "torrington",
+    "state": "CONNECTICUT",
+    "cases": 6
+  },
+  {
+    "city": "dorado",
+    "state": "PUERTO RICO",
+    "cases": 6
+  },
+  {
+    "city": "newark",
+    "state": "DELAWARE",
+    "cases": 6
+  },
+  {
+    "city": "gloucester",
+    "state": "MASSACHUSETTS",
+    "cases": 6
+  },
+  {
+    "city": "newton",
+    "state": "MASSACHUSETTS",
+    "cases": 6
+  },
+  {
+    "city": "weymouth",
+    "state": "MASSACHUSETTS",
+    "cases": 6
+  },
+  {
+    "city": "methuen",
+    "state": "MASSACHUSETTS",
+    "cases": 6
+  },
+  {
+    "city": "northampton",
+    "state": "MASSACHUSETTS",
+    "cases": 6
+  },
+  {
+    "city": "taunton",
+    "state": "MASSACHUSETTS",
+    "cases": 6
+  },
+  {
+    "city": "brighton",
+    "state": "MASSACHUSETTS",
+    "cases": 6
+  },
+  {
+    "city": "chandler",
+    "state": "ARIZONA",
+    "cases": 6
+  },
+  {
+    "city": "pisinemo village",
+    "state": "ARIZONA",
+    "cases": 6
+  },
+  {
+    "city": "baldwin park",
+    "state": "CALIFORNIA",
+    "cases": 6
+  },
+  {
+    "city": "el monte",
+    "state": "CALIFORNIA",
+    "cases": 6
+  },
+  {
+    "city": "grand terrace",
+    "state": "CALIFORNIA",
+    "cases": 6
+  },
+  {
+    "city": "south el monte",
+    "state": "CALIFORNIA",
+    "cases": 6
+  },
+  {
+    "city": "lakeside",
+    "state": "CALIFORNIA",
+    "cases": 6
+  },
+  {
+    "city": "ramona",
+    "state": "CALIFORNIA",
+    "cases": 6
+  },
+  {
+    "city": "glendora",
+    "state": "CALIFORNIA",
+    "cases": 6
+  },
+  {
+    "city": "south gate",
+    "state": "CALIFORNIA",
+    "cases": 6
+  },
+  {
+    "city": "phelan",
+    "state": "CALIFORNIA",
+    "cases": 6
+  },
+  {
+    "city": "aptos",
+    "state": "CALIFORNIA",
+    "cases": 6
+  },
+  {
+    "city": "la jolla",
+    "state": "CALIFORNIA",
+    "cases": 6
+  },
+  {
+    "city": "palo verde",
+    "state": "CALIFORNIA",
+    "cases": 6
+  },
+  {
+    "city": "city of industry",
+    "state": "CALIFORNIA",
+    "cases": 6
+  },
+  {
+    "city": "sun valley",
+    "state": "NEVADA",
+    "cases": 6
+  },
+  {
+    "city": "leavenworth",
+    "state": "KANSAS",
+    "cases": 6
+  },
+  {
+    "city": "sumner",
+    "state": "WASHINGTON",
+    "cases": 6
+  },
+  {
+    "city": "roy",
+    "state": "WASHINGTON",
+    "cases": 6
+  },
+  {
+    "city": "bremerton",
+    "state": "WASHINGTON",
+    "cases": 6
+  },
+  {
+    "city": "montesano",
+    "state": "WASHINGTON",
+    "cases": 6
+  },
+  {
+    "city": "unknown",
+    "state": "WASHINGTON",
+    "cases": 6
+  },
+  {
+    "city": "cle elum",
+    "state": "WASHINGTON",
+    "cases": 6
+  },
+  {
+    "city": "corpus christi",
+    "state": "TEXAS",
+    "cases": 6
+  },
+  {
+    "city": "la joya",
+    "state": "TEXAS",
+    "cases": 6
+  },
+  {
+    "city": "sullivan city",
+    "state": "TEXAS",
+    "cases": 6
+  },
+  {
+    "city": "encino",
+    "state": "TEXAS",
+    "cases": 6
+  },
+  {
+    "city": "el cenizo",
+    "state": "TEXAS",
+    "cases": 6
+  },
+  {
+    "city": "zapata",
+    "state": "TEXAS",
+    "cases": 6
+  },
+  {
+    "city": "daytona beach",
+    "state": "FLORIDA",
+    "cases": 6
+  },
+  {
+    "city": "lakeland",
+    "state": "FLORIDA",
+    "cases": 6
+  },
+  {
+    "city": "youngstown",
+    "state": "NEW YORK",
+    "cases": 6
+  },
+  {
+    "city": "greensboro",
+    "state": "NORTH CAROLINA",
+    "cases": 6
+  },
+  {
+    "city": "williamsburg",
+    "state": "VIRGINIA",
+    "cases": 6
+  },
+  {
+    "city": "nw of lukeville",
+    "state": "ARIZONA",
+    "cases": 6
+  },
+  {
+    "city": "aztec",
+    "state": "ARIZONA",
+    "cases": 6
+  },
+  {
+    "city": "rio rico",
+    "state": "ARIZONA",
+    "cases": 6
+  },
+  {
+    "city": "gu vo village",
+    "state": "ARIZONA",
+    "cases": 6
+  },
+  {
+    "city": "san pedro village",
+    "state": "ARIZONA",
+    "cases": 6
+  },
+  {
+    "city": "arizona city",
+    "state": "ARIZONA",
+    "cases": 6
+  },
+  {
+    "city": "williams",
+    "state": "ARIZONA",
+    "cases": 6
+  },
+  {
+    "city": "grand canyon",
+    "state": "ARIZONA",
+    "cases": 6
+  },
+  {
+    "city": "julian",
+    "state": "CALIFORNIA",
+    "cases": 6
+  },
+  {
+    "city": "coachella",
+    "state": "CALIFORNIA",
+    "cases": 6
+  },
+  {
+    "city": "irwindale",
+    "state": "CALIFORNIA",
+    "cases": 6
+  },
+  {
+    "city": "pine valley",
+    "state": "CALIFORNIA",
+    "cases": 6
+  },
+  {
+    "city": "temecula",
+    "state": "CALIFORNIA",
+    "cases": 6
+  },
+  {
+    "city": "plaster city",
+    "state": "CALIFORNIA",
+    "cases": 6
+  },
+  {
+    "city": "acworth",
+    "state": "GA",
+    "cases": 6
+  },
+  {
+    "city": "jonesboro",
+    "state": "GA",
+    "cases": 6
+  },
+  {
+    "city": "college park",
+    "state": "GA",
+    "cases": 6
+  },
+  {
+    "city": "valdosta",
+    "state": "GA",
+    "cases": 6
+  },
+  {
+    "city": "anderson",
+    "state": "SC",
+    "cases": 6
+  },
+  {
+    "city": "st paul",
+    "state": "MN",
+    "cases": 6
+  },
+  {
+    "city": "mckinney",
+    "state": "TX",
+    "cases": 6
+  },
+  {
+    "city": "greenville",
+    "state": "TX",
+    "cases": 6
+  },
+  {
+    "city": "longview",
+    "state": "TX",
+    "cases": 6
+  },
+  {
+    "city": "carrizo springs",
+    "state": "TX",
+    "cases": 6
+  },
+  {
+    "city": "lufkin",
+    "state": "TX",
+    "cases": 6
+  },
+  {
+    "city": "sierra blanca",
+    "state": "TX",
+    "cases": 6
+  },
+  {
+    "city": "inverness",
+    "state": "FL",
+    "cases": 6
+  },
+  {
+    "city": "holly hill",
+    "state": "FL",
+    "cases": 6
+  },
+  {
+    "city": "north fort myers",
+    "state": "FL",
+    "cases": 6
+  },
+  {
+    "city": "loxahatchee",
+    "state": "FL",
+    "cases": 6
+  },
+  {
+    "city": "clewiston",
+    "state": "FL",
+    "cases": 6
+  },
+  {
+    "city": "perry",
+    "state": "FL",
+    "cases": 6
+  },
+  {
+    "city": "jacksonville beach",
+    "state": "FL",
+    "cases": 6
+  },
+  {
+    "city": "warren",
+    "state": "MI",
+    "cases": 6
+  },
+  {
+    "city": "pontiac",
+    "state": "MI",
+    "cases": 6
+  },
+  {
+    "city": "ypsilanti",
+    "state": "MI",
+    "cases": 6
+  },
+  {
+    "city": "jackson",
+    "state": "MI",
+    "cases": 6
+  },
+  {
+    "city": "st. ignace",
+    "state": "MI",
+    "cases": 6
+  },
+  {
+    "city": "kauai",
+    "state": "HI",
+    "cases": 6
+  },
+  {
+    "city": "newport",
+    "state": "TN",
+    "cases": 6
+  },
+  {
+    "city": "lafollette",
+    "state": "TN",
+    "cases": 6
+  },
+  {
+    "city": "texarkana",
+    "state": "AR",
+    "cases": 6
+  },
+  {
+    "city": "batesville",
+    "state": "AR",
+    "cases": 6
+  },
+  {
+    "city": "sioux falls",
+    "state": "SD",
+    "cases": 6
+  },
+  {
+    "city": "butte",
+    "state": "MT",
+    "cases": 6
+  },
+  {
+    "city": "terre haute",
+    "state": "IN",
+    "cases": 6
+  },
+  {
+    "city": "flushing",
+    "state": "NY",
+    "cases": 6
+  },
+  {
+    "city": "utica",
+    "state": "NY",
+    "cases": 6
+  },
+  {
+    "city": "bayshore",
+    "state": "NY",
+    "cases": 6
+  },
+  {
+    "city": "kingston",
+    "state": "NY",
+    "cases": 6
+  },
+  {
+    "city": "yonkers",
+    "state": "NY",
+    "cases": 6
+  },
+  {
+    "city": "amsterdam",
+    "state": "NY",
+    "cases": 6
+  },
+  {
+    "city": "new york city",
+    "state": "NY",
+    "cases": 6
+  },
+  {
+    "city": "kingwood",
+    "state": "WV",
+    "cases": 6
+  },
+  {
+    "city": "columbus",
+    "state": "MS",
+    "cases": 6
+  },
+  {
+    "city": "hamden",
+    "state": "CT",
+    "cases": 6
+  },
+  {
+    "city": "guthrie",
+    "state": "OK",
+    "cases": 6
+  },
+  {
+    "city": "enid",
+    "state": "OK",
+    "cases": 6
+  },
+  {
+    "city": "tahlequah",
+    "state": "OK",
+    "cases": 6
+  },
+  {
+    "city": "thornton",
+    "state": "CO",
+    "cases": 6
+  },
+  {
+    "city": "arvada",
+    "state": "CO",
+    "cases": 6
+  },
+  {
+    "city": "castle rock",
+    "state": "CO",
+    "cases": 6
+  },
+  {
+    "city": "bangor",
+    "state": "ME",
+    "cases": 6
+  },
+  {
+    "city": "jacksonville",
+    "state": "NC",
+    "cases": 6
+  },
+  {
+    "city": "oak island",
+    "state": "NC",
+    "cases": 6
+  },
+  {
+    "city": "gretna",
+    "state": "LA",
+    "cases": 6
+  },
+  {
+    "city": "natchitoches",
+    "state": "LA",
+    "cases": 6
+  },
+  {
+    "city": "moab",
+    "state": "UT",
+    "cases": 6
+  },
+  {
+    "city": "portsmouth",
+    "state": "VA",
+    "cases": 6
+  },
+  {
+    "city": "alexandria",
+    "state": "VA",
+    "cases": 6
+  },
+  {
+    "city": "new castle",
+    "state": "DE",
+    "cases": 6
+  },
+  {
+    "city": "paducah",
+    "state": "KY",
+    "cases": 6
+  },
+  {
+    "city": "corbin",
+    "state": "KY",
+    "cases": 6
+  },
+  {
+    "city": "henderson",
+    "state": "KY",
+    "cases": 6
+  },
+  {
+    "city": "owensboro",
+    "state": "KY",
+    "cases": 6
+  },
+  {
+    "city": "shiprock",
+    "state": "NM",
+    "cases": 6
+  },
+  {
+    "city": "carlsbad",
+    "state": "NM",
+    "cases": 6
+  },
+  {
+    "city": "enterprise",
+    "state": "AL",
+    "cases": 6
+  },
+  {
+    "city": "jasper",
+    "state": "AL",
+    "cases": 6
+  },
+  {
+    "city": "chandler",
+    "state": "AZ",
+    "cases": 6
+  },
+  {
+    "city": "casa grande",
+    "state": "AZ",
+    "cases": 6
+  },
+  {
+    "city": "lake forest",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "north hollywood",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "lynwood",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "glendora",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "pacoima",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "los banos",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "roseville",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "downey",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "chico",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "merced",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "moreno valley",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "indio",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "huntington park",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "monterey",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "grass valley",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "running springs",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "milpitas",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "wilmington",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "walnut creek",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "tijuana",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "van nuys",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "rancho cordova",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "san fernando",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "laguna beach",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "burbank",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "mendota",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "west covina",
+    "state": "CA",
+    "cases": 6
+  },
+  {
+    "city": "west new york",
+    "state": "NJ",
+    "cases": 6
+  },
+  {
+    "city": "klawock",
+    "state": "AK",
+    "cases": 6
+  },
+  {
+    "city": "galena",
+    "state": "AK",
+    "cases": 6
+  },
+  {
+    "city": "nulato",
+    "state": "AK",
+    "cases": 6
+  },
+  {
+    "city": "rockford",
+    "state": "IL",
+    "cases": 6
+  },
+  {
+    "city": "cahokia",
+    "state": "IL",
+    "cases": 6
+  },
+  {
+    "city": "jerome",
+    "state": "ID",
+    "cases": 6
+  },
+  {
+    "city": "coeur d'alene",
+    "state": "ID",
+    "cases": 6
+  },
+  {
+    "city": "prospect",
+    "state": "OR",
+    "cases": 6
+  },
+  {
+    "city": "hillsboro",
+    "state": "OR",
+    "cases": 6
+  },
+  {
+    "city": "ashland",
+    "state": "OR",
+    "cases": 6
+  },
+  {
+    "city": "klamath falls",
+    "state": "OR",
+    "cases": 6
+  },
+  {
+    "city": "florence",
+    "state": "OR",
+    "cases": 6
+  },
+  {
+    "city": "sweet home",
+    "state": "OR",
+    "cases": 6
+  },
+  {
+    "city": "salem",
+    "state": "OR",
+    "cases": 6
+  },
+  {
+    "city": "wenatchee",
+    "state": "WA",
+    "cases": 6
+  },
+  {
+    "city": "kent",
+    "state": "WA",
+    "cases": 6
+  },
+  {
+    "city": "toppenish",
+    "state": "WA",
+    "cases": 6
+  },
+  {
+    "city": "port townsend",
+    "state": "WA",
+    "cases": 6
+  },
+  {
+    "city": "saint louis",
+    "state": "MO",
+    "cases": 6
+  },
+  {
+    "city": "berkeley",
+    "state": "MO",
+    "cases": 6
+  },
+  {
+    "city": "st louis",
+    "state": "MO",
+    "cases": 6
+  },
+  {
+    "city": "pottstown",
+    "state": "PENNSYLVANIA",
+    "cases": 5
+  },
+  {
+    "city": "johnstown",
+    "state": "PENNSYLVANIA",
+    "cases": 5
+  },
+  {
+    "city": "duncanville",
+    "state": "TEXAS",
+    "cases": 5
+  },
+  {
+    "city": "cedar hill",
+    "state": "TEXAS",
+    "cases": 5
+  },
+  {
+    "city": "plano",
+    "state": "TEXAS",
+    "cases": 5
+  },
+  {
+    "city": "haltom city",
+    "state": "TEXAS",
+    "cases": 5
+  },
+  {
+    "city": "hutchins",
+    "state": "TEXAS",
+    "cases": 5
+  },
+  {
+    "city": "katy",
+    "state": "TEXAS",
+    "cases": 5
+  },
+  {
+    "city": "lutz",
+    "state": "FLORIDA",
+    "cases": 5
+  },
+  {
+    "city": "ruskin",
+    "state": "FLORIDA",
+    "cases": 5
+  },
+  {
+    "city": "clewiston",
+    "state": "FLORIDA",
+    "cases": 5
+  },
+  {
+    "city": "labelle",
+    "state": "FLORIDA",
+    "cases": 5
+  },
+  {
+    "city": "romulus",
+    "state": "MICHIGAN",
+    "cases": 5
+  },
+  {
+    "city": "millington",
+    "state": "TENNESSEE",
+    "cases": 5
+  },
+  {
+    "city": "el dorado",
+    "state": "ARKANSAS",
+    "cases": 5
+  },
+  {
+    "city": "corona",
+    "state": "NEW YORK",
+    "cases": 5
+  },
+  {
+    "city": "brookyln",
+    "state": "NEW YORK",
+    "cases": 5
+  },
+  {
+    "city": "enfield",
+    "state": "CONNECTICUT",
+    "cases": 5
+  },
+  {
+    "city": "west haven",
+    "state": "CONNECTICUT",
+    "cases": 5
+  },
+  {
+    "city": "fairfield",
+    "state": "CONNECTICUT",
+    "cases": 5
+  },
+  {
+    "city": "north haven",
+    "state": "CONNECTICUT",
+    "cases": 5
+  },
+  {
+    "city": "wethersfield",
+    "state": "CONNECTICUT",
+    "cases": 5
+  },
+  {
+    "city": "wallingford",
+    "state": "CONNECTICUT",
+    "cases": 5
+  },
+  {
+    "city": "milford",
+    "state": "CONNECTICUT",
+    "cases": 5
+  },
+  {
+    "city": "bartlesville",
+    "state": "OKLAHOMA",
+    "cases": 5
+  },
+  {
+    "city": "trujillo alto",
+    "state": "PUERTO RICO",
+    "cases": 5
+  },
+  {
+    "city": "roxbury",
+    "state": "MASSACHUSETTS",
+    "cases": 5
+  },
+  {
+    "city": "beverly",
+    "state": "MASSACHUSETTS",
+    "cases": 5
+  },
+  {
+    "city": "east boston",
+    "state": "MASSACHUSETTS",
+    "cases": 5
+  },
+  {
+    "city": "brighton (boston)",
+    "state": "MASSACHUSETTS",
+    "cases": 5
+  },
+  {
+    "city": "peoria",
+    "state": "ARIZONA",
+    "cases": 5
+  },
+  {
+    "city": "lynwood",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "canoga park",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "downey",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "whittier",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "montebello",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "marina del rey",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "south pasadena",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "bell gardens",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "santa clarita",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "la puente",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "sun valley",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "cathedral city",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "coalinga",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "altadena",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "san bruno",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "mentone",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "thousand oaks",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "salinas",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "moreno valley",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "newberry springs",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "helendale",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "pacifica",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "santa clara",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "garberville",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "brea",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "san clemente",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "ojai",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "carson city",
+    "state": "NEVADA",
+    "cases": 5
+  },
+  {
+    "city": "perth amboy",
+    "state": "NEW JERSEY",
+    "cases": 5
+  },
+  {
+    "city": "hoboken",
+    "state": "NEW JERSEY",
+    "cases": 5
+  },
+  {
+    "city": "cicero",
+    "state": "ILLINOIS",
+    "cases": 5
+  },
+  {
+    "city": "morris",
+    "state": "ILLINOIS",
+    "cases": 5
+  },
+  {
+    "city": "bonney lake",
+    "state": "WASHINGTON",
+    "cases": 5
+  },
+  {
+    "city": "graham",
+    "state": "WASHINGTON",
+    "cases": 5
+  },
+  {
+    "city": "monroe",
+    "state": "WASHINGTON",
+    "cases": 5
+  },
+  {
+    "city": "toppenish",
+    "state": "WASHINGTON",
+    "cases": 5
+  },
+  {
+    "city": "cleveland",
+    "state": "WISCONSIN",
+    "cases": 5
+  },
+  {
+    "city": "cheverly",
+    "state": "MARYLAND",
+    "cases": 5
+  },
+  {
+    "city": "oxon hill",
+    "state": "MARYLAND",
+    "cases": 5
+  },
+  {
+    "city": "pharr",
+    "state": "TEXAS",
+    "cases": 5
+  },
+  {
+    "city": "fort pierce",
+    "state": "FLORIDA",
+    "cases": 5
+  },
+  {
+    "city": "homestead",
+    "state": "FLORIDA",
+    "cases": 5
+  },
+  {
+    "city": "ecorse",
+    "state": "MICHIGAN",
+    "cases": 5
+  },
+  {
+    "city": "river rouge",
+    "state": "MICHIGAN",
+    "cases": 5
+  },
+  {
+    "city": "helena",
+    "state": "ARKANSAS",
+    "cases": 5
+  },
+  {
+    "city": "dayton",
+    "state": "OHIO",
+    "cases": 5
+  },
+  {
+    "city": "cincinnati",
+    "state": "OHIO",
+    "cases": 5
+  },
+  {
+    "city": "gary",
+    "state": "INDIANA",
+    "cases": 5
+  },
+  {
+    "city": "westfield",
+    "state": "INDIANA",
+    "cases": 5
+  },
+  {
+    "city": "buffalo",
+    "state": "NEW YORK",
+    "cases": 5
+  },
+  {
+    "city": "jackson",
+    "state": "MISSISSIPPI",
+    "cases": 5
+  },
+  {
+    "city": "aurora",
+    "state": "COLORADO",
+    "cases": 5
+  },
+  {
+    "city": "petersburg",
+    "state": "VIRGINIA",
+    "cases": 5
+  },
+  {
+    "city": "fairfax",
+    "state": "VIRGINIA",
+    "cases": 5
+  },
+  {
+    "city": "arlington",
+    "state": "VIRGINIA",
+    "cases": 5
+  },
+  {
+    "city": "eastville",
+    "state": "VIRGINIA",
+    "cases": 5
+  },
+  {
+    "city": "howardsville",
+    "state": "VIRGINIA",
+    "cases": 5
+  },
+  {
+    "city": "lexington",
+    "state": "KENTUCKY",
+    "cases": 5
+  },
+  {
+    "city": "ipswich",
+    "state": "MASSACHUSETTS",
+    "cases": 5
+  },
+  {
+    "city": "sunland park",
+    "state": "NEW MEXICO",
+    "cases": 5
+  },
+  {
+    "city": "anthony",
+    "state": "NEW MEXICO",
+    "cases": 5
+  },
+  {
+    "city": "lake havasu city",
+    "state": "ARIZONA",
+    "cases": 5
+  },
+  {
+    "city": "papago farms",
+    "state": "ARIZONA",
+    "cases": 5
+  },
+  {
+    "city": "sierra vista",
+    "state": "ARIZONA",
+    "cases": 5
+  },
+  {
+    "city": "tubac",
+    "state": "ARIZONA",
+    "cases": 5
+  },
+  {
+    "city": "little tucson village",
+    "state": "ARIZONA",
+    "cases": 5
+  },
+  {
+    "city": "camarillo",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "thermal",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "mount baldy",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "beaumont",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "seeley",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "campo",
+    "state": "CALIFORNIA",
+    "cases": 5
+  },
+  {
+    "city": "overton",
+    "state": "NEVADA",
+    "cases": 5
+  },
+  {
+    "city": "stone harbor",
+    "state": "NEW JERSEY",
+    "cases": 5
+  },
+  {
+    "city": "norwood park township",
+    "state": "ILLINOIS",
+    "cases": 5
+  },
+  {
+    "city": "newport",
+    "state": "OREGON",
+    "cases": 5
+  },
+  {
+    "city": "bellingham",
+    "state": "WASHINGTON",
+    "cases": 5
+  },
+  {
+    "city": "conyers",
+    "state": "GA",
+    "cases": 5
+  },
+  {
+    "city": "riverdale",
+    "state": "GA",
+    "cases": 5
+  },
+  {
+    "city": "austell",
+    "state": "GA",
+    "cases": 5
+  },
+  {
+    "city": "goose creek",
+    "state": "SC",
+    "cases": 5
+  },
+  {
+    "city": "rock hill",
+    "state": "SC",
+    "cases": 5
+  },
+  {
+    "city": "hilton head island",
+    "state": "SC",
+    "cases": 5
+  },
+  {
+    "city": "lander",
+    "state": "WY",
+    "cases": 5
+  },
+  {
+    "city": "gillette",
+    "state": "WY",
+    "cases": 5
+  },
+  {
+    "city": "beloit",
+    "state": "WI",
+    "cases": 5
+  },
+  {
+    "city": "rochester",
+    "state": "MN",
+    "cases": 5
+  },
+  {
+    "city": "annapolis",
+    "state": "MD",
+    "cases": 5
+  },
+  {
+    "city": "salisbury",
+    "state": "MD",
+    "cases": 5
+  },
+  {
+    "city": "pasadena",
+    "state": "MD",
+    "cases": 5
+  },
+  {
+    "city": "elkton",
+    "state": "MD",
+    "cases": 5
+  },
+  {
+    "city": "reading",
+    "state": "PA",
+    "cases": 5
+  },
+  {
+    "city": "washington",
+    "state": "PA",
+    "cases": 5
+  },
+  {
+    "city": "huntsville",
+    "state": "TX",
+    "cases": 5
+  },
+  {
+    "city": "richardson",
+    "state": "TX",
+    "cases": 5
+  },
+  {
+    "city": "sherman",
+    "state": "TX",
+    "cases": 5
+  },
+  {
+    "city": "euless",
+    "state": "TX",
+    "cases": 5
+  },
+  {
+    "city": "katy",
+    "state": "TX",
+    "cases": 5
+  },
+  {
+    "city": "baytown",
+    "state": "TX",
+    "cases": 5
+  },
+  {
+    "city": "bonham",
+    "state": "TX",
+    "cases": 5
+  },
+  {
+    "city": "victoria",
+    "state": "TX",
+    "cases": 5
+  },
+  {
+    "city": "jacksonville",
+    "state": "TX",
+    "cases": 5
+  },
+  {
+    "city": "rio grande city",
+    "state": "TX",
+    "cases": 5
+  },
+  {
+    "city": "gilmer",
+    "state": "TX",
+    "cases": 5
+  },
+  {
+    "city": "big spring",
+    "state": "TX",
+    "cases": 5
+  },
+  {
+    "city": "hidalgo",
+    "state": "TX",
+    "cases": 5
+  },
+  {
+    "city": "mission",
+    "state": "TX",
+    "cases": 5
+  },
+  {
+    "city": "wichita falls",
+    "state": "TX",
+    "cases": 5
+  },
+  {
+    "city": "auburndale",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "lake wales",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "homosassa",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "port st. lucie",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "wesley chapel",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "miami gardens",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "plant city",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "brooksville",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "lake city",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "crystal river",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "dunnellon",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "okeechobee",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "key largo",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "lake placid",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "delray beach",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "jensen beach",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "miramar",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "palatka",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "ft. lauderdale",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "pembroke pines",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "titusville",
+    "state": "FL",
+    "cases": 5
+  },
+  {
+    "city": "roseville",
+    "state": "MI",
+    "cases": 5
+  },
+  {
+    "city": "dearborn",
+    "state": "MI",
+    "cases": 5
+  },
+  {
+    "city": "westland",
+    "state": "MI",
+    "cases": 5
+  },
+  {
+    "city": "niles",
+    "state": "MI",
+    "cases": 5
+  },
+  {
+    "city": "livonia",
+    "state": "MI",
+    "cases": 5
+  },
+  {
+    "city": "troy",
+    "state": "MI",
+    "cases": 5
+  },
+  {
+    "city": "madison heights",
+    "state": "MI",
+    "cases": 5
+  },
+  {
+    "city": "wyoming",
+    "state": "MI",
+    "cases": 5
+  },
+  {
+    "city": "kailua-kona",
+    "state": "HI",
+    "cases": 5
+  },
+  {
+    "city": "pahoa",
+    "state": "HI",
+    "cases": 5
+  },
+  {
+    "city": "kailua",
+    "state": "HI",
+    "cases": 5
+  },
+  {
+    "city": "clinton",
+    "state": "TN",
+    "cases": 5
+  },
+  {
+    "city": "paris",
+    "state": "TN",
+    "cases": 5
+  },
+  {
+    "city": "springfield",
+    "state": "TN",
+    "cases": 5
+  },
+  {
+    "city": "dickson",
+    "state": "TN",
+    "cases": 5
+  },
+  {
+    "city": "smyrna",
+    "state": "TN",
+    "cases": 5
+  },
+  {
+    "city": "jackson",
+    "state": "TN",
+    "cases": 5
+  },
+  {
+    "city": "conway",
+    "state": "AR",
+    "cases": 5
+  },
+  {
+    "city": "alexander",
+    "state": "AR",
+    "cases": 5
+  },
+  {
+    "city": "jonesboro",
+    "state": "AR",
+    "cases": 5
+  },
+  {
+    "city": "ozark",
+    "state": "AR",
+    "cases": 5
+  },
+  {
+    "city": "zanesville",
+    "state": "OH",
+    "cases": 5
+  },
+  {
+    "city": "hamilton",
+    "state": "OH",
+    "cases": 5
+  },
+  {
+    "city": "mansfield",
+    "state": "OH",
+    "cases": 5
+  },
+  {
+    "city": "chillicothe",
+    "state": "OH",
+    "cases": 5
+  },
+  {
+    "city": "kalispell",
+    "state": "MT",
+    "cases": 5
+  },
+  {
+    "city": "hammond",
+    "state": "IN",
+    "cases": 5
+  },
+  {
+    "city": "richmond",
+    "state": "IN",
+    "cases": 5
+  },
+  {
+    "city": "anderson",
+    "state": "IN",
+    "cases": 5
+  },
+  {
+    "city": "south bend",
+    "state": "IN",
+    "cases": 5
+  },
+  {
+    "city": "long beach",
+    "state": "NY",
+    "cases": 5
+  },
+  {
+    "city": "jamaica",
+    "state": "NY",
+    "cases": 5
+  },
+  {
+    "city": "pleasantville",
+    "state": "NY",
+    "cases": 5
+  },
+  {
+    "city": "grand island",
+    "state": "NY",
+    "cases": 5
+  },
+  {
+    "city": "rome",
+    "state": "NY",
+    "cases": 5
+  },
+  {
+    "city": "schenectady",
+    "state": "NY",
+    "cases": 5
+  },
+  {
+    "city": "long island",
+    "state": "NY",
+    "cases": 5
+  },
+  {
+    "city": "baldwin",
+    "state": "NY",
+    "cases": 5
+  },
+  {
+    "city": "ocean springs",
+    "state": "MS",
+    "cases": 5
+  },
+  {
+    "city": "canton",
+    "state": "MS",
+    "cases": 5
+  },
+  {
+    "city": "concord",
+    "state": "NH",
+    "cases": 5
+  },
+  {
+    "city": "groton",
+    "state": "CT",
+    "cases": 5
+  },
+  {
+    "city": "manchester",
+    "state": "CT",
+    "cases": 5
+  },
+  {
+    "city": "williston",
+    "state": "ND",
+    "cases": 5
+  },
+  {
+    "city": "trinidad",
+    "state": "CO",
+    "cases": 5
+  },
+  {
+    "city": "littleton",
+    "state": "CO",
+    "cases": 5
+  },
+  {
+    "city": "westminster",
+    "state": "CO",
+    "cases": 5
+  },
+  {
+    "city": "longmont",
+    "state": "CO",
+    "cases": 5
+  },
+  {
+    "city": "wheat ridge",
+    "state": "CO",
+    "cases": 5
+  },
+  {
+    "city": "burlington",
+    "state": "NC",
+    "cases": 5
+  },
+  {
+    "city": "concord",
+    "state": "NC",
+    "cases": 5
+  },
+  {
+    "city": "sanford",
+    "state": "NC",
+    "cases": 5
+  },
+  {
+    "city": "kannapolis",
+    "state": "NC",
+    "cases": 5
+  },
+  {
+    "city": "asheboro",
+    "state": "NC",
+    "cases": 5
+  },
+  {
+    "city": "north wilkesboro",
+    "state": "NC",
+    "cases": 5
+  },
+  {
+    "city": "winston salem",
+    "state": "NC",
+    "cases": 5
+  },
+  {
+    "city": "rocky mount",
+    "state": "NC",
+    "cases": 5
+  },
+  {
+    "city": "hammond",
+    "state": "LA",
+    "cases": 5
+  },
+  {
+    "city": "bossier city",
+    "state": "LA",
+    "cases": 5
+  },
+  {
+    "city": "opelousas",
+    "state": "LA",
+    "cases": 5
+  },
+  {
+    "city": "houma",
+    "state": "LA",
+    "cases": 5
+  },
+  {
+    "city": "duchesne",
+    "state": "UT",
+    "cases": 5
+  },
+  {
+    "city": "provo",
+    "state": "UT",
+    "cases": 5
+  },
+  {
+    "city": "chesapeake",
+    "state": "VA",
+    "cases": 5
+  },
+  {
+    "city": "fredericksburg",
+    "state": "VA",
+    "cases": 5
+  },
+  {
+    "city": "newark",
+    "state": "DE",
+    "cases": 5
+  },
+  {
+    "city": "ashland",
+    "state": "KY",
+    "cases": 5
+  },
+  {
+    "city": "hazard",
+    "state": "KY",
+    "cases": 5
+  },
+  {
+    "city": "radcliff",
+    "state": "KY",
+    "cases": 5
+  },
+  {
+    "city": "brockton",
+    "state": "MA",
+    "cases": 5
+  },
+  {
+    "city": "lawrence",
+    "state": "MA",
+    "cases": 5
+  },
+  {
+    "city": "nantucket",
+    "state": "MA",
+    "cases": 5
+  },
+  {
+    "city": "belen",
+    "state": "NM",
+    "cases": 5
+  },
+  {
+    "city": "aztec",
+    "state": "NM",
+    "cases": 5
+  },
+  {
+    "city": "wetumpka",
+    "state": "AL",
+    "cases": 5
+  },
+  {
+    "city": "selma",
+    "state": "AL",
+    "cases": 5
+  },
+  {
+    "city": "youngtown",
+    "state": "AZ",
+    "cases": 5
+  },
+  {
+    "city": "litchfield park",
+    "state": "AZ",
+    "cases": 5
+  },
+  {
+    "city": "bullhead city",
+    "state": "AZ",
+    "cases": 5
+  },
+  {
+    "city": "laveen",
+    "state": "AZ",
+    "cases": 5
+  },
+  {
+    "city": "san carlos",
+    "state": "AZ",
+    "cases": 5
+  },
+  {
+    "city": "gila bend",
+    "state": "AZ",
+    "cases": 5
+  },
+  {
+    "city": "ajo",
+    "state": "AZ",
+    "cases": 5
+  },
+  {
+    "city": "three points",
+    "state": "AZ",
+    "cases": 5
+  },
+  {
+    "city": "garden grove",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "covina",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "ukiah",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "elk grove",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "nevada city",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "lodi",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "morongo valley",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "antioch",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "yreka",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "corona",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "glendale",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "marysville",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "vista",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "mission viejo",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "fortuna",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "mendocino",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "altadena",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "san bruno",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "garberville",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "chatsworth",
+    "state": "CA",
+    "cases": 5
+  },
+  {
+    "city": "newport beach",
+    "state": "CA",
+    "cases": 5
+  }
+]

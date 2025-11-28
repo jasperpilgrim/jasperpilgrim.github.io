@@ -118,27 +118,7 @@ body {
 }
 
 .app-header {
-    padding: 1.25rem 2rem;
-    flex-shrink: 0;
-    background-color: var(--bg);
-    margin: 0;
-    width: 100%;
-}
-
-.app-header h1 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-    margin-bottom: 0.25rem;
-    color: var(--accent);
-}
-
-.app-header p {
-    font-size: 0.875rem;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    color: var(--text-secondary);
+    display: none;
 }
 
 .app-container {
@@ -963,10 +943,6 @@ body {
         padding: 0 1rem;
     }
 
-    .nav-links {
-        gap: 1rem;
-        font-size: 0.9rem;
-    }
 
     .main-content {
         padding: 1.5rem 1rem;

@@ -15,15 +15,18 @@
     </script>
     <link rel="stylesheet" href="../../assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/styles.css">
-</head>
+    </head>
 
-<body>
+<body class="caseecho-page">
     <nav class="navbar">
         <div class="nav-container">
+            <div class="nav-brand">
+                <h1 class="nav-title">CaseEcho</h1>
+                <p class="nav-description">Enhanced search for missing, unidentified, and unclaimed persons cases</p>
+            </div>
             <div class="nav-links">
                 <a href="../../" class="nav-link">Home</a>
                 <a href="../../projects.html" class="nav-link">Projects</a>
-                <a href="../../resources.html" class="nav-link">Resources</a>
                 <a href="../../contact.html" class="nav-link">Contact</a>
             </div>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
@@ -44,10 +47,6 @@
     </nav>
 
     <main class="main-content">
-        <header class="app-header">
-            <h1>CaseEcho</h1>
-            <p>Enhanced search and visualization for missing, unidentified, and unclaimed persons cases</p>
-        </header>
 
         <div class="app-container">
 
@@ -159,9 +158,21 @@
 
             <section class="stats-section">
                 <div class="stats-grid">
-                    <div class="stat-card">
+                    <div class="stat-card stat-card-total">
                         <div class="stat-value" id="totalCases">-</div>
                         <div class="stat-label">Total Cases</div>
+                    </div>
+                    <div class="stat-card stat-card-location">
+                        <div class="stat-value" id="statesCount">-</div>
+                        <div class="stat-label" id="statesLabel">States</div>
+                    </div>
+                    <div class="stat-card stat-card-location">
+                        <div class="stat-value" id="territoriesCount">-</div>
+                        <div class="stat-label" id="territoriesLabel">Territories</div>
+                    </div>
+                    <div class="stat-card stat-card-location">
+                        <div class="stat-value" id="districtsCount">-</div>
+                        <div class="stat-label" id="districtsLabel">Districts</div>
                     </div>
                     <div class="stat-card stat-card-missing">
                         <div class="stat-value" id="missingCases">-</div>
@@ -174,18 +185,6 @@
                     <div class="stat-card stat-card-unclaimed">
                         <div class="stat-value" id="unclaimedCases">-</div>
                         <div class="stat-label" id="unclaimedLabel">Unclaimed</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="statesCount">-</div>
-                        <div class="stat-label" id="statesLabel">States</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="territoriesCount">-</div>
-                        <div class="stat-label" id="territoriesLabel">Territories</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="districtsCount">-</div>
-                        <div class="stat-label" id="districtsLabel">Districts</div>
                     </div>
                 </div>
             </section>
@@ -228,6 +227,14 @@
                                 </svg>
                             </button>
                         </div>
+                        <button id="fullscreenBtn" class="fullscreen-btn" aria-label="Toggle fullscreen">
+                            <svg id="fullscreenIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                            </svg>
+                            <svg id="fullscreenExitIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                                <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path>
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -243,6 +250,10 @@
                 </div>
                 <div id="paginationContainer" class="pagination-container"></div>
             </section>
+
+            <footer class="data-footer">
+                <p class="data-source">Data sourced from <a href="https://www.namus.gov" target="_blank">NamUs.gov</a></p>
+            </footer>
         </div>
     </main>
 

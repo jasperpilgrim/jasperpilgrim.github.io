@@ -3,6 +3,7 @@ let filteredResults = [];
 let currentView = 'grid';
 let currentPage = 1;
 const itemsPerPage = 50;
+let physicalData = null;
 
 const searchInput = document.getElementById('searchInput');
 const caseTypeFilter = document.getElementById('caseTypeFilter');
@@ -21,25 +22,30 @@ const gridViewBtn = document.getElementById('gridView');
 const listViewBtn = document.getElementById('listView');
 const sortSelect = document.getElementById('sortSelect');
 const totalCases = document.getElementById('totalCases');
-const missingCases = document.getElementById('missingCases');
-const missingLabel = document.getElementById('missingLabel');
-const unidentifiedCases = document.getElementById('unidentifiedCases');
-const unidentifiedLabel = document.getElementById('unidentifiedLabel');
-const unclaimedCases = document.getElementById('unclaimedCases');
-const unclaimedLabel = document.getElementById('unclaimedLabel');
 const statesCount = document.getElementById('statesCount');
 const statesLabel = document.getElementById('statesLabel');
 const territoriesCount = document.getElementById('territoriesCount');
 const territoriesLabel = document.getElementById('territoriesLabel');
 const districtsCount = document.getElementById('districtsCount');
 const districtsLabel = document.getElementById('districtsLabel');
+const missingCases = document.getElementById('missingCases');
+const missingLabel = document.getElementById('missingLabel');
+const unidentifiedCases = document.getElementById('unidentifiedCases');
+const unidentifiedLabel = document.getElementById('unidentifiedLabel');
+const unclaimedCases = document.getElementById('unclaimedCases');
+const unclaimedLabel = document.getElementById('unclaimedLabel');
+const fullscreenBtn = document.getElementById('fullscreenBtn');
+const fullscreenIcon = document.getElementById('fullscreenIcon');
+const fullscreenExitIcon = document.getElementById('fullscreenExitIcon');
 
 document.addEventListener('DOMContentLoaded', async () => {
     setupEventListeners();
+    await loadPhysicalData();
     await loadNamUsData();
 
     showEmptyState();
     updateStats();
+    updateFullscreenIcon();
 });
 
 function setupEventListeners() {
@@ -48,6 +54,19 @@ function setupEventListeners() {
     searchInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             applyFilters();
+        }
+        if (e.key === 'Escape') {
+            clearAllFilters();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && e.target !== searchInput && !e.target.matches('input, textarea, select')) {
+            e.preventDefault();
+            searchInput.focus();
+        }
+        if (e.key === 'Escape' && document.activeElement === searchInput && searchInput.value.trim() === '') {
+            searchInput.blur();
         }
     });
 
@@ -67,8 +86,15 @@ function setupEventListeners() {
     });
     sortSelect.addEventListener('change', applyFilters);
 
-    resultsContainer.addEventListener('click', (e) => {
+    if (fullscreenBtn) {
+        fullscreenBtn.addEventListener('click', toggleFullscreen);
+        document.addEventListener('fullscreenchange', updateFullscreenIcon);
+        document.addEventListener('webkitfullscreenchange', updateFullscreenIcon);
+        document.addEventListener('mozfullscreenchange', updateFullscreenIcon);
+        document.addEventListener('MSFullscreenChange', updateFullscreenIcon);
+    }
 
+    resultsContainer.addEventListener('click', (e) => {
         if (e.target.classList.contains('find-matches-btn') || e.target.closest('.find-matches-btn')) {
             e.stopPropagation();
             e.preventDefault();
@@ -80,21 +106,18 @@ function setupEventListeners() {
             return false;
         }
 
-        if (e.target.closest('.result-card-link') || e.target.closest('.result-item-link')) {
+        if (e.target.closest('.result-card-link') || e.target.closest('.result-item-link') || e.target.tagName === 'A') {
             return;
         }
 
-        const card = e.target.closest('.result-card');
-        const item = e.target.closest('.result-item');
-        if (card) {
-            const link = card.getAttribute('data-link');
-            if (link) {
-                window.open(link, '_blank');
-            }
-        } else if (item) {
-            const link = item.getAttribute('data-link');
-            if (link) {
-                window.open(link, '_blank');
+        const card = e.target.closest('.result-card') || e.target.closest('.result-item');
+        if (card && !e.target.closest('button') && !e.target.closest('a')) {
+            const caseNumber = card.getAttribute('data-case-number');
+            if (caseNumber) {
+                const caseData = allResults.find(c => c.caseNumber === caseNumber);
+                if (caseData) {
+                    showCaseDetailsModal(caseData);
+                }
             }
         }
     });
@@ -253,7 +276,7 @@ function csvRowToCase(row, detectedCaseType = null) {
         }
     }
 
-    return {
+    const caseObj = {
         id: caseNumber ? caseNumber.replace(/^MP|^UP|^UCP/i, '').trim() : null,
         caseNumber: caseNumber,
         caseType: caseType,
@@ -271,6 +294,36 @@ function csvRowToCase(row, detectedCaseType = null) {
         dateModified: row['Date Modified'] || '',
         link: link
     };
+
+    if (physicalData && caseNumber && physicalData[caseNumber]) {
+        const phys = physicalData[caseNumber];
+        caseObj.heightFeet = phys.heightFeet;
+        caseObj.heightInches = phys.heightInches;
+        caseObj.heightFormatted = phys.heightFormatted;
+        caseObj.weight = phys.weight;
+        caseObj.hairColor = phys.hairColor;
+        caseObj.eyeColor = phys.eyeColor;
+        caseObj.headHairDescription = phys.headHairDescription;
+        caseObj.bodyHairDescription = phys.bodyHairDescription;
+        caseObj.facialHairDescription = phys.facialHairDescription;
+        caseObj.circumstances = phys.circumstances;
+        caseObj.dnaStatus = phys.dnaStatus;
+        caseObj.fingerprintsStatus = phys.fingerprintsStatus;
+        caseObj.dentalStatus = phys.dentalStatus;
+    }
+
+    return caseObj;
+}
+
+async function loadPhysicalData() {
+    try {
+        const response = await fetch('assets/data/extracted-physical-data.json');
+        if (response.ok) {
+            physicalData = await response.json();
+        }
+    } catch (error) {
+        console.error('Error loading physical data:', error);
+    }
 }
 
 async function loadNamUsData() {
@@ -568,12 +621,12 @@ function showEmptyState() {
                 <circle cx="11" cy="11" r="8"></circle>
                 <path d="m21 21-4.35-4.35"></path>
             </svg>
-            <p>Enter a search term to find missing persons cases</p>
-            <p class="empty-state-hint">Search by name, case number, state, or other keywords</p>
+            <p>Enter a search term to find cases</p>
         </div>
     `;
     resultsTitle.textContent = 'Search Results';
     resultsCount.textContent = '';
+    paginationContainer.innerHTML = '';
     currentPage = 1;
 }
 
@@ -925,19 +978,43 @@ function populateStateFilter() {
         }).join('');
 }
 
+function formatNumber(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
 function updateStats() {
 
-    totalCases.textContent = allResults.length;
+    totalCases.textContent = formatNumber(allResults.length);
 
     const dataToCount = filteredResults.length > 0 ? filteredResults : allResults;
+    const uniqueStates = new Set(dataToCount.map(r => r.state).filter(s => s));
+    
+    const territories = new Set(['PR', 'MP', 'VI', 'GU']);
+    const districts = new Set(['DC']);
+    const allStates = new Set(['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']);
+    
+    const states = Array.from(uniqueStates).filter(s => allStates.has(s));
+    const territoriesList = Array.from(uniqueStates).filter(s => territories.has(s));
+    const districtsList = Array.from(uniqueStates).filter(s => districts.has(s));
+    
+    const statesNum = states.length;
+    const territoriesNum = territoriesList.length;
+    const districtsNum = districtsList.length;
+    const uniqueLocations = statesNum + territoriesNum + districtsNum;
+    
     const missing = dataToCount.filter(r => r.caseType === 'missing').length;
     const unidentified = dataToCount.filter(r => r.caseType === 'unidentified').length;
     const unclaimed = dataToCount.filter(r => r.caseType === 'unclaimed').length;
 
-    missingCases.textContent = missing;
-    unidentifiedCases.textContent = unidentified;
-    unclaimedCases.textContent = unclaimed;
-
+    if (statesCount) statesCount.textContent = formatNumber(statesNum);
+    if (statesLabel) statesLabel.textContent = statesNum === 1 ? 'State' : 'States';
+    if (territoriesCount) territoriesCount.textContent = formatNumber(territoriesNum);
+    if (territoriesLabel) territoriesLabel.textContent = territoriesNum === 1 ? 'Territory' : 'Territories';
+    if (districtsCount) districtsCount.textContent = formatNumber(districtsNum);
+    if (districtsLabel) districtsLabel.textContent = districtsNum === 1 ? 'District' : 'Districts';
+    missingCases.textContent = formatNumber(missing);
+    unidentifiedCases.textContent = formatNumber(unidentified);
+    unclaimedCases.textContent = formatNumber(unclaimed);
     if (missingLabel) {
         missingLabel.textContent = missing === 1 ? 'Missing Person' : 'Missing Persons';
     }
@@ -946,32 +1023,6 @@ function updateStats() {
     }
     if (unclaimedLabel) {
         unclaimedLabel.textContent = unclaimed === 1 ? 'Unclaimed Person' : 'Unclaimed';
-    }
-
-    const districts = new Set(['DC']);
-    const territories = new Set(['GU', 'MP', 'PR', 'VI']);
-    const allLocations = new Set(dataToCount.map(r => r.state).filter(s => s));
-    const statesOnly = new Set([...allLocations].filter(s => !territories.has(s) && !districts.has(s)));
-    const territoriesOnly = new Set([...allLocations].filter(s => territories.has(s)));
-    const districtsOnly = new Set([...allLocations].filter(s => districts.has(s)));
-
-    const statesCountNum = statesOnly.size;
-    const territoriesCountNum = territoriesOnly.size;
-    const districtsCountNum = districtsOnly.size;
-
-    statesCount.textContent = statesCountNum;
-    if (statesLabel) {
-        statesLabel.textContent = statesCountNum === 1 ? 'State' : 'States';
-    }
-
-    territoriesCount.textContent = territoriesCountNum;
-    if (territoriesLabel) {
-        territoriesLabel.textContent = territoriesCountNum === 1 ? 'Territory' : 'Territories';
-    }
-
-    districtsCount.textContent = districtsCountNum;
-    if (districtsLabel) {
-        districtsLabel.textContent = districtsCountNum === 1 ? 'District' : 'Districts';
     }
 }
 
@@ -1009,6 +1060,198 @@ window.showMatchesForCase = function (caseNumber) {
     }
 };
 
+function lockBodyScroll() {
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = `${window.innerWidth - document.documentElement.clientWidth}px`;
+}
+
+function unlockBodyScroll() {
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+}
+
+function closeCaseDetailsModal(modal) {
+    unlockBodyScroll();
+    modal.remove();
+}
+
+function showCaseDetailsModal(caseData) {
+    lockBodyScroll();
+    const modal = document.createElement('div');
+    modal.className = 'case-details-modal';
+    modal.innerHTML = `
+        <div class="case-details-modal-content">
+            <div class="case-details-modal-header">
+                <h2>${escapeHtml(caseData.name)}</h2>
+                <button class="case-details-modal-close" onclick="closeCaseDetailsModal(this.closest('.case-details-modal'))" aria-label="Close">×</button>
+            </div>
+            <div class="case-details-modal-body">
+                <div class="case-details-grid">
+                    <div class="case-details-section">
+                        <h3>Case Information</h3>
+                        <div class="case-details-info">
+                            <div class="case-details-item">
+                                <strong>Case #:</strong>
+                                <span>${escapeHtml(caseData.caseNumber)}</span>
+                            </div>
+                            <div class="case-details-item">
+                                <strong>Case Type:</strong>
+                                <span class="case-type-badge case-type-${caseData.caseType}">${caseData.caseType}</span>
+                            </div>
+                            ${caseData.age ? `
+                            <div class="case-details-item">
+                                <strong>Age:</strong>
+                                <span>${caseData.age} ${pluralize(caseData.age, 'year')}</span>
+                            </div>
+                            ` : ''}
+                            ${caseData.sex ? `
+                            <div class="case-details-item">
+                                <strong>Sex:</strong>
+                                <span>${escapeHtml(caseData.sex)}</span>
+                            </div>
+                            ` : ''}
+                            ${caseData.race ? `
+                            <div class="case-details-item">
+                                <strong>Race/Ethnicity:</strong>
+                                <span>${escapeHtml(caseData.race)}</span>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                    ${(caseData.heightFormatted || caseData.weight || caseData.hairColor || caseData.eyeColor) ? `
+                    <div class="case-details-section">
+                        <h3>Physical Description</h3>
+                        <div class="case-details-info">
+                            ${caseData.heightFormatted ? `
+                            <div class="case-details-item">
+                                <strong>Height:</strong>
+                                <span>${escapeHtml(caseData.heightFormatted)}</span>
+                            </div>
+                            ` : ''}
+                            ${caseData.weight ? `
+                            <div class="case-details-item">
+                                <strong>Weight:</strong>
+                                <span>${escapeHtml(caseData.weight)} lbs</span>
+                            </div>
+                            ` : ''}
+                            ${caseData.hairColor ? `
+                            <div class="case-details-item">
+                                <strong>Hair:</strong>
+                                <span>${escapeHtml(caseData.hairColor)}</span>
+                            </div>
+                            ` : ''}
+                            ${caseData.eyeColor ? `
+                            <div class="case-details-item">
+                                <strong>Eyes:</strong>
+                                <span>${escapeHtml(caseData.eyeColor)}</span>
+                            </div>
+                            ` : ''}
+                            ${caseData.headHairDescription ? `
+                            <div class="case-details-item">
+                                <strong>Hair Details:</strong>
+                                <span>${escapeHtml(caseData.headHairDescription)}</span>
+                            </div>
+                            ` : ''}
+                            ${caseData.facialHairDescription ? `
+                            <div class="case-details-item">
+                                <strong>Facial Hair:</strong>
+                                <span>${escapeHtml(caseData.facialHairDescription)}</span>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                    ` : ''}
+                    <div class="case-details-section case-details-location-wrapper">
+                        <h3>Location</h3>
+                        <div class="case-details-info">
+                            ${caseData.city ? `
+                            <div class="case-details-item">
+                                <strong>City:</strong>
+                                <span>${escapeHtml(caseData.city)}</span>
+                            </div>
+                            ` : ''}
+                            ${caseData.county ? `
+                            <div class="case-details-item">
+                                <strong>County:</strong>
+                                <span>${escapeHtml(caseData.county)}</span>
+                            </div>
+                            ` : ''}
+                            ${caseData.state ? `
+                            <div class="case-details-item">
+                                <strong>State:</strong>
+                                <span>${escapeHtml(caseData.state)}</span>
+                            </div>
+                            ` : ''}
+                            ${caseData.year ? `
+                            <div class="case-details-item">
+                                <strong>Year:</strong>
+                                <span>${caseData.year}</span>
+                            </div>
+                            ` : ''}
+                            ${caseData.dlc ? `
+                            <div class="case-details-item">
+                                <strong>${caseData.caseType === 'unidentified' ? 'Date Found' : 'Date Last Contact'}:</strong>
+                                <span>${escapeHtml(caseData.dlc)}</span>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                    ${caseData.circumstances ? `
+                    <div class="case-details-section case-details-circumstances-wrapper">
+                        <h3>Circumstances</h3>
+                        <div class="case-details-circumstances">
+                            <p>${escapeHtml(caseData.circumstances)}</p>
+                        </div>
+                    </div>
+                    ` : ''}
+                    ${(caseData.dnaStatus || caseData.fingerprintsStatus || caseData.dentalStatus) ? `
+                    <div class="case-details-section">
+                        <h3>Forensic Information</h3>
+                        <div class="case-details-info">
+                            ${caseData.dnaStatus ? `
+                            <div class="case-details-item">
+                                <strong>DNA Status:</strong>
+                                <span>${escapeHtml(caseData.dnaStatus)}</span>
+                            </div>
+                            ` : ''}
+                            ${caseData.fingerprintsStatus ? `
+                            <div class="case-details-item">
+                                <strong>Fingerprints Status:</strong>
+                                <span>${escapeHtml(caseData.fingerprintsStatus)}</span>
+                            </div>
+                            ` : ''}
+                            ${caseData.dentalStatus ? `
+                            <div class="case-details-item">
+                                <strong>Dental Status:</strong>
+                                <span>${escapeHtml(caseData.dentalStatus)}</span>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+            </div>
+            <div class="case-details-modal-footer">
+                <button class="find-matches-btn" data-case-number="${escapeHtml(caseData.caseNumber || '')}" onclick="window.showMatchesForCase('${escapeHtml(caseData.caseNumber || '')}'); closeCaseDetailsModal(this.closest('.case-details-modal'));">Find Similar Cases</button>
+                <a href="${caseData.link || '#'}" target="_blank" class="case-details-link">View on NamUs →</a>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeCaseDetailsModal(modal);
+        }
+    });
+
+    modal.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeCaseDetailsModal(modal);
+        }
+    });
+}
+
 function displayResults() {
     if (filteredResults.length === 0) {
         resultsContainer.innerHTML = `
@@ -1030,7 +1273,7 @@ function displayResults() {
     const paginatedResults = getPaginatedResults();
 
     resultsTitle.textContent = 'Search Results';
-    resultsCount.textContent = `Showing ${(currentPage - 1) * itemsPerPage + 1}-${Math.min(currentPage * itemsPerPage, filteredResults.length)} of ${filteredResults.length} ${filteredResults.length === 1 ? 'case' : 'cases'}`;
+    resultsCount.textContent = `Showing ${formatNumber((currentPage - 1) * itemsPerPage + 1)}-${formatNumber(Math.min(currentPage * itemsPerPage, filteredResults.length))} of ${formatNumber(filteredResults.length)} ${filteredResults.length === 1 ? 'case' : 'cases'}`;
 
     if (currentView === 'grid') {
 
@@ -1063,6 +1306,76 @@ function displayResults() {
                         <div class="result-card-info-item">
                             <strong>Race/Ethnicity:</strong>
                             <span>${escapeHtml(item.race)}</span>
+                        </div>
+                        ` : ''}
+                        ${(item.heightFormatted || item.weight || item.hairColor || item.eyeColor || item.headHairDescription || item.facialHairDescription) ? `
+                        <div class="result-card-physical-section">
+                            ${item.heightFormatted ? `
+                            <div class="result-card-info-item">
+                                <strong>Height:</strong>
+                                <span>${escapeHtml(item.heightFormatted)}</span>
+                            </div>
+                            ` : ''}
+                            ${item.weight ? `
+                            <div class="result-card-info-item">
+                                <strong>Weight:</strong>
+                                <span>${escapeHtml(item.weight)} lbs</span>
+                            </div>
+                            ` : ''}
+                            ${item.hairColor ? `
+                            <div class="result-card-info-item">
+                                <strong>Hair:</strong>
+                                <span>${escapeHtml(item.hairColor)}</span>
+                            </div>
+                            ` : ''}
+                            ${item.eyeColor ? `
+                            <div class="result-card-info-item">
+                                <strong>Eyes:</strong>
+                                <span>${escapeHtml(item.eyeColor)}</span>
+                            </div>
+                            ` : ''}
+                            ${item.headHairDescription ? `
+                            <div class="result-card-info-item">
+                                <strong>Hair Details:</strong>
+                                <span>${escapeHtml(item.headHairDescription)}</span>
+                            </div>
+                            ` : ''}
+                            ${item.facialHairDescription ? `
+                            <div class="result-card-info-item">
+                                <strong>Facial Hair:</strong>
+                                <span>${escapeHtml(item.facialHairDescription)}</span>
+                            </div>
+                            ` : ''}
+                        </div>
+                        ` : ''}
+                        ${item.circumstances ? (() => {
+                            const words = item.circumstances.trim().split(/\s+/);
+                            const previewWords = words.slice(0, 4).join(' ');
+                            return `
+                        <div class="result-card-circumstances">
+                            <div class="result-card-info-item">
+                                <strong>Circumstances:</strong>
+                                <span>${escapeHtml(previewWords)}...</span>
+                            </div>
+                        </div>
+                        `;
+                        })() : ''}
+                        ${item.dnaStatus ? `
+                        <div class="result-card-info-item">
+                            <strong>DNA Status:</strong>
+                            <span>${escapeHtml(item.dnaStatus)}</span>
+                        </div>
+                        ` : ''}
+                        ${item.fingerprintsStatus ? `
+                        <div class="result-card-info-item">
+                            <strong>Fingerprints Status:</strong>
+                            <span>${escapeHtml(item.fingerprintsStatus)}</span>
+                        </div>
+                        ` : ''}
+                        ${item.dentalStatus ? `
+                        <div class="result-card-info-item">
+                            <strong>Dental Status:</strong>
+                            <span>${escapeHtml(item.dentalStatus)}</span>
                         </div>
                         ` : ''}
                         ${item.city ? `
@@ -1148,6 +1461,76 @@ function displayResults() {
                             <span>${escapeHtml(item.race)}</span>
                         </div>
                         ` : ''}
+                        ${(item.heightFormatted || item.weight || item.hairColor || item.eyeColor || item.headHairDescription || item.facialHairDescription) ? `
+                        <div class="result-item-physical-section">
+                            ${item.heightFormatted ? `
+                            <div class="result-item-info-item">
+                                <strong>Height:</strong>
+                                <span>${escapeHtml(item.heightFormatted)}</span>
+                            </div>
+                            ` : ''}
+                            ${item.weight ? `
+                            <div class="result-item-info-item">
+                                <strong>Weight:</strong>
+                                <span>${escapeHtml(item.weight)} lbs</span>
+                            </div>
+                            ` : ''}
+                            ${item.hairColor ? `
+                            <div class="result-item-info-item">
+                                <strong>Hair:</strong>
+                                <span>${escapeHtml(item.hairColor)}</span>
+                            </div>
+                            ` : ''}
+                            ${item.eyeColor ? `
+                            <div class="result-item-info-item">
+                                <strong>Eyes:</strong>
+                                <span>${escapeHtml(item.eyeColor)}</span>
+                            </div>
+                            ` : ''}
+                            ${item.headHairDescription ? `
+                            <div class="result-item-info-item">
+                                <strong>Hair Details:</strong>
+                                <span>${escapeHtml(item.headHairDescription)}</span>
+                            </div>
+                            ` : ''}
+                            ${item.facialHairDescription ? `
+                            <div class="result-item-info-item">
+                                <strong>Facial Hair:</strong>
+                                <span>${escapeHtml(item.facialHairDescription)}</span>
+                            </div>
+                            ` : ''}
+                        </div>
+                        ` : ''}
+                        ${item.circumstances ? (() => {
+                            const words = item.circumstances.trim().split(/\s+/);
+                            const previewWords = words.slice(0, 4).join(' ');
+                            return `
+                        <div class="result-item-circumstances">
+                            <div class="result-item-info-item">
+                                <strong>Circumstances:</strong>
+                                <span>${escapeHtml(previewWords)}...</span>
+                            </div>
+                        </div>
+                        `;
+                        })() : ''}
+                        ${item.dnaStatus ? `
+                        <div class="result-item-info-item">
+                            <strong>DNA Status:</strong>
+                            <span>${escapeHtml(item.dnaStatus)}</span>
+                        </div>
+                        ` : ''}
+                        ${item.fingerprintsStatus ? `
+                        <div class="result-item-info-item">
+                            <strong>Fingerprints Status:</strong>
+                            <span>${escapeHtml(item.fingerprintsStatus)}</span>
+                        </div>
+                        ` : ''}
+                        ${item.dentalStatus ? `
+                        <div class="result-item-info-item">
+                            <strong>Dental Status:</strong>
+                            <span>${escapeHtml(item.dentalStatus)}</span>
+                        </div>
+                        ` : ''}
                         ${item.city ? `
                         <div class="result-item-info-item">
                             <strong>City:</strong>
@@ -1214,7 +1597,7 @@ function changePage(page) {
 
 function areStatesAdjacent(state1, state2) {
     if (!state1 || !state2 || state1 === state2) return false;
-    
+
     const adjacencyMap = {
         'AL': ['FL', 'GA', 'MS', 'TN'],
         'AK': [],
@@ -1268,7 +1651,7 @@ function areStatesAdjacent(state1, state2) {
         'WY': ['CO', 'ID', 'MT', 'NE', 'SD', 'UT'],
         'DC': ['MD', 'VA']
     };
-    
+
     const neighbors = adjacencyMap[state1] || [];
     return neighbors.includes(state2);
 }
@@ -1319,6 +1702,29 @@ function calculateMatchScore(case1, case2) {
         }
     }
 
+    if (case1.heightFormatted && case2.heightFormatted) {
+        const height1 = (case1.heightFeet || 0) * 12 + (case1.heightInches || 0);
+        const height2 = (case2.heightFeet || 0) * 12 + (case2.heightInches || 0);
+
+        if (height1 > 0 && height2 > 0) {
+            const heightDiff = Math.abs(height1 - height2);
+            if (heightDiff > 8) {
+                hardExclusion = true;
+                exclusionReason = `Hard exclusion: Height mismatch too large (${case1.heightFormatted} vs ${case2.heightFormatted}, ${heightDiff}" difference)`;
+            }
+        }
+    }
+
+    if (case1.weight && case2.weight) {
+        const weightDiff = Math.abs(case1.weight - case2.weight);
+        const weightPercentDiff = weightDiff / Math.max(case1.weight, case2.weight);
+
+        if (weightPercentDiff > 0.5 && weightDiff > 50) {
+            hardExclusion = true;
+            exclusionReason = `Hard exclusion: Weight mismatch too large (${case1.weight} lbs vs ${case2.weight} lbs, ${Math.round(weightPercentDiff * 100)}% difference)`;
+        }
+    }
+
     if (hardExclusion) {
         return {
             score: 0,
@@ -1359,6 +1765,7 @@ function calculateMatchScore(case1, case2) {
 
     maxScore += 50;
     let hasStrongGeographicMatch = false;
+
     if (case1.state && case2.state) {
         if (case1.state === case2.state) {
             score += 10;
@@ -1389,7 +1796,7 @@ function calculateMatchScore(case1, case2) {
         } else if (areStatesAdjacent(case1.state, case2.state)) {
             score += 5;
             matchReasons.push(`Adjacent states: ${case1.state} and ${case2.state}`);
-            
+
             if (case1.city && case2.city && case1.city.toLowerCase() === case2.city.toLowerCase()) {
                 score += 8;
                 matchReasons.push('Same city name across border');
@@ -1662,6 +2069,107 @@ function calculateMatchScore(case1, case2) {
         }
     }
 
+    maxScore += 25;
+    let hasStrongPhysicalMatch = false;
+
+    if (case1.heightFormatted && case2.heightFormatted) {
+        const height1 = (case1.heightFeet || 0) * 12 + (case1.heightInches || 0);
+        const height2 = (case2.heightFeet || 0) * 12 + (case2.heightInches || 0);
+
+        if (height1 > 0 && height2 > 0) {
+            const heightDiff = Math.abs(height1 - height2);
+
+            if (heightDiff === 0) {
+                score += 10;
+                hasStrongPhysicalMatch = true;
+                matchReasons.push(`Same height: ${case1.heightFormatted}`);
+            } else if (heightDiff <= 1) {
+                score += 8;
+                hasStrongPhysicalMatch = true;
+                matchReasons.push(`Height match: ${case1.heightFormatted} vs ${case2.heightFormatted}`);
+            } else if (heightDiff <= 2) {
+                score += 5;
+                matchReasons.push(`Height close: ${case1.heightFormatted} vs ${case2.heightFormatted}`);
+            } else if (heightDiff <= 3) {
+                score += 2;
+                matchReasons.push(`Height similar: ${case1.heightFormatted} vs ${case2.heightFormatted}`);
+            } else if (heightDiff > 4) {
+                mismatchReasons.push(`Height mismatch: ${case1.heightFormatted} vs ${case2.heightFormatted}`);
+            }
+        }
+    }
+
+    if (case1.weight && case2.weight) {
+        const weightDiff = Math.abs(case1.weight - case2.weight);
+        const weightPercentDiff = weightDiff / Math.max(case1.weight, case2.weight);
+
+        if (weightPercentDiff <= 0.05) {
+            score += 8;
+            hasStrongPhysicalMatch = true;
+            matchReasons.push(`Weight match: ${case1.weight} lbs vs ${case2.weight} lbs`);
+        } else if (weightPercentDiff <= 0.10) {
+            score += 5;
+            matchReasons.push(`Weight close: ${case1.weight} lbs vs ${case2.weight} lbs`);
+        } else if (weightPercentDiff <= 0.15) {
+            score += 2;
+            matchReasons.push(`Weight similar: ${case1.weight} lbs vs ${case2.weight} lbs`);
+        } else if (weightPercentDiff > 0.25) {
+            mismatchReasons.push(`Weight mismatch: ${case1.weight} lbs vs ${case2.weight} lbs`);
+        }
+    }
+
+    if (case1.hairColor && case2.hairColor) {
+        const hair1 = case1.hairColor.toLowerCase().trim();
+        const hair2 = case2.hairColor.toLowerCase().trim();
+
+        if (hair1 === hair2 && hair1 !== 'unknown' && hair1 !== 'other') {
+            score += 8;
+            hasStrongPhysicalMatch = true;
+            matchReasons.push(`Same hair color: ${case1.hairColor}`);
+        } else if (hair1 !== 'unknown' && hair2 !== 'unknown' && hair1 !== 'other' && hair2 !== 'other') {
+            const hair1Parts = hair1.split('/').map(h => h.trim());
+            const hair2Parts = hair2.split('/').map(h => h.trim());
+
+            const matchingHair = hair1Parts.filter(h1 =>
+                hair2Parts.some(h2 => h1 === h2 || h1.includes(h2) || h2.includes(h1))
+            );
+
+            if (matchingHair.length > 0) {
+                score += 4;
+                matchReasons.push(`Similar hair color: ${case1.hairColor} vs ${case2.hairColor}`);
+            } else {
+                mismatchReasons.push(`Hair color mismatch: ${case1.hairColor} vs ${case2.hairColor}`);
+            }
+        }
+    }
+
+    if (case1.eyeColor && case2.eyeColor) {
+        const eye1 = case1.eyeColor.toLowerCase().trim();
+        const eye2 = case2.eyeColor.toLowerCase().trim();
+
+        if (eye1 === eye2 && eye1 !== 'unknown' && eye1 !== 'other') {
+            score += 7;
+            hasStrongPhysicalMatch = true;
+            matchReasons.push(`Same eye color: ${case1.eyeColor}`);
+        } else if (eye1 !== 'unknown' && eye2 !== 'unknown' && eye1 !== 'other' && eye2 !== 'other') {
+            mismatchReasons.push(`Eye color mismatch: ${case1.eyeColor} vs ${case2.eyeColor}`);
+        }
+    }
+
+    if (case1.headHairDescription && case2.headHairDescription) {
+        const desc1 = case1.headHairDescription.toLowerCase();
+        const desc2 = case2.headHairDescription.toLowerCase();
+
+        const commonWords = desc1.split(/\s+/).filter(word =>
+            word.length > 3 && desc2.includes(word)
+        );
+
+        if (commonWords.length >= 2) {
+            score += 3;
+            matchReasons.push('Similar hair description');
+        }
+    }
+
     score = Math.round(score * caseTypeMultiplier);
 
     if (!isTemporallyValid && yearsDiff) {
@@ -1693,30 +2201,74 @@ function calculateMatchScore(case1, case2) {
 
     }
 
+    let physicalMismatch = false;
+    if (case1.hairColor && case2.hairColor &&
+        case1.hairColor.toLowerCase() !== 'unknown' && case2.hairColor.toLowerCase() !== 'unknown' &&
+        case1.hairColor.toLowerCase() !== 'other' && case2.hairColor.toLowerCase() !== 'other') {
+        const hair1 = case1.hairColor.toLowerCase().trim();
+        const hair2 = case2.hairColor.toLowerCase().trim();
+
+        if (hair1 !== hair2) {
+            const hair1Parts = hair1.split('/').map(h => h.trim());
+            const hair2Parts = hair2.split('/').map(h => h.trim());
+            const matchingHair = hair1Parts.filter(h1 =>
+                hair2Parts.some(h2 => h1 === h2 || h1.includes(h2) || h2.includes(h1))
+            );
+
+            if (matchingHair.length === 0) {
+                physicalMismatch = true;
+            }
+        }
+    }
+
+    if (case1.eyeColor && case2.eyeColor &&
+        case1.eyeColor.toLowerCase() !== 'unknown' && case2.eyeColor.toLowerCase() !== 'unknown' &&
+        case1.eyeColor.toLowerCase() !== 'other' && case2.eyeColor.toLowerCase() !== 'other') {
+        const eye1 = case1.eyeColor.toLowerCase().trim();
+        const eye2 = case2.eyeColor.toLowerCase().trim();
+
+        if (eye1 !== eye2) {
+            physicalMismatch = true;
+        }
+    }
+
+    if (physicalMismatch) {
+        score = Math.round(score * 0.8);
+    }
+
     const strongFactors = [];
     if (hasStrongGeographicMatch) strongFactors.push('geography');
     if (hasStrongAgeMatch) strongFactors.push('age');
     if (hasStrongDateMatch) strongFactors.push('date');
     if (sexMatch) strongFactors.push('sex');
     if (raceMatch) strongFactors.push('race');
+    if (hasStrongPhysicalMatch) strongFactors.push('physical');
 
-    const percentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
+    const percentage = maxScore > 0 ? Math.min(100, Math.round((score / maxScore) * 100)) : 0;
     let confidence = 'Low';
 
-    const hasCriticalFactors = sexMatch && raceMatch && !sexMismatch && !raceMismatch && !ageMismatch;
+    const hasCriticalFactors = sexMatch && raceMatch && !sexMismatch && !raceMismatch && !ageMismatch && !physicalMismatch;
     const hasStrongGeography = hasStrongGeographicMatch;
 
-    if (percentage >= 75 && isTemporallyValid && hasCriticalFactors && hasStrongGeography && strongFactors.length >= 4) {
+    if (percentage >= 75 && isTemporallyValid && hasCriticalFactors && hasStrongGeography && hasStrongPhysicalMatch && strongFactors.length >= 5) {
+        confidence = 'High';
+    } else if (percentage >= 75 && isTemporallyValid && hasCriticalFactors && hasStrongGeography && strongFactors.length >= 4) {
+        confidence = 'High';
+    } else if (percentage >= 70 && isTemporallyValid && hasCriticalFactors && hasStrongGeography && hasStrongPhysicalMatch && strongFactors.length >= 4) {
         confidence = 'High';
     } else if (percentage >= 70 && isTemporallyValid && hasCriticalFactors && hasStrongGeography && strongFactors.length >= 3) {
         confidence = 'High';
+    } else if (percentage >= 70 && isTemporallyValid && hasCriticalFactors && hasStrongPhysicalMatch && strongFactors.length >= 3) {
+        confidence = 'Medium';
     } else if (percentage >= 70 && isTemporallyValid && hasCriticalFactors && strongFactors.length >= 3) {
+        confidence = 'Medium';
+    } else if (percentage >= 60 && isTemporallyValid && sexMatch && raceMatch && !sexMismatch && !raceMismatch && hasStrongPhysicalMatch && strongFactors.length >= 3) {
         confidence = 'Medium';
     } else if (percentage >= 60 && isTemporallyValid && sexMatch && raceMatch && !sexMismatch && !raceMismatch && strongFactors.length >= 2) {
         confidence = 'Medium';
-    } else if (percentage >= 50 && isTemporallyValid && !sexMismatch && !raceMismatch && !ageMismatch) {
+    } else if (percentage >= 50 && isTemporallyValid && !sexMismatch && !raceMismatch && !ageMismatch && !physicalMismatch) {
         confidence = 'Medium';
-    } else if (percentage >= 40 && isTemporallyValid && !raceMismatch && !ageMismatch) {
+    } else if (percentage >= 40 && isTemporallyValid && !raceMismatch && !ageMismatch && !physicalMismatch) {
         confidence = 'Low';
     } else if (percentage >= 40 && isTemporallyValid) {
         confidence = 'Low';
@@ -1751,6 +2303,14 @@ function calculateMatchScore(case1, case2) {
         }
     }
 
+    if (physicalMismatch && confidence === 'High') {
+        confidence = 'Medium';
+    }
+
+    if (physicalMismatch && confidence === 'Medium' && percentage < 55) {
+        confidence = 'Low';
+    }
+
     return {
         score: percentage,
         confidence: confidence,
@@ -1765,7 +2325,7 @@ function calculateMatchScore(case1, case2) {
             sameCity: case1.city && case2.city && case1.city.toLowerCase() === case2.city.toLowerCase(),
             isTemporallyValid: isTemporallyValid,
             strongFactors: strongFactors.length,
-            hardExclusion: false
+            hardExclusion: false,
         }
     };
 }
@@ -1785,7 +2345,13 @@ function findPotentialMatches(targetCase) {
         .filter(m => m.match.score > 0);
 }
 
+function closeMatchesModal(modal) {
+    unlockBodyScroll();
+    modal.remove();
+}
+
 function showPotentialMatches(caseData) {
+    lockBodyScroll();
     const matches = findPotentialMatches(caseData);
 
     const modal = document.createElement('div');
@@ -1794,7 +2360,7 @@ function showPotentialMatches(caseData) {
         <div class="matches-modal-content">
             <div class="matches-modal-header">
                 <h2>Potential Matches for ${escapeHtml(caseData.name)}</h2>
-                <button class="matches-modal-close" onclick="this.closest('.matches-modal').remove()">×</button>
+                <button class="matches-modal-close" onclick="closeMatchesModal(this.closest('.matches-modal'))">×</button>
             </div>
             <div class="matches-modal-body">
                 ${matches.length === 0 ? `
@@ -1808,7 +2374,7 @@ function showPotentialMatches(caseData) {
                                 <div class="match-header">
                                     <div class="match-title">
                                         <h3>${escapeHtml(match.case.name)}</h3>
-                                        <span class="match-type">${match.case.caseType}</span>
+                                        <span class="match-type match-type-${match.case.caseType}">${match.case.caseType}</span>
                                     </div>
                                     <div class="match-score">
                                         <span class="match-score-value match-score-${match.match.confidence.toLowerCase()}">${match.match.score}%</span>
@@ -1817,43 +2383,63 @@ function showPotentialMatches(caseData) {
                                 </div>
                                 <div class="match-details">
                                     <div class="match-case-info">
-                                        <strong>Case #:</strong>
-                                        <span>${escapeHtml(match.case.caseNumber)}</span>
+                                        <div class="match-case-info-item">
+                                            <strong>Case #:</strong>
+                                            <span>${escapeHtml(match.case.caseNumber)}</span>
+                                        </div>
                                         ${match.case.age ? `
-                                        <strong>Age:</strong>
-                                        <span>${match.case.age} ${pluralize(match.case.age, 'year')}</span>
+                                        <div class="match-case-info-item">
+                                            <strong>Age:</strong>
+                                            <span>${match.case.age} ${pluralize(match.case.age, 'year')}</span>
+                                        </div>
                                         ` : ''}
                                         ${match.case.sex ? `
-                                        <strong>Sex:</strong>
-                                        <span>${escapeHtml(match.case.sex)}</span>
+                                        <div class="match-case-info-item">
+                                            <strong>Sex:</strong>
+                                            <span>${escapeHtml(match.case.sex)}</span>
+                                        </div>
                                         ` : ''}
                                         ${match.case.race ? `
-                                        <strong>Race/Ethnicity:</strong>
-                                        <span>${escapeHtml(match.case.race)}</span>
+                                        <div class="match-case-info-item">
+                                            <strong>Race/Ethnicity:</strong>
+                                            <span>${escapeHtml(match.case.race)}</span>
+                                        </div>
                                         ` : ''}
                                         ${match.case.state ? `
-                                        <strong>State:</strong>
-                                        <span>${escapeHtml(match.case.state)}</span>
+                                        <div class="match-case-info-item">
+                                            <strong>State:</strong>
+                                            <span>${escapeHtml(match.case.state)}</span>
+                                        </div>
                                         ` : ''}
                                         ${match.case.county ? `
-                                        <strong>County:</strong>
-                                        <span>${escapeHtml(match.case.county)}</span>
+                                        <div class="match-case-info-item">
+                                            <strong>County:</strong>
+                                            <span>${escapeHtml(match.case.county)}</span>
+                                        </div>
                                         ` : ''}
                                         ${match.case.city ? `
-                                        <strong>City:</strong>
-                                        <span>${escapeHtml(match.case.city)}</span>
+                                        <div class="match-case-info-item">
+                                            <strong>City:</strong>
+                                            <span>${escapeHtml(match.case.city)}</span>
+                                        </div>
                                         ` : ''}
                                         ${match.case.dlc ? `
-                                        <strong>${match.case.caseType === 'unidentified' ? 'Date Found' : match.case.caseType === 'missing' ? 'Date Last Contact' : 'Date'}:</strong>
-                                        <span>${escapeHtml(match.case.dlc)}</span>
+                                        <div class="match-case-info-item">
+                                            <strong>${match.case.caseType === 'unidentified' ? 'Date Found' : match.case.caseType === 'missing' ? 'Date Last Contact' : 'Date'}:</strong>
+                                            <span>${escapeHtml(match.case.dlc)}</span>
+                                        </div>
                                         ` : ''}
                                         ${caseData.dlc ? `
-                                        <strong>Original Case Date:</strong>
-                                        <span>${escapeHtml(caseData.dlc)}</span>
+                                        <div class="match-case-info-item">
+                                            <strong>Original Case Date:</strong>
+                                            <span>${escapeHtml(caseData.dlc)}</span>
+                                        </div>
                                         ` : ''}
                                         ${match.match.details.yearsDiff ? `
-                                        <strong style="color: ${match.match.details.yearsDiff > 50 ? '#ff5555' : match.match.details.yearsDiff > 10 ? '#ffb86c' : 'inherit'};">Time Gap:</strong>
-                                        <span style="color: ${match.match.details.yearsDiff > 50 ? '#ff5555' : match.match.details.yearsDiff > 10 ? '#ffb86c' : 'inherit'};">${match.match.details.yearsDiff} ${pluralize(match.match.details.yearsDiff, 'year')}</span>
+                                        <div class="match-case-info-item">
+                                            <strong style="color: ${match.match.details.yearsDiff > 50 ? '#ff5555' : match.match.details.yearsDiff > 10 ? '#ffb86c' : 'inherit'};">Time Gap:</strong>
+                                            <span style="color: ${match.match.details.yearsDiff > 50 ? '#ff5555' : match.match.details.yearsDiff > 10 ? '#ffb86c' : 'inherit'};">${match.match.details.yearsDiff} ${pluralize(match.match.details.yearsDiff, 'year')}</span>
+                                        </div>
                                         ` : ''}
                                     </div>
                                     <div class="match-reasons">
@@ -1886,7 +2472,15 @@ function showPotentialMatches(caseData) {
 
     document.body.appendChild(modal);
     modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.remove();
+        if (e.target === modal) {
+            closeMatchesModal(modal);
+        }
+    });
+
+    modal.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeMatchesModal(modal);
+        }
     });
 }
 
@@ -1898,3 +2492,50 @@ function escapeHtml(text) {
     div.textContent = text;
     return div.innerHTML;
 }
+
+function toggleFullscreen() {
+    if (!document.fullscreenElement && 
+        !document.webkitFullscreenElement && 
+        !document.mozFullScreenElement && 
+        !document.msFullscreenElement) {
+        const element = document.documentElement;
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.webkitRequestFullscreen) {
+            element.webkitRequestFullscreen();
+        } else if (element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+        } else if (element.msRequestFullscreen) {
+            element.msRequestFullscreen();
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    }
+}
+
+function updateFullscreenIcon() {
+    const isFullscreen = !!(document.fullscreenElement || 
+                            document.webkitFullscreenElement || 
+                            document.mozFullScreenElement || 
+                            document.msFullscreenElement);
+    
+    if (fullscreenIcon && fullscreenExitIcon) {
+        if (isFullscreen) {
+            fullscreenIcon.style.display = 'none';
+            fullscreenExitIcon.style.display = 'block';
+        } else {
+            fullscreenIcon.style.display = 'block';
+            fullscreenExitIcon.style.display = 'none';
+        }
+    }
+}
+
+

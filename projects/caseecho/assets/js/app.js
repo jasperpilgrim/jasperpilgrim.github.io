@@ -1190,7 +1190,7 @@ function showCaseDetailsModal(caseData) {
                             ` : ''}
                             ${caseData.dlc ? `
                             <div class="case-details-item">
-                                <strong>${caseData.caseType === 'unidentified' ? 'Date Found' : 'Date Last Contact'}:</strong>
+                                <strong>${caseData.caseType === 'unidentified' || caseData.caseType === 'unclaimed' ? 'Date Found' : 'Date Last Contact'}:</strong>
                                 <span>${escapeHtml(caseData.dlc)}</span>
                             </div>
                             ` : ''}
@@ -1404,7 +1404,7 @@ function displayResults() {
                         ` : ''}
                         ${item.dlc ? `
                         <div class="result-card-info-item">
-                            <strong>${item.caseType === 'unidentified' ? 'Date Found' : 'Date Last Contact'}:</strong>
+                            <strong>${item.caseType === 'unidentified' || item.caseType === 'unclaimed' ? 'Date Found' : 'Date Last Contact'}:</strong>
                             <span>${escapeHtml(item.dlc)}</span>
                         </div>
                         ` : ''}
@@ -1557,7 +1557,7 @@ function displayResults() {
                         ` : ''}
                         ${item.dlc ? `
                         <div class="result-item-info-item">
-                            <strong>${item.caseType === 'unidentified' ? 'Date Found' : 'Date Last Contact'}:</strong>
+                            <strong>${item.caseType === 'unidentified' || item.caseType === 'unclaimed' ? 'Date Found' : 'Date Last Contact'}:</strong>
                             <span>${escapeHtml(item.dlc)}</span>
                         </div>
                         ` : ''}
@@ -1657,48 +1657,63 @@ function areStatesAdjacent(state1, state2) {
 }
 
 function calculateMatchScore(case1, case2) {
-    let score = 0;
-    let maxScore = 0;
     const matchReasons = [];
     const mismatchReasons = [];
+    const categoryScores = {};
+    const categoryMax = {};
 
     const date1 = parseDate(case1.dlc);
     const date2 = parseDate(case2.dlc);
     const yearsDiff = date1 && date2 ? Math.abs(new Date(date1).getFullYear() - new Date(date2).getFullYear()) : null;
     const daysDiff = date1 && date2 ? Math.abs(date1 - date2) / (1000 * 60 * 60 * 24) : null;
 
-    let hardExclusion = false;
-    let exclusionReason = '';
-
-    if (case1.caseType === 'missing' && case2.caseType === 'unidentified' && date1 && date2) {
-        if (date1 > date2) {
-
-            hardExclusion = true;
-            exclusionReason = `Hard exclusion: Missing date (${case1.dlc}) is after found date (${case2.dlc})`;
-        }
-    }
+    let eliminated = false;
+    let eliminationReason = '';
 
     if (case1.sex && case2.sex) {
         const sex1 = case1.sex.toLowerCase().trim();
         const sex2 = case2.sex.toLowerCase().trim();
         if (sex1 !== sex2 && sex1 !== 'unknown' && sex2 !== 'unknown') {
-            hardExclusion = true;
-            exclusionReason = `Hard exclusion: Sex mismatch (${case1.sex} vs ${case2.sex})`;
+            eliminated = true;
+            eliminationReason = `Sex mismatch (${case1.sex} vs ${case2.sex})`;
+        }
+    }
+
+    if (date1 && date2 && case1.caseType === 'missing' && case2.caseType === 'unidentified') {
+        if (date1 > date2) {
+            eliminated = true;
+            eliminationReason = `Missing date (${case1.dlc}) is after found date (${case2.dlc})`;
         }
     }
 
     if (yearsDiff && yearsDiff > 50) {
-        hardExclusion = true;
-        exclusionReason = `Hard exclusion: Dates ${yearsDiff} ${pluralize(yearsDiff, 'year')} apart (extremely unlikely)`;
+        eliminated = true;
+        eliminationReason = `Dates ${yearsDiff} ${pluralize(yearsDiff, 'year')} apart (extremely unlikely)`;
     }
 
-    if (case1.age && case2.age && date1 && date2 && case1.caseType === 'missing' && case2.caseType === 'unidentified') {
+    if (case1.age && case2.age && date1 && date2) {
         const yearsBetween = (date2 - date1) / (1000 * 60 * 60 * 24 * 365.25);
-        const expectedAge = case1.age + yearsBetween;
-
-        if (expectedAge < case2.age - 5) {
-            hardExclusion = true;
-            exclusionReason = `Hard exclusion: Impossible age progression (missing at ${case1.age}, found ${Math.round(yearsBetween)} years later at estimated age ${case2.age})`;
+        
+        let mpAgeMin = case1.age;
+        let mpAgeMax = case1.age;
+        if (case1.ageFrom !== null && case1.ageTo !== null) {
+            mpAgeMin = case1.ageFrom;
+            mpAgeMax = case1.ageTo;
+        }
+        
+        let uidAgeMin = case2.age;
+        let uidAgeMax = case2.age;
+        if (case2.ageFrom !== null && case2.ageTo !== null) {
+            uidAgeMin = case2.ageFrom;
+            uidAgeMax = case2.ageTo;
+        }
+        
+        const expectedAgeMin = mpAgeMin + yearsBetween - 10;
+        const expectedAgeMax = mpAgeMax + yearsBetween + 10;
+        
+        if (expectedAgeMax < uidAgeMin || expectedAgeMin > uidAgeMax) {
+            eliminated = true;
+            eliminationReason = `Impossible age progression (missing at ${case1.age}, found ${Math.round(yearsBetween)} years later at estimated age ${case2.age})`;
         }
     }
 
@@ -1708,29 +1723,25 @@ function calculateMatchScore(case1, case2) {
 
         if (height1 > 0 && height2 > 0) {
             const heightDiff = Math.abs(height1 - height2);
-            if (heightDiff > 8) {
-                hardExclusion = true;
-                exclusionReason = `Hard exclusion: Height mismatch too large (${case1.heightFormatted} vs ${case2.heightFormatted}, ${heightDiff}" difference)`;
+            if (heightDiff > 10) {
+                eliminated = true;
+                eliminationReason = `Height mismatch too large (${case1.heightFormatted} vs ${case2.heightFormatted}, ${heightDiff}" difference)`;
             }
         }
     }
 
-    if (case1.weight && case2.weight) {
-        const weightDiff = Math.abs(case1.weight - case2.weight);
-        const weightPercentDiff = weightDiff / Math.max(case1.weight, case2.weight);
-
-        if (weightPercentDiff > 0.5 && weightDiff > 50) {
-            hardExclusion = true;
-            exclusionReason = `Hard exclusion: Weight mismatch too large (${case1.weight} lbs vs ${case2.weight} lbs, ${Math.round(weightPercentDiff * 100)}% difference)`;
-        }
-    }
-
-    if (hardExclusion) {
+    if (eliminated) {
         return {
+            eliminated: true,
+            reason: eliminationReason,
             score: 0,
+            finalScore: 0,
+            rawScore: 0,
             confidence: 'Low',
             matchReasons: [],
-            mismatchReasons: [exclusionReason],
+            mismatchReasons: [eliminationReason],
+            categoryScores: {},
+            categoryMax: {},
             details: {
                 ageDiff: null,
                 dateDiff: daysDiff,
@@ -1744,587 +1755,410 @@ function calculateMatchScore(case1, case2) {
         };
     }
 
-    const isTemporallyValid = !yearsDiff || yearsDiff <= 50;
-    const isTemporallyClose = yearsDiff && yearsDiff <= 10;
+    let earnedScore = 0;
+    let maxPossibleScore = 0;
 
-    let sexMatch = false;
-    let sexMismatch = false;
-    let raceMatch = false;
-    let raceMismatch = false;
-    let ageMismatch = false;
     let ageDiff = null;
-
-    let caseTypeMultiplier = 1.0;
-    if (case1.caseType === 'missing' && case2.caseType === 'unidentified') {
-        caseTypeMultiplier = 1.0;
-    } else if (case1.caseType === 'unidentified' && case2.caseType === 'missing') {
-        caseTypeMultiplier = 0.95;
-    } else if (case1.caseType === 'unidentified' && case2.caseType === 'unclaimed') {
-        caseTypeMultiplier = 0.9;
-    }
-
-    maxScore += 50;
-    let hasStrongGeographicMatch = false;
+    const contradictionFlags = {
+        ageDiffTooLarge: false,
+        heightDiffTooLarge: false,
+        weightDiffTooLarge: false,
+        raceIncompatible: false
+    };
 
     if (case1.state && case2.state) {
-        if (case1.state === case2.state) {
-            score += 10;
-            matchReasons.push('Same state');
-
-            if (case1.county && case2.county) {
-                if (case1.county.toLowerCase() === case2.county.toLowerCase()) {
-                    score += 20;
-                    hasStrongGeographicMatch = true;
-                    matchReasons.push('Same county');
-
-                    if (case1.city && case2.city && case1.city.toLowerCase() === case2.city.toLowerCase()) {
-                        score += 20;
-                        matchReasons.push('Same city');
-                    } else if (case1.city && case2.city) {
-                        score += 5;
-                        mismatchReasons.push(`Different cities: ${case1.city} vs ${case2.city}`);
-                    }
-                } else {
-                    score += 3;
-                    matchReasons.push('Same state, different counties');
-                    mismatchReasons.push(`Different counties: ${case1.county} vs ${case2.county}`);
-                }
-            } else if (case1.city && case2.city && case1.city.toLowerCase() === case2.city.toLowerCase()) {
-                score += 15;
-                matchReasons.push('Same city, same state');
-            }
-        } else if (areStatesAdjacent(case1.state, case2.state)) {
-            score += 5;
+        categoryMax.geography = 20;
+        let geoScore = 0;
+        
+        let stateScore = 0;
+        let countyScore = 0;
+        let cityScore = 0;
+        
+        const sameState = case1.state === case2.state;
+        const adjacentStates = areStatesAdjacent(case1.state, case2.state);
+        
+        if (sameState) {
+            stateScore = 6;
+        } else if (adjacentStates) {
+            stateScore = 3;
             matchReasons.push(`Adjacent states: ${case1.state} and ${case2.state}`);
-
-            if (case1.city && case2.city && case1.city.toLowerCase() === case2.city.toLowerCase()) {
-                score += 8;
-                matchReasons.push('Same city name across border');
+        }
+        
+        if (case1.county && case2.county) {
+            const sameCounty = case1.county.toLowerCase() === case2.county.toLowerCase();
+            
+            if (sameCounty && sameState) {
+                countyScore = 7;
+                matchReasons.push('Same county');
+            } else if (sameState) {
+                countyScore = 3;
+                matchReasons.push('Same state, different counties');
             }
-        } else {
-            mismatchReasons.push(`Different states: ${case1.state} vs ${case2.state}`);
+        } else if (sameState) {
+            matchReasons.push('Same state');
         }
-    }
-
-    maxScore += 30;
-    let hasStrongAgeMatch = false;
-
-    if (date1 && date2 && (case1.age || case2.age)) {
-
-        let expectedAge1 = case1.age;
-        let expectedAge2 = case2.age;
-
-        if (case1.age && date1 && date2) {
-
-            const yearsBetween = (date2 - date1) / (1000 * 60 * 60 * 24 * 365.25);
-            expectedAge1 = case1.age + yearsBetween;
-        }
-
-        if (case2.age && date1 && date2) {
-
-            const yearsBetween = (date2 - date1) / (1000 * 60 * 60 * 24 * 365.25);
-            expectedAge2 = case2.age - yearsBetween;
-        }
-
-        let ageMatchScore = 0;
-        let ageReason = '';
-
-        if (case2.ageFrom !== null && case2.ageTo !== null) {
-
-            const ageToCheck = case1.age || expectedAge1;
-            const rangeWidth = case2.ageTo - case2.ageFrom;
-            const rangeMid = (case2.ageFrom + case2.ageTo) / 2;
-
-            if (rangeWidth === 0) {
-
-                const ageDiff = Math.abs(ageToCheck - case2.ageFrom);
-                if (ageDiff === 0) {
-                    ageMatchScore = 30;
-                    hasStrongAgeMatch = true;
-                    ageReason = 'Same age';
-                } else if (ageDiff <= 1) {
-                    ageMatchScore = 30;
-                    hasStrongAgeMatch = true;
-                    ageReason = `Age ${Math.round(ageToCheck)} matches age ${case2.ageFrom}`;
-                } else if (ageDiff <= 2) {
-                    ageMatchScore = 20;
-                    hasStrongAgeMatch = true;
-                    ageReason = `Age ${Math.round(ageToCheck)} close to age ${case2.ageFrom}`;
-                } else if (ageDiff <= 5) {
-                    ageMatchScore = 10;
-                    ageReason = `Age ${Math.round(ageToCheck)} near age ${case2.ageFrom}`;
-                }
-            } else if (rangeWidth > 5) {
-
-                ageMatchScore = 0;
-                ageReason = '';
-
-            } else if (ageToCheck >= case2.ageFrom && ageToCheck <= case2.ageTo) {
-
-                const distanceFromMid = Math.abs(ageToCheck - rangeMid);
-                const normalizedDistance = rangeWidth > 0 ? distanceFromMid / (rangeWidth / 2) : 0;
-
-                let baseScore = 30;
-
-                const positionPenalty = normalizedDistance * 0.3;
-                ageMatchScore = Math.round(baseScore * (1 - positionPenalty));
-
-                if (normalizedDistance <= 0.5 || rangeWidth <= 5) {
-                    hasStrongAgeMatch = true;
-                }
-
-                if (normalizedDistance <= 0.2) {
-                    ageReason = `Age ${Math.round(ageToCheck)} matches estimated range (${case2.ageFrom}-${case2.ageTo})`;
-                } else if (normalizedDistance <= 0.5) {
-                    ageReason = `Age ${Math.round(ageToCheck)} matches estimated range (${case2.ageFrom}-${case2.ageTo})`;
+        
+        if (case1.city && case2.city) {
+            const city1Lower = case1.city.toLowerCase();
+            const city2Lower = case2.city.toLowerCase();
+            
+            if (city1Lower === city2Lower) {
+                if (sameState) {
+                    cityScore = 7;
+                    matchReasons.push('Same city');
+                } else if (adjacentStates) {
+                    cityScore = 5;
+                    matchReasons.push('Same city name across border');
                 } else {
-                    ageReason = `Age ${Math.round(ageToCheck)} matches estimated range (${case2.ageFrom}-${case2.ageTo})`;
-                }
-            } else {
-
-                const ageDiff = Math.abs(ageToCheck - rangeMid);
-                if (ageDiff <= 2) {
-                    ageMatchScore = 20;
-                    hasStrongAgeMatch = true;
-                    ageReason = `Age ${Math.round(ageToCheck)} close to estimated range (${case2.ageFrom}-${case2.ageTo})`;
-                } else if (ageDiff <= 5) {
-                    ageMatchScore = 10;
-                    ageReason = `Age ${Math.round(ageToCheck)} near estimated range (${case2.ageFrom}-${case2.ageTo})`;
+                    cityScore = 7;
+                    matchReasons.push('Same city');
                 }
             }
-        } else if (case1.age && case2.age) {
+        }
+        
+        geoScore = Math.min(20, stateScore + countyScore + cityScore);
+        earnedScore += geoScore;
+        maxPossibleScore += 20;
+        categoryScores.geography = geoScore;
+    }
 
-            const ageDiff1 = Math.abs(expectedAge1 - case2.age);
-            const ageDiff2 = Math.abs(case1.age - expectedAge2);
-            const ageDiff = Math.min(ageDiff1, ageDiff2);
-
-            if (ageDiff === 0 || (Math.abs(case1.age - case2.age) === 0 && !date1 && !date2)) {
-                ageMatchScore = 30;
-                hasStrongAgeMatch = true;
-                ageReason = 'Same age';
-            } else if (ageDiff <= 1) {
-                ageMatchScore = 30;
-                hasStrongAgeMatch = true;
-                ageReason = `Age matches: ${case1.age} at disappearance, ${case2.age} when found`;
-            } else if (ageDiff <= 2) {
-                ageMatchScore = 20;
-                hasStrongAgeMatch = true;
-                const roundedDiff = Math.round(ageDiff);
-                ageReason = `Ages match within ${roundedDiff} ${pluralize(roundedDiff, 'year')}`;
+    if ((case1.age || case1.ageFrom !== null) && (case2.age || case2.ageFrom !== null) && date1 && date2) {
+        categoryMax.age = 20;
+        let ageScore = 0;
+        
+        const yearsBetween = (date2 - date1) / (1000 * 60 * 60 * 24 * 365.25);
+        
+        let mpAge = case1.age;
+        if (mpAge === null && case1.ageFrom !== null && case1.ageTo !== null) {
+            mpAge = (case1.ageFrom + case1.ageTo) / 2;
+        }
+        
+        let uidAge = case2.age;
+        if (uidAge === null && case2.ageFrom !== null && case2.ageTo !== null) {
+            uidAge = (case2.ageFrom + case2.ageTo) / 2;
+        }
+        
+        if (mpAge !== null && uidAge !== null) {
+            const expectedCurrentAge = mpAge + yearsBetween;
+            ageDiff = Math.abs(expectedCurrentAge - uidAge);
+            
+            if (ageDiff <= 1) {
+                ageScore = 20;
+                matchReasons.push(`Age matches: ${case1.age} at disappearance, ${case2.age} when found`);
+            } else if (ageDiff <= 3) {
+                ageScore = 17;
+                matchReasons.push(`Ages match within ${Math.round(ageDiff)} ${pluralize(Math.round(ageDiff), 'year')}`);
             } else if (ageDiff <= 5) {
-                ageMatchScore = 10;
-                const roundedDiff = Math.round(ageDiff);
-                ageReason = `Ages match within ${roundedDiff} ${pluralize(roundedDiff, 'year')}`;
+                ageScore = 12;
+                matchReasons.push(`Ages match within ${Math.round(ageDiff)} ${pluralize(Math.round(ageDiff), 'year')}`);
             } else if (ageDiff <= 10) {
-                ageMatchScore = 5;
-                const roundedDiff = Math.round(ageDiff);
-                ageReason = `Ages match within ${roundedDiff} ${pluralize(roundedDiff, 'year')}`;
+                ageScore = 7;
+                matchReasons.push(`Ages match within ${Math.round(ageDiff)} ${pluralize(Math.round(ageDiff), 'year')}`);
+            } else if (ageDiff <= 15) {
+                ageScore = 3;
+                matchReasons.push(`Ages match within ${Math.round(ageDiff)} ${pluralize(Math.round(ageDiff), 'year')}`);
+            } else {
+                contradictionFlags.ageDiffTooLarge = true;
             }
-        }
-
-        if (ageMatchScore > 0 && yearsDiff && yearsDiff > 10) {
-            const reduction = yearsDiff <= 25 ? 0.5 : 0.75;
-            ageMatchScore = Math.round(ageMatchScore * (1 - reduction));
-            ageReason += ` (reduced due to ${yearsDiff} ${pluralize(yearsDiff, 'year')} date gap)`;
-        }
-
-        if (ageMatchScore > 0) {
-            score += ageMatchScore;
-            if (ageReason) {
-                matchReasons.push(ageReason);
-            }
-        } else if (case1.age && case2.age && date1 && date2) {
-
-            const ageDiff1 = Math.abs(expectedAge1 - case2.age);
-            const ageDiff2 = Math.abs(case1.age - expectedAge2);
-            ageDiff = Math.min(ageDiff1, ageDiff2);
-
-            if (ageDiff > 5) {
-                ageMismatch = true;
-                mismatchReasons.push(`Ages don't match: ${case1.age} vs ${case2.age} (${Math.round(ageDiff)} ${pluralize(Math.round(ageDiff), 'year')} difference)`);
-            } else if (ageDiff > 2) {
-                mismatchReasons.push(`Ages don't match closely: ${case1.age} vs ${case2.age} (${Math.round(ageDiff)} ${pluralize(Math.round(ageDiff), 'year')} difference)`);
-            }
-        } else if (case1.age && case2.age && (!date1 || !date2)) {
-
-            const directAgeDiff = Math.abs(case1.age - case2.age);
-            if (directAgeDiff > 5) {
-                ageMismatch = true;
-                ageDiff = directAgeDiff;
-                mismatchReasons.push(`Ages don't match: ${case1.age} vs ${case2.age} (${Math.round(ageDiff)} ${pluralize(Math.round(ageDiff), 'year')} difference)`);
-            }
-        } else if ((case1.age || case2.age) && !case1.age) {
-            mismatchReasons.push('Age not available for missing person');
-        } else if ((case1.age || case2.age) && !case2.age) {
-            mismatchReasons.push('Age not available for unidentified person');
+            
+            earnedScore += ageScore;
+            maxPossibleScore += 20;
+            categoryScores.age = ageScore;
         }
     }
 
-    maxScore += 20;
-    let hasStrongDateMatch = false;
     if (date1 && date2) {
+        categoryMax.date = 15;
+        let dateScore = 0;
+        
+        const getDateLabel = (caseObj) => {
+            if (caseObj.caseType === 'missing') {
+                return 'Missing date';
+            } else if (caseObj.caseType === 'unidentified') {
+                return 'Found date';
+            } else if (caseObj.caseType === 'unclaimed') {
+                return 'Found date';
+            }
+            return 'Date';
+        };
+        
+        const date1Label = getDateLabel(case1);
+        const date2Label = getDateLabel(case2);
+        const date1Str = case1.dlc || '';
+        const date2Str = case2.dlc || '';
+        
         if (daysDiff <= 30) {
-            score += 20;
-            hasStrongDateMatch = true;
-            matchReasons.push(`Dates within 30 days`);
+            dateScore = 15;
+            if (date1Str && date2Str) {
+                matchReasons.push(`${date1Label} (${date1Str}) and ${date2Label} (${date2Str}) within 30 days`);
+            } else {
+                matchReasons.push(`${date1Label} and ${date2Label} within 30 days`);
+            }
         } else if (daysDiff <= 90) {
-            score += 15;
-            hasStrongDateMatch = true;
-            matchReasons.push(`Dates within 90 days`);
+            dateScore = 12;
+            if (date1Str && date2Str) {
+                matchReasons.push(`${date1Label} (${date1Str}) and ${date2Label} (${date2Str}) within 90 days`);
+            } else {
+                matchReasons.push(`${date1Label} and ${date2Label} within 90 days`);
+            }
         } else if (daysDiff <= 180) {
-            score += 10;
-            matchReasons.push(`Dates within 6 months`);
+            dateScore = 9;
+            if (date1Str && date2Str) {
+                matchReasons.push(`${date1Label} (${date1Str}) and ${date2Label} (${date2Str}) within 6 months`);
+            } else {
+                matchReasons.push(`${date1Label} and ${date2Label} within 6 months`);
+            }
         } else if (daysDiff <= 365) {
-            score += 5;
-            matchReasons.push(`Dates within 1 year`);
+            dateScore = 6;
+            if (date1Str && date2Str) {
+                matchReasons.push(`${date1Label} (${date1Str}) and ${date2Label} (${date2Str}) within 1 year`);
+            } else {
+                matchReasons.push(`${date1Label} and ${date2Label} within 1 year`);
+            }
         } else if (yearsDiff && yearsDiff <= 5) {
-            score += 2;
-            matchReasons.push(`Dates within ${yearsDiff} ${pluralize(yearsDiff, 'year')}`);
-        } else if (yearsDiff && yearsDiff > 5) {
-
-            mismatchReasons.push(`Dates ${yearsDiff} ${pluralize(yearsDiff, 'year')} apart`);
-        }
-
-        if (case1.caseType === 'missing' && case2.caseType === 'unidentified' && date1 < date2) {
-            if (daysDiff <= 3650) {
-                score += 5;
-                matchReasons.push('Missing date before found date');
-            }
-        }
-    } else {
-
-        if (!date1 && case1.dlc) {
-            mismatchReasons.push('Date not available for missing person');
-        } else if (!date1) {
-            mismatchReasons.push('Date not available for first case');
-        }
-        if (!date2 && case2.dlc) {
-            mismatchReasons.push('Date not available for unidentified person');
-        } else if (!date2) {
-            mismatchReasons.push('Date not available for second case');
-        }
-    }
-
-    maxScore += 15;
-
-    if (case1.sex && case2.sex) {
-        const sex1 = case1.sex.toLowerCase().trim();
-        const sex2 = case2.sex.toLowerCase().trim();
-        if (sex1 === sex2) {
-            score += 8;
-            sexMatch = true;
-            matchReasons.push('Same sex');
-        } else {
-            sexMismatch = true;
-            const sex1Formatted = case1.sex.charAt(0).toUpperCase() + case1.sex.slice(1).toLowerCase();
-            const sex2Formatted = case2.sex.charAt(0).toUpperCase() + case2.sex.slice(1).toLowerCase();
-            mismatchReasons.push(`Sex mismatch: ${sex1Formatted} vs ${sex2Formatted}`);
-        }
-    } else {
-
-        if (!case1.sex && case2.sex) {
-            mismatchReasons.push('Sex not available for missing person');
-        } else if (case1.sex && !case2.sex) {
-            mismatchReasons.push('Sex not available for unidentified person');
-        } else if (!case1.sex && !case2.sex) {
-            mismatchReasons.push('Sex not available for either case');
-        }
-    }
-
-    if (case1.race && case2.race) {
-        const race1 = case1.race.toLowerCase().trim();
-        const race2 = case2.race.toLowerCase().trim();
-
-        if (race1 === race2) {
-            score += 7;
-            raceMatch = true;
-            matchReasons.push('Same race/ethnicity');
-        } else {
-
-            const race1Parts = race1.split(',').map(r => r.trim());
-            const race2Parts = race2.split(',').map(r => r.trim());
-
-            const matchingParts = race1Parts.filter(r1 =>
-                race2Parts.some(r2 => r1 === r2 || r1.includes(r2) || r2.includes(r1))
-            );
-
-            if (matchingParts.length > 0) {
-                score += 4;
-                raceMatch = true;
-                const formattedParts = matchingParts.map(p => formatRace(p));
-                matchReasons.push(`Partial race match: ${formattedParts.join(', ')}`);
+            dateScore = 3;
+            if (date1Str && date2Str) {
+                matchReasons.push(`${yearsDiff} ${pluralize(yearsDiff, 'year')} between ${date1Label.toLowerCase()} (${date1Str}) and ${date2Label.toLowerCase()} (${date2Str})`);
             } else {
-                raceMismatch = true;
-                mismatchReasons.push(`Race mismatch: ${formatRace(case1.race)} vs ${formatRace(case2.race)}`);
+                matchReasons.push(`${yearsDiff} ${pluralize(yearsDiff, 'year')} between ${date1Label.toLowerCase()} and ${date2Label.toLowerCase()}`);
             }
         }
-    } else {
-
-        if (!case1.race && case2.race) {
-            mismatchReasons.push('Race/ethnicity not available for missing person');
-        } else if (case1.race && !case2.race) {
-            mismatchReasons.push('Race/ethnicity not available for unidentified person');
-        } else if (!case1.race && !case2.race) {
-            mismatchReasons.push('Race/ethnicity not available for either case');
-        }
+        
+        earnedScore += dateScore;
+        maxPossibleScore += 15;
+        categoryScores.date = dateScore;
     }
 
-    maxScore += 25;
-    let hasStrongPhysicalMatch = false;
-
-    if (case1.heightFormatted && case2.heightFormatted) {
-        const height1 = (case1.heightFeet || 0) * 12 + (case1.heightInches || 0);
-        const height2 = (case2.heightFeet || 0) * 12 + (case2.heightInches || 0);
-
-        if (height1 > 0 && height2 > 0) {
-            const heightDiff = Math.abs(height1 - height2);
-
-            if (heightDiff === 0) {
-                score += 10;
-                hasStrongPhysicalMatch = true;
-                matchReasons.push(`Same height: ${case1.heightFormatted}`);
-            } else if (heightDiff <= 1) {
-                score += 8;
-                hasStrongPhysicalMatch = true;
-                matchReasons.push(`Height match: ${case1.heightFormatted} vs ${case2.heightFormatted}`);
-            } else if (heightDiff <= 2) {
-                score += 5;
-                matchReasons.push(`Height close: ${case1.heightFormatted} vs ${case2.heightFormatted}`);
-            } else if (heightDiff <= 3) {
-                score += 2;
-                matchReasons.push(`Height similar: ${case1.heightFormatted} vs ${case2.heightFormatted}`);
-            } else if (heightDiff > 4) {
-                mismatchReasons.push(`Height mismatch: ${case1.heightFormatted} vs ${case2.heightFormatted}`);
+    if (case1.sex || case2.sex) {
+        categoryMax.sex = 5;
+        let sexScore = 0;
+        
+        const sex1 = case1.sex ? case1.sex.toLowerCase().trim() : null;
+        const sex2 = case2.sex ? case2.sex.toLowerCase().trim() : null;
+        
+        if (sex1 && sex2 && sex1 !== 'unknown' && sex2 !== 'unknown') {
+            if (sex1 === sex2) {
+                sexScore = 5;
+                matchReasons.push('Same sex');
             }
+        } else if ((sex1 && sex1 !== 'unknown') || (sex2 && sex2 !== 'unknown')) {
+            sexScore = 2;
         }
+        
+        earnedScore += sexScore;
+        maxPossibleScore += 5;
+        categoryScores.sex = sexScore;
     }
 
-    if (case1.weight && case2.weight) {
-        const weightDiff = Math.abs(case1.weight - case2.weight);
-        const weightPercentDiff = weightDiff / Math.max(case1.weight, case2.weight);
-
-        if (weightPercentDiff <= 0.05) {
-            score += 8;
-            hasStrongPhysicalMatch = true;
-            matchReasons.push(`Weight match: ${case1.weight} lbs vs ${case2.weight} lbs`);
-        } else if (weightPercentDiff <= 0.10) {
-            score += 5;
-            matchReasons.push(`Weight close: ${case1.weight} lbs vs ${case2.weight} lbs`);
-        } else if (weightPercentDiff <= 0.15) {
-            score += 2;
-            matchReasons.push(`Weight similar: ${case1.weight} lbs vs ${case2.weight} lbs`);
-        } else if (weightPercentDiff > 0.25) {
-            mismatchReasons.push(`Weight mismatch: ${case1.weight} lbs vs ${case2.weight} lbs`);
-        }
-    }
-
-    if (case1.hairColor && case2.hairColor) {
-        const hair1 = case1.hairColor.toLowerCase().trim();
-        const hair2 = case2.hairColor.toLowerCase().trim();
-
-        if (hair1 === hair2 && hair1 !== 'unknown' && hair1 !== 'other') {
-            score += 8;
-            hasStrongPhysicalMatch = true;
-            matchReasons.push(`Same hair color: ${case1.hairColor}`);
-        } else if (hair1 !== 'unknown' && hair2 !== 'unknown' && hair1 !== 'other' && hair2 !== 'other') {
-            const hair1Parts = hair1.split('/').map(h => h.trim());
-            const hair2Parts = hair2.split('/').map(h => h.trim());
-
-            const matchingHair = hair1Parts.filter(h1 =>
-                hair2Parts.some(h2 => h1 === h2 || h1.includes(h2) || h2.includes(h1))
-            );
-
-            if (matchingHair.length > 0) {
-                score += 4;
-                matchReasons.push(`Similar hair color: ${case1.hairColor} vs ${case2.hairColor}`);
+    if (case1.race || case2.race) {
+        categoryMax.race = 10;
+        let raceScore = 0;
+        
+        const race1 = case1.race ? case1.race.toLowerCase().trim() : '';
+        const race2 = case2.race ? case2.race.toLowerCase().trim() : '';
+        
+        if (race1 && race2) {
+            const normalizeRace = (r) => {
+                r = r.toLowerCase();
+                if (r.includes('white') || r.includes('caucasian')) return 'white';
+                if (r.includes('black') || r.includes('african')) return 'black';
+                if (r.includes('asian')) return 'asian';
+                if (r.includes('native') || r.includes('indian')) return 'native';
+                if (r.includes('hispanic') || r.includes('latino')) return 'hispanic';
+                return r;
+            };
+            
+            const norm1 = normalizeRace(race1);
+            const norm2 = normalizeRace(race2);
+            
+            if (norm1 === norm2) {
+                raceScore = 8;
+                matchReasons.push('Same race/ethnicity');
             } else {
-                mismatchReasons.push(`Hair color mismatch: ${case1.hairColor} vs ${case2.hairColor}`);
+                const race1Parts = race1.split(',').map(r => normalizeRace(r.trim()));
+                const race2Parts = race2.split(',').map(r => normalizeRace(r.trim()));
+                
+                const matchingParts = race1Parts.filter(r1 =>
+                    race2Parts.some(r2 => r1 === r2 || r1.includes(r2) || r2.includes(r1))
+                );
+                
+                if (matchingParts.length > 0 || norm1 === 'unknown' || norm2 === 'unknown') {
+                    raceScore = 4;
+                    matchReasons.push('Compatible race/ethnicity');
+                } else {
+                    contradictionFlags.raceIncompatible = true;
+                }
             }
         }
+        
+        earnedScore += raceScore;
+        maxPossibleScore += 10;
+        categoryScores.race = raceScore;
     }
 
-    if (case1.eyeColor && case2.eyeColor) {
-        const eye1 = case1.eyeColor.toLowerCase().trim();
-        const eye2 = case2.eyeColor.toLowerCase().trim();
+    if ((case1.heightFormatted && case2.heightFormatted) || (case1.weight && case2.weight)) {
+        categoryMax.heightWeight = 20;
+        let heightWeightScore = 0;
+        
+        if (case1.heightFormatted && case2.heightFormatted) {
+            const height1 = (case1.heightFeet || 0) * 12 + (case1.heightInches || 0);
+            const height2 = (case2.heightFeet || 0) * 12 + (case2.heightInches || 0);
 
-        if (eye1 === eye2 && eye1 !== 'unknown' && eye1 !== 'other') {
-            score += 7;
-            hasStrongPhysicalMatch = true;
-            matchReasons.push(`Same eye color: ${case1.eyeColor}`);
-        } else if (eye1 !== 'unknown' && eye2 !== 'unknown' && eye1 !== 'other' && eye2 !== 'other') {
-            mismatchReasons.push(`Eye color mismatch: ${case1.eyeColor} vs ${case2.eyeColor}`);
-        }
-    }
-
-    if (case1.headHairDescription && case2.headHairDescription) {
-        const desc1 = case1.headHairDescription.toLowerCase();
-        const desc2 = case2.headHairDescription.toLowerCase();
-
-        const commonWords = desc1.split(/\s+/).filter(word =>
-            word.length > 3 && desc2.includes(word)
-        );
-
-        if (commonWords.length >= 2) {
-            score += 3;
-            matchReasons.push('Similar hair description');
-        }
-    }
-
-    score = Math.round(score * caseTypeMultiplier);
-
-    if (!isTemporallyValid && yearsDiff) {
-        score = Math.round(score * 0.7);
-    }
-
-    if (sexMismatch) {
-        score = Math.round(score * 0.7);
-
-    }
-
-    if (raceMismatch) {
-        score = Math.round(score * 0.6);
-
-    }
-
-    if (ageMismatch && ageDiff !== null) {
-        let agePenalty = 0.7;
-        if (ageDiff > 50) {
-            agePenalty = 0.2;
-        } else if (ageDiff > 40) {
-            agePenalty = 0.3;
-        } else if (ageDiff > 30) {
-            agePenalty = 0.4;
-        } else if (ageDiff > 20) {
-            agePenalty = 0.5;
-        }
-        score = Math.round(score * agePenalty);
-
-    }
-
-    let physicalMismatch = false;
-    if (case1.hairColor && case2.hairColor &&
-        case1.hairColor.toLowerCase() !== 'unknown' && case2.hairColor.toLowerCase() !== 'unknown' &&
-        case1.hairColor.toLowerCase() !== 'other' && case2.hairColor.toLowerCase() !== 'other') {
-        const hair1 = case1.hairColor.toLowerCase().trim();
-        const hair2 = case2.hairColor.toLowerCase().trim();
-
-        if (hair1 !== hair2) {
-            const hair1Parts = hair1.split('/').map(h => h.trim());
-            const hair2Parts = hair2.split('/').map(h => h.trim());
-            const matchingHair = hair1Parts.filter(h1 =>
-                hair2Parts.some(h2 => h1 === h2 || h1.includes(h2) || h2.includes(h1))
-            );
-
-            if (matchingHair.length === 0) {
-                physicalMismatch = true;
+            if (height1 > 0 && height2 > 0) {
+                const heightDiff = Math.abs(height1 - height2);
+                
+                if (heightDiff <= 1) {
+                    heightWeightScore += 15;
+                    matchReasons.push(`Height match: ${case1.heightFormatted} vs ${case2.heightFormatted}`);
+                } else if (heightDiff <= 2) {
+                    heightWeightScore += 12;
+                    matchReasons.push(`Height close: ${case1.heightFormatted} vs ${case2.heightFormatted}`);
+                } else if (heightDiff <= 3) {
+                    heightWeightScore += 8;
+                    matchReasons.push(`Height similar: ${case1.heightFormatted} vs ${case2.heightFormatted}`);
+                } else if (heightDiff <= 4) {
+                    heightWeightScore += 4;
+                    matchReasons.push(`Height similar: ${case1.heightFormatted} vs ${case2.heightFormatted}`);
+                } else {
+                    contradictionFlags.heightDiffTooLarge = true;
+                }
             }
         }
-    }
-
-    if (case1.eyeColor && case2.eyeColor &&
-        case1.eyeColor.toLowerCase() !== 'unknown' && case2.eyeColor.toLowerCase() !== 'unknown' &&
-        case1.eyeColor.toLowerCase() !== 'other' && case2.eyeColor.toLowerCase() !== 'other') {
-        const eye1 = case1.eyeColor.toLowerCase().trim();
-        const eye2 = case2.eyeColor.toLowerCase().trim();
-
-        if (eye1 !== eye2) {
-            physicalMismatch = true;
+        
+        if (case1.weight && case2.weight) {
+            const weightDiff = Math.abs(case1.weight - case2.weight);
+            const pctDiff = weightDiff / case1.weight;
+            
+            if (pctDiff <= 0.10) {
+                heightWeightScore += 5;
+                matchReasons.push(`Weight match: ${case1.weight} lbs vs ${case2.weight} lbs`);
+            } else if (pctDiff <= 0.20) {
+                heightWeightScore += 3;
+                matchReasons.push(`Weight close: ${case1.weight} lbs vs ${case2.weight} lbs`);
+            } else if (pctDiff <= 0.35) {
+                heightWeightScore += 1;
+                matchReasons.push(`Weight similar: ${case1.weight} lbs vs ${case2.weight} lbs`);
+            } else {
+                contradictionFlags.weightDiffTooLarge = true;
+            }
         }
+        
+        heightWeightScore = Math.min(20, heightWeightScore);
+        earnedScore += heightWeightScore;
+        maxPossibleScore += 20;
+        categoryScores.heightWeight = heightWeightScore;
     }
 
-    if (physicalMismatch) {
-        score = Math.round(score * 0.8);
+    if ((case1.hairColor && case2.hairColor) || (case1.eyeColor && case2.eyeColor) || (case1.headHairDescription && case2.headHairDescription)) {
+        categoryMax.hairEyesDesc = 10;
+        let hairEyesDescScore = 0;
+        
+        if (case1.hairColor && case2.hairColor) {
+            const hair1 = case1.hairColor.toLowerCase().trim();
+            const hair2 = case2.hairColor.toLowerCase().trim();
+            
+            if (hair1 === hair2 && hair1 !== 'unknown' && hair1 !== 'other') {
+                hairEyesDescScore += 4;
+                matchReasons.push(`Same hair color: ${case1.hairColor}`);
+            } else if (hair1 !== 'unknown' && hair2 !== 'unknown' && hair1 !== 'other' && hair2 !== 'other') {
+                const isRelated = (h1, h2) => {
+                    const related = [
+                        ['blond', 'light brown', 'light-brown'],
+                        ['brown', 'auburn', 'dark brown']
+                    ];
+                    return related.some(group => group.includes(h1) && group.includes(h2));
+                };
+                
+                if (isRelated(hair1, hair2)) {
+                    hairEyesDescScore += 2;
+                    matchReasons.push(`Similar hair color: ${case1.hairColor} vs ${case2.hairColor}`);
+                }
+            }
+        }
+        
+        if (case1.eyeColor && case2.eyeColor) {
+            const eye1 = case1.eyeColor.toLowerCase().trim();
+            const eye2 = case2.eyeColor.toLowerCase().trim();
+            
+            if (eye1 === eye2 && eye1 !== 'unknown' && eye1 !== 'other') {
+                hairEyesDescScore += 3;
+                matchReasons.push(`Same eye color: ${case1.eyeColor}`);
+            } else if (eye1 !== 'unknown' && eye2 !== 'unknown' && eye1 !== 'other' && eye2 !== 'other') {
+                const isSimilar = (e1, e2) => {
+                    return (e1 === 'hazel' && (e2 === 'green' || e2 === 'brown')) ||
+                           (e2 === 'hazel' && (e1 === 'green' || e1 === 'brown'));
+                };
+                
+                if (isSimilar(eye1, eye2)) {
+                    hairEyesDescScore += 1;
+                    matchReasons.push(`Similar eye color: ${case1.eyeColor} vs ${case2.eyeColor}`);
+                }
+            }
+        }
+        
+        if (case1.headHairDescription && case2.headHairDescription) {
+            const desc1 = case1.headHairDescription.toLowerCase();
+            const desc2 = case2.headHairDescription.toLowerCase();
+            
+            const stopWords = ['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by'];
+            const words1 = desc1.split(/\s+/).filter(word => word.length > 3 && !stopWords.includes(word));
+            const words2 = desc2.split(/\s+/).filter(word => word.length > 3 && !stopWords.includes(word));
+            
+            const commonWords = words1.filter(w1 => words2.includes(w1));
+            
+            if (commonWords.length >= 2) {
+                hairEyesDescScore += 3;
+                matchReasons.push('Similar hair description');
+            } else if (commonWords.length >= 1) {
+                hairEyesDescScore += 1;
+            }
+        }
+        
+        hairEyesDescScore = Math.min(10, hairEyesDescScore);
+        earnedScore += hairEyesDescScore;
+        maxPossibleScore += 10;
+        categoryScores.hairEyesDesc = hairEyesDescScore;
     }
 
-    const strongFactors = [];
-    if (hasStrongGeographicMatch) strongFactors.push('geography');
-    if (hasStrongAgeMatch) strongFactors.push('age');
-    if (hasStrongDateMatch) strongFactors.push('date');
-    if (sexMatch) strongFactors.push('sex');
-    if (raceMatch) strongFactors.push('race');
-    if (hasStrongPhysicalMatch) strongFactors.push('physical');
-
-    const percentage = maxScore > 0 ? Math.min(100, Math.round((score / maxScore) * 100)) : 0;
+    const rawScore = maxPossibleScore > 0 ? (earnedScore / maxPossibleScore) * 100 : 0;
+    
+    const flagsCount = Object.values(contradictionFlags).filter(f => f === true).length;
+    let finalScore = rawScore;
+    
+    if (flagsCount >= 3) {
+        finalScore = rawScore * 0.7;
+    } else if (flagsCount === 2) {
+        finalScore = rawScore * 0.85;
+    }
+    
+    finalScore = Math.min(100, Math.round(finalScore * 100) / 100);
+    
     let confidence = 'Low';
-
-    const hasCriticalFactors = sexMatch && raceMatch && !sexMismatch && !raceMismatch && !ageMismatch && !physicalMismatch;
-    const hasStrongGeography = hasStrongGeographicMatch;
-
-    if (percentage >= 75 && isTemporallyValid && hasCriticalFactors && hasStrongGeography && hasStrongPhysicalMatch && strongFactors.length >= 5) {
+    if (finalScore >= 75) {
         confidence = 'High';
-    } else if (percentage >= 75 && isTemporallyValid && hasCriticalFactors && hasStrongGeography && strongFactors.length >= 4) {
-        confidence = 'High';
-    } else if (percentage >= 70 && isTemporallyValid && hasCriticalFactors && hasStrongGeography && hasStrongPhysicalMatch && strongFactors.length >= 4) {
-        confidence = 'High';
-    } else if (percentage >= 70 && isTemporallyValid && hasCriticalFactors && hasStrongGeography && strongFactors.length >= 3) {
-        confidence = 'High';
-    } else if (percentage >= 70 && isTemporallyValid && hasCriticalFactors && hasStrongPhysicalMatch && strongFactors.length >= 3) {
+    } else if (finalScore >= 50) {
         confidence = 'Medium';
-    } else if (percentage >= 70 && isTemporallyValid && hasCriticalFactors && strongFactors.length >= 3) {
-        confidence = 'Medium';
-    } else if (percentage >= 60 && isTemporallyValid && sexMatch && raceMatch && !sexMismatch && !raceMismatch && hasStrongPhysicalMatch && strongFactors.length >= 3) {
-        confidence = 'Medium';
-    } else if (percentage >= 60 && isTemporallyValid && sexMatch && raceMatch && !sexMismatch && !raceMismatch && strongFactors.length >= 2) {
-        confidence = 'Medium';
-    } else if (percentage >= 50 && isTemporallyValid && !sexMismatch && !raceMismatch && !ageMismatch && !physicalMismatch) {
-        confidence = 'Medium';
-    } else if (percentage >= 40 && isTemporallyValid && !raceMismatch && !ageMismatch && !physicalMismatch) {
-        confidence = 'Low';
-    } else if (percentage >= 40 && isTemporallyValid) {
-        confidence = 'Low';
-    } else if (percentage >= 70) {
-        confidence = 'Low';
-    } else {
-        confidence = 'Low';
-    }
-
-    if (sexMismatch && confidence === 'High') {
-        confidence = 'Medium';
-    }
-
-    if (raceMismatch && confidence === 'High') {
-        confidence = 'Medium';
-    }
-    if (raceMismatch && confidence === 'Medium' && percentage < 50) {
-        confidence = 'Low';
-    }
-
-    if (ageMismatch && ageDiff !== null) {
-        if (confidence === 'High') {
-            confidence = 'Medium';
-        }
-
-        if (ageDiff > 20 && confidence === 'Medium') {
-            confidence = 'Low';
-        }
-
-        if (ageDiff > 40) {
-            confidence = 'Low';
-        }
-    }
-
-    if (physicalMismatch && confidence === 'High') {
-        confidence = 'Medium';
-    }
-
-    if (physicalMismatch && confidence === 'Medium' && percentage < 55) {
-        confidence = 'Low';
     }
 
     return {
-        score: percentage,
+        eliminated: false,
+        score: Math.round(finalScore),
+        finalScore: finalScore,
+        rawScore: Math.round(rawScore * 100) / 100,
         confidence: confidence,
         matchReasons: matchReasons,
         mismatchReasons: mismatchReasons,
+        categoryScores: categoryScores,
+        categoryMax: categoryMax,
+        contradictionFlags: contradictionFlags,
         details: {
-            ageDiff: case1.age && case2.age ? Math.abs(case1.age - case2.age) : null,
+            ageDiff: ageDiff,
             dateDiff: daysDiff,
             yearsDiff: yearsDiff,
             sameState: case1.state && case2.state && case1.state === case2.state,
             sameCounty: case1.county && case2.county && case1.county.toLowerCase() === case2.county.toLowerCase(),
             sameCity: case1.city && case2.city && case1.city.toLowerCase() === case2.city.toLowerCase(),
-            isTemporallyValid: isTemporallyValid,
-            strongFactors: strongFactors.length,
+            isTemporallyValid: !yearsDiff || yearsDiff <= 50,
             hardExclusion: false,
         }
     };
@@ -2340,9 +2174,10 @@ function findPotentialMatches(targetCase) {
     }));
 
     return matches
-        .sort((a, b) => b.match.score - a.match.score)
+        .filter(m => !m.match.eliminated)
+        .sort((a, b) => b.match.finalScore - a.match.finalScore)
         .slice(0, 20)
-        .filter(m => m.match.score > 0);
+        .filter(m => m.match.finalScore > 0);
 }
 
 function closeMatchesModal(modal) {
@@ -2377,7 +2212,7 @@ function showPotentialMatches(caseData) {
                                         <span class="match-type match-type-${match.case.caseType}">${match.case.caseType}</span>
                                     </div>
                                     <div class="match-score">
-                                        <span class="match-score-value match-score-${match.match.confidence.toLowerCase()}">${match.match.score}%</span>
+                                        <span class="match-score-value match-score-${match.match.confidence.toLowerCase()}">${match.match.finalScore}%</span>
                                         <span class="match-confidence">${match.match.confidence} Match</span>
                                     </div>
                                 </div>
@@ -2425,7 +2260,7 @@ function showPotentialMatches(caseData) {
                                         ` : ''}
                                         ${match.case.dlc ? `
                                         <div class="match-case-info-item">
-                                            <strong>${match.case.caseType === 'unidentified' ? 'Date Found' : match.case.caseType === 'missing' ? 'Date Last Contact' : 'Date'}:</strong>
+                                            <strong>${match.case.caseType === 'unidentified' || match.case.caseType === 'unclaimed' ? 'Date Found' : 'Date Last Contact'}:</strong>
                                             <span>${escapeHtml(match.case.dlc)}</span>
                                         </div>
                                         ` : ''}
@@ -2537,5 +2372,6 @@ function updateFullscreenIcon() {
         }
     }
 }
+
 
 

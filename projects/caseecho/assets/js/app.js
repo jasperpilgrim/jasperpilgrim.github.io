@@ -1873,13 +1873,13 @@ function calculateMatchScore(case1, case2) {
         
         const getDateLabel = (caseObj) => {
             if (caseObj.caseType === 'missing') {
-                return 'Missing date';
+                return 'missing date';
             } else if (caseObj.caseType === 'unidentified') {
-                return 'Found date';
+                return 'found date';
             } else if (caseObj.caseType === 'unclaimed') {
-                return 'Found date';
+                return 'found date';
             }
-            return 'Date';
+            return 'date';
         };
         
         const date1Label = getDateLabel(case1);
@@ -1918,9 +1918,9 @@ function calculateMatchScore(case1, case2) {
         } else if (yearsDiff && yearsDiff <= 5) {
             dateScore = 3;
             if (date1Str && date2Str) {
-                matchReasons.push(`${yearsDiff} ${pluralize(yearsDiff, 'year')} between ${date1Label.toLowerCase()} (${date1Str}) and ${date2Label.toLowerCase()} (${date2Str})`);
+                matchReasons.push(`${yearsDiff} ${pluralize(yearsDiff, 'year')} between ${date1Label} (${date1Str}) and ${date2Label} (${date2Str})`);
             } else {
-                matchReasons.push(`${yearsDiff} ${pluralize(yearsDiff, 'year')} between ${date1Label.toLowerCase()} and ${date2Label.toLowerCase()}`);
+                matchReasons.push(`${yearsDiff} ${pluralize(yearsDiff, 'year')} between ${date1Label} and ${date2Label}`);
             }
         }
         
@@ -2208,11 +2208,11 @@ function showPotentialMatches(caseData) {
                             <div class="match-item match-item-${match.case.caseType}">
                                 <div class="match-header">
                                     <div class="match-title">
-                                        <h3>${escapeHtml(match.case.name)}</h3>
                                         <span class="match-type match-type-${match.case.caseType}">${match.case.caseType}</span>
+                                        <h3>${escapeHtml(match.case.name)}</h3>
                                     </div>
                                     <div class="match-score">
-                                        <span class="match-score-value match-score-${match.match.confidence.toLowerCase()}">${match.match.finalScore}%</span>
+                                        <span class="match-score-value match-score-${match.match.confidence.toLowerCase()}">${Math.round(match.match.finalScore)}%</span>
                                         <span class="match-confidence">${match.match.confidence} Match</span>
                                     </div>
                                 </div>

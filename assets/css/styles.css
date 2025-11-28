@@ -133,7 +133,7 @@ p {
     gap: 0.125rem;
     justify-content: center;
     grid-column: 1;
-    max-width: 350px;
+    max-width: 450px;
     min-width: 0;
     align-self: center;
 }
@@ -154,9 +154,6 @@ p {
     color: var(--text-secondary);
     margin: 0;
     line-height: 1.3;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 .theme-toggle {

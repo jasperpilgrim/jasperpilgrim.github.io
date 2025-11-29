@@ -321,9 +321,7 @@ async function loadPhysicalData() {
         if (response.ok) {
             physicalData = await response.json();
         }
-    } catch (error) {
-        console.error('Error loading physical data:', error);
-    }
+    } catch (error) {}
 }
 
 async function loadNamUsData() {
@@ -520,7 +518,6 @@ async function loadNamUsData() {
             try {
                 const response = await fetch(file);
                 if (!response.ok) {
-                    console.warn(`Failed to load ${file}: ${response.status}`);
                     loadedCount++;
                     if (loadingProgressEl) {
                         const percentage = Math.round((loadedCount / totalFiles) * 100);
@@ -537,7 +534,6 @@ async function loadNamUsData() {
                 const csvData = parseCSV(csvText);
 
                 if (csvData.length === 0) {
-                    console.warn(`No data found in ${file}`);
                     loadedCount++;
                     if (loadingProgressEl) {
                         const percentage = Math.round((loadedCount / totalFiles) * 100);
@@ -558,7 +554,6 @@ async function loadNamUsData() {
                 else if (file.includes('/unclaimed/')) detectedCaseType = 'unclaimed';
 
                 const cases = csvData.map(row => csvRowToCase(row, detectedCaseType));
-                console.log(`Loaded ${cases.length} ${detectedCaseType} cases from ${file}`);
                 loadedCount++;
                 if (loadingProgressEl) {
                     const percentage = Math.round((loadedCount / totalFiles) * 100);
@@ -570,7 +565,6 @@ async function loadNamUsData() {
                 }
                 return cases;
             } catch (error) {
-                console.error(`Error loading ${file}:`, error);
                 loadedCount++;
                 if (loadingProgressEl) {
                     const percentage = Math.round((loadedCount / totalFiles) * 100);
@@ -587,13 +581,8 @@ async function loadNamUsData() {
         const results = await Promise.all(loadPromises);
         allResults = results.filter(r => r !== null).flat();
 
-        console.log(`Total loaded: ${allResults.length} cases`);
-
         populateStateFilter();
-
-        console.log(`Ready to search ${allResults.length} cases`);
     } catch (error) {
-        console.error('Error loading case data:', error);
         resultsContainer.innerHTML = `
             <div class="empty-state">
                 <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -1055,7 +1044,6 @@ window.showMatchesForCase = function (caseNumber) {
     if (caseData) {
         showPotentialMatches(caseData);
     } else {
-        console.error('Case not found:', cleanCaseNumber);
         alert('Case not found. Please try again.');
     }
 };
@@ -2460,6 +2448,3 @@ function updateFullscreenIcon() {
         }
     }
 }
-
-
-

@@ -44,11 +44,7 @@
 }
 
 html {
-    background-color: #ffffff;
-}
-
-[data-theme="dark"] html {
-    background-color: #282a36;
+    background-color: var(--bg);
 }
 
 body {
@@ -115,11 +111,17 @@ p {
 
 .nav-logo {
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.02em;
     color: var(--accent);
     text-decoration: none;
     transition: color 0.3s ease;
+    position: absolute;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    z-index: 2;
 }
 
 .nav-logo:hover {
@@ -311,10 +313,11 @@ p {
 }
 
 .home-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1.5rem;
-    max-width: 500px;
+    max-width: 800px;
     margin: 4rem auto 0;
 }
 
@@ -330,6 +333,8 @@ p {
     text-decoration: none;
     color: var(--text);
     transition: all 0.3s ease;
+    flex: 0 1 auto;
+    min-width: 200px;
 }
 
 .home-grid-item:hover {
@@ -779,9 +784,18 @@ body:has(.contact-content) .main-content {
     }
 
     .home-grid {
-        grid-template-columns: 1fr;
         gap: 1rem;
         max-width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        .home-grid {
+            flex-direction: column;
+        }
+        
+        .home-grid-item {
+            width: 100%;
+        }
     }
 
     .home-grid-item {

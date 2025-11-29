@@ -1233,7 +1233,7 @@ function showCaseDetailsModal(caseData) {
             </div>
             <div class="case-details-modal-footer">
                 <button class="find-matches-btn" data-case-number="${escapeHtml(caseData.caseNumber || '')}" onclick="window.showMatchesForCase('${escapeHtml(caseData.caseNumber || '')}'); closeCaseDetailsModal(this.closest('.case-details-modal'));">Find Similar Cases</button>
-                <a href="${caseData.link || '#'}" target="_blank" class="case-details-link">View on NamUs →</a>
+                <a href="${caseData.link || '#'}" target="_blank" class="case-details-link">View on NamUs</a>
             </div>
         </div>
     `;
@@ -1411,7 +1411,7 @@ function displayResults() {
                     </div>
                     <div class="result-card-link">
                         <button class="find-matches-btn" data-case-number="${escapeHtml(item.caseNumber || '')}">Find Similar Cases</button>
-                        <a href="${item.link || '#'}" target="_blank">View on NamUs →</a>
+                        <a href="${item.link || '#'}" target="_blank">View on NamUs</a>
                     </div>
                 </div>
             </div>
@@ -1564,7 +1564,7 @@ function displayResults() {
                     </div>
                     <div class="result-item-link">
                         <button class="find-matches-btn" data-case-number="${escapeHtml(item.caseNumber || '')}">Find Similar Cases</button>
-                        <a href="${item.link || '#'}" target="_blank">View full case on NamUs →</a>
+                        <a href="${item.link || '#'}" target="_blank">View on NamUs</a>
                     </div>
                 </div>
             </div>
@@ -1887,40 +1887,45 @@ function calculateMatchScore(case1, case2) {
         const date1Str = case1.dlc || '';
         const date2Str = case2.dlc || '';
         
+        const capitalizeFirst = (str) => {
+            if (!str) return str;
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        };
+        
         if (daysDiff <= 30) {
             dateScore = 15;
             if (date1Str && date2Str) {
-                matchReasons.push(`${date1Label} (${date1Str}) and ${date2Label} (${date2Str}) within 30 days`);
+                matchReasons.push(`${capitalizeFirst(date1Label)} (${date1Str}) and ${date2Label} (${date2Str}) within 30 days`);
             } else {
-                matchReasons.push(`${date1Label} and ${date2Label} within 30 days`);
+                matchReasons.push(`${capitalizeFirst(date1Label)} and ${date2Label} within 30 days`);
             }
         } else if (daysDiff <= 90) {
             dateScore = 12;
             if (date1Str && date2Str) {
-                matchReasons.push(`${date1Label} (${date1Str}) and ${date2Label} (${date2Str}) within 90 days`);
+                matchReasons.push(`${capitalizeFirst(date1Label)} (${date1Str}) and ${date2Label} (${date2Str}) within 90 days`);
             } else {
-                matchReasons.push(`${date1Label} and ${date2Label} within 90 days`);
+                matchReasons.push(`${capitalizeFirst(date1Label)} and ${date2Label} within 90 days`);
             }
         } else if (daysDiff <= 180) {
             dateScore = 9;
             if (date1Str && date2Str) {
-                matchReasons.push(`${date1Label} (${date1Str}) and ${date2Label} (${date2Str}) within 6 months`);
+                matchReasons.push(`${capitalizeFirst(date1Label)} (${date1Str}) and ${date2Label} (${date2Str}) within 6 months`);
             } else {
-                matchReasons.push(`${date1Label} and ${date2Label} within 6 months`);
+                matchReasons.push(`${capitalizeFirst(date1Label)} and ${date2Label} within 6 months`);
             }
         } else if (daysDiff <= 365) {
             dateScore = 6;
             if (date1Str && date2Str) {
-                matchReasons.push(`${date1Label} (${date1Str}) and ${date2Label} (${date2Str}) within 1 year`);
+                matchReasons.push(`${capitalizeFirst(date1Label)} (${date1Str}) and ${date2Label} (${date2Str}) within 1 year`);
             } else {
-                matchReasons.push(`${date1Label} and ${date2Label} within 1 year`);
+                matchReasons.push(`${capitalizeFirst(date1Label)} and ${date2Label} within 1 year`);
             }
         } else if (yearsDiff && yearsDiff <= 5) {
             dateScore = 3;
             if (date1Str && date2Str) {
-                matchReasons.push(`${yearsDiff} ${pluralize(yearsDiff, 'year')} between ${date1Label} (${date1Str}) and ${date2Label} (${date2Str})`);
+                matchReasons.push(`${yearsDiff} ${pluralize(yearsDiff, 'year')} between ${capitalizeFirst(date1Label)} (${date1Str}) and ${date2Label} (${date2Str})`);
             } else {
-                matchReasons.push(`${yearsDiff} ${pluralize(yearsDiff, 'year')} between ${date1Label} and ${date2Label}`);
+                matchReasons.push(`${yearsDiff} ${pluralize(yearsDiff, 'year')} between ${capitalizeFirst(date1Label)} and ${date2Label}`);
             }
         }
         
@@ -2185,6 +2190,154 @@ function closeMatchesModal(modal) {
     modal.remove();
 }
 
+function valuesMatch(val1, val2) {
+    if (!val1 || !val2) return false;
+    const v1 = String(val1).toLowerCase().trim();
+    const v2 = String(val2).toLowerCase().trim();
+    return v1 === v2;
+}
+
+function renderCaseDetailsForComparison(caseObj, label, compareCase = null, matchReasons = []) {
+    const isMatch = (field) => {
+        if (!compareCase) return false;
+        const val1 = caseObj[field];
+        const val2 = compareCase[field];
+        if (!val1 || !val2) return false;
+        return valuesMatch(val1, val2);
+    };
+    
+    const isRaceMatch = () => {
+        if (!compareCase || !matchReasons || matchReasons.length === 0) return false;
+        const val1 = caseObj.race;
+        const val2 = compareCase.race;
+        if (!val1 || !val2) return false;
+        
+        const lowerReasons = matchReasons.map(r => String(r).toLowerCase());
+        if (lowerReasons.some(r => r.includes('same race/ethnicity') || r.includes('same race'))) {
+            return true;
+        }
+        if (lowerReasons.some(r => r.includes('compatible race/ethnicity') || r.includes('compatible race'))) {
+            return 'partial';
+        }
+        return false;
+    };
+    
+    const isPartialMatch = (field) => {
+        if (!compareCase || !matchReasons) return false;
+        const val1 = caseObj[field];
+        const val2 = compareCase[field];
+        if (!val1 || !val2) return false;
+        
+        if (field === 'state') {
+            return matchReasons.some(r => r.includes('Adjacent states'));
+        }
+        if (field === 'county') {
+            return matchReasons.some(r => r.includes('Same state, different counties'));
+        }
+        if (field === 'city') {
+            return matchReasons.some(r => r.includes('Same city name across border'));
+        }
+        if (field === 'dlc' || field === 'date') {
+            return matchReasons.some(r => r.includes('within') && !r.includes('within 30 days'));
+        }
+        if (field === 'age') {
+            return matchReasons.some(r => r.includes('match') && (r.includes('within') || r.includes('close') || r.includes('near')));
+        }
+        if (field === 'heightFormatted') {
+            return matchReasons.some(r => r.includes('Height') && (r.includes('close') || r.includes('similar')));
+        }
+        if (field === 'weight') {
+            return matchReasons.some(r => r.includes('Weight') && (r.includes('close') || r.includes('similar')));
+        }
+        if (field === 'hairColor') {
+            return matchReasons.some(r => r.includes('hair') && r.includes('Similar'));
+        }
+        if (field === 'eyeColor') {
+            return matchReasons.some(r => r.includes('eye') && r.includes('Similar'));
+        }
+        return false;
+    };
+    
+    const getDateLabel = (obj) => {
+        if (obj.caseType === 'unidentified' || obj.caseType === 'unclaimed') {
+            return 'Date Found';
+        }
+        return 'Date Last Contact';
+    };
+    
+    return `
+        <div class="comparison-case-section">
+            <div class="comparison-case-header">
+                <h4>${label}</h4>
+                ${caseObj.link ? `<a href="${caseObj.link}" target="_blank" class="comparison-namus-link-header">View on NamUs</a>` : ''}
+                ${caseObj.caseType ? `<span class="match-type match-type-${caseObj.caseType}">${caseObj.caseType}</span>` : ''}
+            </div>
+            <div class="comparison-case-info">
+                <div class="comparison-case-info-item">
+                    <strong>Name:</strong>
+                    <span>${escapeHtml(caseObj.name || 'N/A')}</span>
+                </div>
+                <div class="comparison-case-info-item">
+                    <strong>Case #:</strong>
+                    <span>${escapeHtml(caseObj.caseNumber || 'N/A')}</span>
+                </div>
+                <div class="comparison-case-info-item ${isMatch('age') ? 'comparison-match' : isPartialMatch('age') ? 'comparison-partial' : ''} ${!caseObj.age ? 'comparison-unavailable' : ''}">
+                    <strong>Age:</strong>
+                    <span>${caseObj.age ? `${caseObj.age} ${pluralize(caseObj.age, 'year')}` : 'N/A'}</span>
+                </div>
+                <div class="comparison-case-info-item ${isMatch('sex') ? 'comparison-match' : ''} ${!caseObj.sex ? 'comparison-unavailable' : ''}">
+                    <strong>Sex:</strong>
+                    <span>${escapeHtml(caseObj.sex || 'N/A')}</span>
+                </div>
+                <div class="comparison-case-info-item ${isRaceMatch() === true ? 'comparison-match' : isRaceMatch() === 'partial' ? 'comparison-partial' : ''} ${!caseObj.race ? 'comparison-unavailable' : ''}">
+                    <strong>Race/Ethnicity:</strong>
+                    <span>${escapeHtml(caseObj.race || 'N/A')}</span>
+                </div>
+                <div class="comparison-case-info-item ${isMatch('heightFormatted') ? 'comparison-match' : isPartialMatch('heightFormatted') ? 'comparison-partial' : ''} ${!caseObj.heightFormatted ? 'comparison-unavailable' : ''}">
+                    <strong>Height:</strong>
+                    <span>${escapeHtml(caseObj.heightFormatted || 'N/A')}</span>
+                </div>
+                <div class="comparison-case-info-item ${isMatch('weight') ? 'comparison-match' : isPartialMatch('weight') ? 'comparison-partial' : ''} ${!caseObj.weight ? 'comparison-unavailable' : ''}">
+                    <strong>Weight:</strong>
+                    <span>${caseObj.weight ? `${escapeHtml(caseObj.weight)} lbs` : 'N/A'}</span>
+                </div>
+                <div class="comparison-case-info-item ${isMatch('hairColor') ? 'comparison-match' : isPartialMatch('hairColor') ? 'comparison-partial' : ''} ${!caseObj.hairColor ? 'comparison-unavailable' : ''}">
+                    <strong>Hair Color:</strong>
+                    <span>${escapeHtml(caseObj.hairColor || 'N/A')}</span>
+                </div>
+                <div class="comparison-case-info-item ${isMatch('eyeColor') ? 'comparison-match' : isPartialMatch('eyeColor') ? 'comparison-partial' : ''} ${!caseObj.eyeColor ? 'comparison-unavailable' : ''}">
+                    <strong>Eye Color:</strong>
+                    <span>${escapeHtml(caseObj.eyeColor || 'N/A')}</span>
+                </div>
+                <div class="comparison-case-info-item ${!caseObj.headHairDescription ? 'comparison-unavailable' : ''}">
+                    <strong>Hair Details:</strong>
+                    <span>${escapeHtml(caseObj.headHairDescription || 'N/A')}</span>
+                </div>
+                <div class="comparison-case-info-item ${isMatch('state') ? 'comparison-match' : isPartialMatch('state') ? 'comparison-partial' : ''} ${!caseObj.state ? 'comparison-unavailable' : ''}">
+                    <strong>State:</strong>
+                    <span>${escapeHtml(caseObj.state || 'N/A')}</span>
+                </div>
+                <div class="comparison-case-info-item ${isMatch('county') ? 'comparison-match' : isPartialMatch('county') ? 'comparison-partial' : ''} ${!caseObj.county ? 'comparison-unavailable' : ''}">
+                    <strong>County:</strong>
+                    <span>${escapeHtml(caseObj.county || 'N/A')}</span>
+                </div>
+                <div class="comparison-case-info-item ${isMatch('city') ? 'comparison-match' : isPartialMatch('city') ? 'comparison-partial' : ''} ${!caseObj.city ? 'comparison-unavailable' : ''}">
+                    <strong>City:</strong>
+                    <span>${escapeHtml(caseObj.city || 'N/A')}</span>
+                </div>
+                <div class="comparison-case-info-item ${isPartialMatch('dlc') ? 'comparison-partial' : ''} ${!caseObj.dlc ? 'comparison-unavailable' : ''}">
+                    <strong>${getDateLabel(caseObj)}:</strong>
+                    <span>${escapeHtml(caseObj.dlc || 'N/A')}</span>
+                </div>
+                <div class="comparison-case-info-item comparison-circumstances ${!caseObj.circumstances ? 'comparison-unavailable' : ''}">
+                    <strong>Circumstances:</strong>
+                    <span>${escapeHtml(caseObj.circumstances || 'N/A')}</span>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
 function showPotentialMatches(caseData) {
     lockBodyScroll();
     const matches = findPotentialMatches(caseData);
@@ -2206,77 +2359,15 @@ function showPotentialMatches(caseData) {
                     <div class="matches-list">
                         ${matches.map(match => `
                             <div class="match-item match-item-${match.case.caseType}">
-                                <div class="match-header">
-                                    <div class="match-title">
-                                        <span class="match-type match-type-${match.case.caseType}">${match.case.caseType}</span>
-                                        <h3>${escapeHtml(match.case.name)}</h3>
-                                    </div>
-                                    <div class="match-score">
-                                        <span class="match-score-value match-score-${match.match.confidence.toLowerCase()}">${Math.round(match.match.finalScore)}%</span>
-                                        <span class="match-confidence">${match.match.confidence} Match</span>
-                                    </div>
+                                <div class="match-score-header">
+                                    <span class="match-score-value match-score-${match.match.confidence.toLowerCase()}">${Math.round(match.match.finalScore)}%</span>
+                                    <span class="match-confidence">${match.match.confidence} Match</span>
                                 </div>
-                                <div class="match-details">
-                                    <div class="match-case-info">
-                                        <div class="match-case-info-item">
-                                            <strong>Case #:</strong>
-                                            <span>${escapeHtml(match.case.caseNumber)}</span>
-                                        </div>
-                                        ${match.case.age ? `
-                                        <div class="match-case-info-item">
-                                            <strong>Age:</strong>
-                                            <span>${match.case.age} ${pluralize(match.case.age, 'year')}</span>
-                                        </div>
-                                        ` : ''}
-                                        ${match.case.sex ? `
-                                        <div class="match-case-info-item">
-                                            <strong>Sex:</strong>
-                                            <span>${escapeHtml(match.case.sex)}</span>
-                                        </div>
-                                        ` : ''}
-                                        ${match.case.race ? `
-                                        <div class="match-case-info-item">
-                                            <strong>Race/Ethnicity:</strong>
-                                            <span>${escapeHtml(match.case.race)}</span>
-                                        </div>
-                                        ` : ''}
-                                        ${match.case.state ? `
-                                        <div class="match-case-info-item">
-                                            <strong>State:</strong>
-                                            <span>${escapeHtml(match.case.state)}</span>
-                                        </div>
-                                        ` : ''}
-                                        ${match.case.county ? `
-                                        <div class="match-case-info-item">
-                                            <strong>County:</strong>
-                                            <span>${escapeHtml(match.case.county)}</span>
-                                        </div>
-                                        ` : ''}
-                                        ${match.case.city ? `
-                                        <div class="match-case-info-item">
-                                            <strong>City:</strong>
-                                            <span>${escapeHtml(match.case.city)}</span>
-                                        </div>
-                                        ` : ''}
-                                        ${match.case.dlc ? `
-                                        <div class="match-case-info-item">
-                                            <strong>${match.case.caseType === 'unidentified' || match.case.caseType === 'unclaimed' ? 'Date Found' : 'Date Last Contact'}:</strong>
-                                            <span>${escapeHtml(match.case.dlc)}</span>
-                                        </div>
-                                        ` : ''}
-                                        ${caseData.dlc ? `
-                                        <div class="match-case-info-item">
-                                            <strong>Original Case Date:</strong>
-                                            <span>${escapeHtml(caseData.dlc)}</span>
-                                        </div>
-                                        ` : ''}
-                                        ${match.match.details.yearsDiff ? `
-                                        <div class="match-case-info-item">
-                                            <strong style="color: ${match.match.details.yearsDiff > 50 ? '#ff5555' : match.match.details.yearsDiff > 10 ? '#ffb86c' : 'inherit'};">Time Gap:</strong>
-                                            <span style="color: ${match.match.details.yearsDiff > 50 ? '#ff5555' : match.match.details.yearsDiff > 10 ? '#ffb86c' : 'inherit'};">${match.match.details.yearsDiff} ${pluralize(match.match.details.yearsDiff, 'year')}</span>
-                                        </div>
-                                        ` : ''}
-                                    </div>
+                                <div class="match-comparison">
+                                    ${renderCaseDetailsForComparison(caseData, 'Original Case', match.case, match.match.matchReasons)}
+                                    ${renderCaseDetailsForComparison(match.case, 'Matched Case', caseData, match.match.matchReasons)}
+                                </div>
+                                <div class="match-reasons-section">
                                     <div class="match-reasons">
                                         <strong>Match Reasons:</strong>
                                         ${match.match.matchReasons.length > 0 ? `
@@ -2293,9 +2384,6 @@ function showPotentialMatches(caseData) {
                                         </div>
                                         ` : ''}
                                     </div>
-                                </div>
-                                <div class="match-actions">
-                                    <a href="${match.case.link}" target="_blank" class="match-link">View on NamUs →</a>
                                 </div>
                             </div>
                         `).join('')}

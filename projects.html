@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Jasper Pilgrim</title>
     <script>
-        (function() {
+        (function () {
             const savedTheme = localStorage.getItem('theme');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const theme = savedTheme || (prefersDark ? 'dark' : 'light');
@@ -14,6 +15,7 @@
     </script>
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="nav-container">
@@ -47,7 +49,7 @@
         <section class="projects-grid">
             <a href="projects/smslinter/" class="project-card">
                 <h2>SMS Linter</h2>
-                <p>Real-time 10DLC compliance checker</p>
+                <p>10DLC content compliance checker</p>
             </a>
             <a href="projects/caseecho/" class="project-card">
                 <h2>CaseEcho</h2>
@@ -58,5 +60,5 @@
 
     <script src="assets/js/script.js"></script>
 </body>
-</html>
 
+</html>

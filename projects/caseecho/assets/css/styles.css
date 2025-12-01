@@ -168,6 +168,22 @@ html {
     gap: 0.25rem;
 }
 
+.filter-group-date {
+    min-width: 300px;
+    flex: 1 1 300px;
+    max-width: 400px;
+}
+
+.filter-group-quick-dates {
+    min-width: auto;
+    flex: 0 0 auto;
+    justify-content: flex-end;
+}
+
+.filter-group-quick-dates .quick-date-filters {
+    margin-top: 1.75rem;
+}
+
 .filter-label {
     display: block;
     font-size: 0.75rem;
@@ -219,6 +235,7 @@ html {
     align-items: center;
     gap: 0.5rem;
 }
+
 
 .age-input,
 .date-input {
@@ -286,28 +303,61 @@ html {
     opacity: 0.5;
 }
 
-.clear-filters-btn {
-    padding: 0.625rem 1rem;
+.quick-date-filters {
+    display: flex;
+    gap: 0.375rem;
+    align-items: center;
+}
+
+.quick-date-btn {
+    padding: 0.5rem 0.75rem;
     font-size: 0.8125rem;
-    font-weight: 600;
+    font-weight: 500;
     background-color: transparent;
     color: var(--text-secondary);
-    border: 1.5px solid var(--border-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: inherit;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+}
+
+.quick-date-btn:hover {
+    background-color: var(--card-bg);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+.quick-date-btn:active {
+    background-color: rgba(189, 147, 249, 0.1);
+}
+
+.quick-date-btn:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+.clear-filters-btn {
+    padding: 0.625rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    background-color: #bd93f9;
+    color: #282a36;
+    border: 2px solid #bd93f9;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     white-space: nowrap;
     align-self: flex-end;
     height: fit-content;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    margin-left: auto;
 }
 
 .clear-filters-btn:hover {
-    color: var(--text-color);
-    border-color: var(--accent-color);
-    background-color: rgba(189, 147, 249, 0.08);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-    transform: translateY(-1px);
+    background-color: #a78bfa;
+    border-color: #a78bfa;
 }
 
 .clear-filters-btn:active {
@@ -375,6 +425,49 @@ html {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.export-btn,
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    background-color: var(--accent-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: inherit;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.export-btn:hover,
+.share-btn:hover {
+    background-color: var(--accent-color-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.export-btn:active,
+.share-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.export-btn:focus-visible,
+.share-btn:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+.export-btn svg,
+.share-btn svg {
+    flex-shrink: 0;
 }
 
 .sort-select {

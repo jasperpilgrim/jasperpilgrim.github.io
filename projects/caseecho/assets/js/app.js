@@ -37,6 +37,8 @@ const unclaimedLabel = document.getElementById('unclaimedLabel');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
 const fullscreenIcon = document.getElementById('fullscreenIcon');
 const fullscreenExitIcon = document.getElementById('fullscreenExitIcon');
+const exportBtn = document.getElementById('exportBtn');
+const shareBtn = document.getElementById('shareBtn');
 
 document.addEventListener('DOMContentLoaded', async () => {
     setupEventListeners();
@@ -46,6 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     showEmptyState();
     updateStats();
     updateFullscreenIcon();
+    loadStateFromURL();
 });
 
 function setupEventListeners() {
@@ -93,6 +96,22 @@ function setupEventListeners() {
         document.addEventListener('mozfullscreenchange', updateFullscreenIcon);
         document.addEventListener('MSFullscreenChange', updateFullscreenIcon);
     }
+
+    if (exportBtn) {
+        exportBtn.addEventListener('click', exportToCSV);
+    }
+
+    if (shareBtn) {
+        shareBtn.addEventListener('click', shareSearch);
+    }
+
+    document.querySelectorAll('.quick-date-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const days = e.target.getAttribute('data-days');
+            const year = e.target.getAttribute('data-year');
+            applyQuickDateFilter(days, year);
+        });
+    });
 
     resultsContainer.addEventListener('click', (e) => {
         if (e.target.classList.contains('find-matches-btn') || e.target.closest('.find-matches-btn')) {
@@ -631,7 +650,9 @@ function applyFilters() {
     if (query.length === 0 && !hasAnyFilter) {
         showEmptyState();
         filteredResults = [];
+        updateActiveFilters();
         updateStats();
+        updateURL();
         return;
     }
 
@@ -683,6 +704,7 @@ function applyFilters() {
     updateActiveFilters();
     updateStats();
     displayResults();
+    updateURL();
 }
 
 function sortResults(results) {
@@ -909,9 +931,8 @@ function updateActiveFilters() {
                 ageFrom.value = '';
             } else if (type === 'ageTo') {
                 ageTo.value = '';
-            } else if (type === 'dateFrom') {
+            } else if (type === 'dateFrom' || type === 'dateTo') {
                 if (dateFrom) dateFrom.value = '';
-            } else if (type === 'dateTo') {
                 if (dateTo) dateTo.value = '';
             }
 
@@ -932,6 +953,196 @@ function clearAllFilters() {
     showEmptyState();
     filteredResults = [];
     updateStats();
+    updateURL();
+}
+
+function applyQuickDateFilter(days, year) {
+    const today = new Date();
+    let fromDate, toDate;
+
+    if (year === 'current') {
+        fromDate = new Date(today.getFullYear(), 0, 1);
+        toDate = today;
+    } else if (days) {
+        fromDate = new Date(today);
+        fromDate.setDate(fromDate.getDate() - parseInt(days));
+        toDate = today;
+    }
+
+    if (dateFrom && fromDate) {
+        dateFrom.value = fromDate.toISOString().split('T')[0];
+    }
+    if (dateTo && toDate) {
+        dateTo.value = toDate.toISOString().split('T')[0];
+    }
+
+    applyFilters();
+}
+
+function exportToCSV() {
+    if (filteredResults.length === 0) {
+        alert('No results to export');
+        return;
+    }
+
+    const headers = ['Case Number', 'Name', 'Case Type', 'Age', 'Sex', 'Race/Ethnicity', 'State', 'County', 'City', 'Date', 'Height', 'Weight', 'Hair Color', 'Eye Color', 'Link'];
+    
+    const csvRows = [headers.join(',')];
+
+    filteredResults.forEach(caseItem => {
+        const row = [
+            escapeCSV(caseItem.caseNumber || ''),
+            escapeCSV(caseItem.name || ''),
+            escapeCSV(caseItem.caseType || ''),
+            escapeCSV(caseItem.age ? String(caseItem.age) : ''),
+            escapeCSV(caseItem.sex || ''),
+            escapeCSV(caseItem.race || ''),
+            escapeCSV(caseItem.state || ''),
+            escapeCSV(caseItem.county || ''),
+            escapeCSV(caseItem.city || ''),
+            escapeCSV(caseItem.dlc || ''),
+            escapeCSV(caseItem.heightFormatted || ''),
+            escapeCSV(caseItem.weight || ''),
+            escapeCSV(caseItem.hairColor || ''),
+            escapeCSV(caseItem.eyeColor || ''),
+            escapeCSV(caseItem.link || '')
+        ];
+        csvRows.push(row.join(','));
+    });
+
+    const csvContent = csvRows.join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    
+    link.setAttribute('href', url);
+    link.setAttribute('download', `caseecho-export-${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+function escapeCSV(str) {
+    if (!str) return '';
+    const string = String(str);
+    if (string.includes(',') || string.includes('"') || string.includes('\n')) {
+        return `"${string.replace(/"/g, '""')}"`;
+    }
+    return string;
+}
+
+function updateURL() {
+    const params = new URLSearchParams();
+    
+    if (searchInput.value.trim()) {
+        params.set('q', searchInput.value.trim());
+    }
+    if (caseTypeFilter.value) {
+        params.set('type', caseTypeFilter.value);
+    }
+    if (stateFilter.value) {
+        params.set('state', stateFilter.value);
+    }
+    if (ageFrom.value) {
+        params.set('ageFrom', ageFrom.value);
+    }
+    if (ageTo.value) {
+        params.set('ageTo', ageTo.value);
+    }
+    if (dateFrom && dateFrom.value) {
+        params.set('dateFrom', dateFrom.value);
+    }
+    if (dateTo && dateTo.value) {
+        params.set('dateTo', dateTo.value);
+    }
+    if (sortSelect.value && sortSelect.value !== 'case-type') {
+        params.set('sort', sortSelect.value);
+    }
+    if (currentView !== 'grid') {
+        params.set('view', currentView);
+    }
+
+    const newURL = params.toString() ? `${window.location.pathname}?${params.toString()}` : window.location.pathname;
+    window.history.replaceState({}, '', newURL);
+}
+
+function loadStateFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    
+    if (params.has('q')) {
+        searchInput.value = params.get('q');
+    }
+    if (params.has('type')) {
+        caseTypeFilter.value = params.get('type');
+    }
+    if (params.has('state')) {
+        stateFilter.value = params.get('state');
+    }
+    if (params.has('ageFrom')) {
+        ageFrom.value = params.get('ageFrom');
+    }
+    if (params.has('ageTo')) {
+        ageTo.value = params.get('ageTo');
+    }
+    if (params.has('dateFrom') && dateFrom) {
+        dateFrom.value = params.get('dateFrom');
+    }
+    if (params.has('dateTo') && dateTo) {
+        dateTo.value = params.get('dateTo');
+    }
+    if (params.has('sort')) {
+        sortSelect.value = params.get('sort');
+    }
+    if (params.has('view')) {
+        const view = params.get('view');
+        if (view === 'list' || view === 'grid') {
+            setView(view);
+        }
+    }
+
+    if (params.toString()) {
+        applyFilters();
+    }
+}
+
+function shareSearch() {
+    updateURL();
+    const url = window.location.href;
+    
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => {
+            const originalText = shareBtn.innerHTML;
+            shareBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!';
+            setTimeout(() => {
+                shareBtn.innerHTML = originalText;
+            }, 2000);
+        }).catch(() => {
+            fallbackCopy(url);
+        });
+    } else {
+        fallbackCopy(url);
+    }
+}
+
+function fallbackCopy(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+        document.execCommand('copy');
+        const originalText = shareBtn.innerHTML;
+        shareBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!';
+        setTimeout(() => {
+            shareBtn.innerHTML = originalText;
+        }, 2000);
+    } catch (err) {
+        alert('Failed to copy link. Please copy manually: ' + text);
+    }
+    document.body.removeChild(textarea);
 }
 
 function populateStateFilter() {
@@ -972,8 +1183,19 @@ function formatNumber(num) {
 }
 
 function updateStats() {
+    const query = searchInput.value.trim().toLowerCase();
+    const hasCaseType = caseTypeFilter.value.length > 0;
+    const hasState = stateFilter.value.length > 0;
+    const hasAge = ageFrom.value.length > 0 || ageTo.value.length > 0;
+    const hasDate = (dateFrom && dateFrom.value) || (dateTo && dateTo.value);
+    const hasAnyFilter = hasCaseType || hasState || hasAge || hasDate;
+    const hasActiveSearch = query.length > 0 || hasAnyFilter;
 
-    totalCases.textContent = formatNumber(allResults.length);
+    if (hasActiveSearch) {
+        totalCases.textContent = formatNumber(filteredResults.length);
+    } else {
+        totalCases.textContent = formatNumber(allResults.length);
+    }
 
     const dataToCount = filteredResults.length > 0 ? filteredResults : allResults;
     const uniqueStates = new Set(dataToCount.map(r => r.state).filter(s => s));
@@ -1023,6 +1245,7 @@ function setView(view) {
     listViewBtn.classList.toggle('active', view === 'list');
 
     displayResults();
+    updateURL();
 }
 
 function getPaginatedResults() {

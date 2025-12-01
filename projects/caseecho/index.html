@@ -139,12 +139,19 @@
                         </div>
                     </div>
 
-                    <div class="filter-group">
+                    <div class="filter-group filter-group-date">
                         <label class="filter-label">Date Range</label>
                         <div class="date-range">
                             <input type="date" id="dateFrom" class="date-input" placeholder="From">
                             <span class="date-separator">-</span>
                             <input type="date" id="dateTo" class="date-input" placeholder="To">
+                        </div>
+                    </div>
+
+                    <div class="filter-group filter-group-quick-dates">
+                        <div class="quick-date-filters">
+                            <button class="quick-date-btn" data-days="30">Last 30 Days</button>
+                            <button class="quick-date-btn" data-days="90">Last 90 Days</button>
                         </div>
                     </div>
 
@@ -197,6 +204,24 @@
                         <span id="resultsCount" class="results-count"></span>
                     </div>
                     <div class="results-controls">
+                        <button id="exportBtn" class="export-btn" aria-label="Export to CSV" title="Export results to CSV">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Export CSV
+                        </button>
+                        <button id="shareBtn" class="share-btn" aria-label="Share search" title="Copy shareable link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="18" cy="5" r="3"></circle>
+                                <circle cx="6" cy="12" r="3"></circle>
+                                <circle cx="18" cy="19" r="3"></circle>
+                                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                            </svg>
+                            Share
+                        </button>
                         <select id="sortSelect" class="sort-select">
                             <option value="case-type">Case Type (Default)</option>
                             <option value="date-desc">Most Recent</option>

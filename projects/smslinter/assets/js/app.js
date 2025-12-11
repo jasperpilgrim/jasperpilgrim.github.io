@@ -11,6 +11,42 @@
     const tabs = document.querySelectorAll('.tab');
     const tabPanes = document.querySelectorAll('.tab-pane');
 
+    const WARNING_SETTINGS_KEY = 'smslinter-warning-settings';
+    
+    const defaultSettings = {
+        'high-risk': true,
+        'url': true,
+        'symbol': true,
+        'formatting': true,
+        'encoding': true
+    };
+
+    function loadSettings() {
+        const saved = localStorage.getItem(WARNING_SETTINGS_KEY);
+        if (saved) {
+            try {
+                return { ...defaultSettings, ...JSON.parse(saved) };
+            } catch (e) {
+                return defaultSettings;
+            }
+        }
+        return defaultSettings;
+    }
+
+    function saveSettings(settings) {
+        localStorage.setItem(WARNING_SETTINGS_KEY, JSON.stringify(settings));
+    }
+
+    let warningSettings = loadSettings();
+
+    function updateToggleSwitches() {
+        document.getElementById('toggle-high-risk').checked = warningSettings['high-risk'];
+        document.getElementById('toggle-url').checked = warningSettings['url'];
+        document.getElementById('toggle-symbol').checked = warningSettings['symbol'];
+        document.getElementById('toggle-formatting').checked = warningSettings['formatting'];
+        document.getElementById('toggle-encoding').checked = warningSettings['encoding'];
+    }
+
     const COMMON_ABBREVIATIONS = new Set([
         'GPS', 'USA',
         'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL',
@@ -253,13 +289,23 @@
     }
 
     function detectAllIssues(text) {
-        const allIssues = [
-            ...detectHighRiskLanguage(text),
-            ...detectURLs(text),
-            ...detectSymbols(text),
-            ...detectFormatting(text),
-            ...detectEncoding(text)
-        ];
+        const allIssues = [];
+        
+        if (warningSettings['high-risk']) {
+            allIssues.push(...detectHighRiskLanguage(text));
+        }
+        if (warningSettings['url']) {
+            allIssues.push(...detectURLs(text));
+        }
+        if (warningSettings['symbol']) {
+            allIssues.push(...detectSymbols(text));
+        }
+        if (warningSettings['formatting']) {
+            allIssues.push(...detectFormatting(text));
+        }
+        if (warningSettings['encoding']) {
+            allIssues.push(...detectEncoding(text));
+        }
 
         allIssues.sort((a, b) => a.start - b.start);
 
@@ -675,6 +721,38 @@
                 if (segmentsPreview) segmentsPreview.style.display = 'block';
             }
         });
+    });
+
+    updateToggleSwitches();
+
+    document.getElementById('toggle-high-risk').addEventListener('change', (e) => {
+        warningSettings['high-risk'] = e.target.checked;
+        saveSettings(warningSettings);
+        auditText(smsInput.value);
+    });
+
+    document.getElementById('toggle-url').addEventListener('change', (e) => {
+        warningSettings['url'] = e.target.checked;
+        saveSettings(warningSettings);
+        auditText(smsInput.value);
+    });
+
+    document.getElementById('toggle-symbol').addEventListener('change', (e) => {
+        warningSettings['symbol'] = e.target.checked;
+        saveSettings(warningSettings);
+        auditText(smsInput.value);
+    });
+
+    document.getElementById('toggle-formatting').addEventListener('change', (e) => {
+        warningSettings['formatting'] = e.target.checked;
+        saveSettings(warningSettings);
+        auditText(smsInput.value);
+    });
+
+    document.getElementById('toggle-encoding').addEventListener('change', (e) => {
+        warningSettings['encoding'] = e.target.checked;
+        saveSettings(warningSettings);
+        auditText(smsInput.value);
     });
 
     auditText('');

@@ -87,19 +87,27 @@
 
         const urlPattern = /(https?:\/\/[^\s]+)|(www\.[^\s]+)|(\b[a-z0-9-]+\.(?:com|org|net|edu|gov|io|co|app|dev|ai|xyz|me|tv|info|biz)(?:\/[^\s]*)?)/gi;
 
+        const matches = [];
         let match;
         while ((match = urlPattern.exec(text)) !== null) {
-            const matchText = match[0];
-            const start = match.index;
-            const end = start + matchText.length;
+            matches.push({
+                text: match[0],
+                index: match.index,
+                length: match[0].length
+            });
+        }
 
-            if (seenIndices.has(start)) continue;
+        matches.forEach(match => {
+            const start = match.index;
+            const end = start + match.length;
+
+            if (seenIndices.has(start)) return;
 
             const emailPattern = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
             if (start > 0) {
                 const before = text.substring(Math.max(0, start - 30), start);
-                if (before.includes('@') && emailPattern.test(before + matchText)) {
-                    continue;
+                if (before.includes('@') && emailPattern.test(before + match.text)) {
+                    return;
                 }
             }
 
@@ -107,12 +115,12 @@
 
             issues.push({
                 type: 'url',
-                text: matchText,
+                text: match.text,
                 start: start,
                 end: end,
                 description: 'Links can trigger additional carrier scrutiny. Avoid URL shortening services (bit.ly, tinyurl, etc.) as they are frequently flagged.'
             });
-        }
+        });
 
         return issues;
     }
@@ -434,12 +442,13 @@
     }
 
     function renderHighlights(text, issues) {
-        if (!highlightOverlay) {
-            console.warn('Highlight overlay not found');
+        if (!highlightOverlay || !smsInput) {
             return;
         }
 
-        if (text.length === 0 || issues.length === 0) {
+        const textareaText = smsInput.value;
+
+        if (textareaText.length === 0 || issues.length === 0) {
             highlightOverlay.textContent = '';
             return;
         }
@@ -452,27 +461,34 @@
 
         const merged = mergeRanges(ranges);
 
-        let html = '';
+        highlightOverlay.textContent = '';
+        const fragment = document.createDocumentFragment();
+        
         let lastIndex = 0;
 
         merged.forEach(range => {
             if (range.start > lastIndex) {
-                html += escapeHtml(text.substring(lastIndex, range.start));
+                const beforeText = textareaText.substring(lastIndex, range.start);
+                fragment.appendChild(document.createTextNode(beforeText));
             }
 
-            const rangeText = text.substring(range.start, range.end);
+            const rangeText = textareaText.substring(range.start, range.end);
             const types = range.types ? Array.from(range.types) : [range.type];
             const primaryType = types[0];
 
-            html += `<span class="highlight ${primaryType}">${escapeHtml(rangeText)}</span>`;
+            const span = document.createElement('span');
+            span.className = `highlight ${primaryType}`;
+            span.textContent = rangeText;
+            fragment.appendChild(span);
             lastIndex = range.end;
         });
 
-        if (lastIndex < text.length) {
-            html += escapeHtml(text.substring(lastIndex));
+        if (lastIndex < textareaText.length) {
+            const afterText = textareaText.substring(lastIndex);
+            fragment.appendChild(document.createTextNode(afterText));
         }
 
-        highlightOverlay.innerHTML = html;
+        highlightOverlay.appendChild(fragment);
     }
 
     function syncScroll() {
@@ -686,7 +702,12 @@
         }, 0);
     });
 
-    smsInput.addEventListener('scroll', syncScroll);
+    smsInput.addEventListener('scroll', () => {
+        if (highlightOverlay) {
+            highlightOverlay.scrollTop = smsInput.scrollTop;
+            highlightOverlay.scrollLeft = smsInput.scrollLeft;
+        }
+    });
 
     const textareaWrapper = smsInput.closest('.textarea-wrapper');
     if (textareaWrapper) {

@@ -1,0 +1,9 @@
+[submodule "projects/caseecho"]
+	path = projects/caseecho
+	url = https://github.com/jasperpilgrim/caseecho.git
+[submodule "projects/rsskeeper"]
+	path = projects/rsskeeper
+	url = https://github.com/jasperpilgrim/rsskeeper.git
+[submodule "projects/smslinter"]
+	path = projects/smslinter
+	url = https://github.com/jasperpilgrim/smslinter.git

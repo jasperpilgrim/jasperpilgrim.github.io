@@ -381,7 +381,7 @@ body {
 .action-btn {
     flex: 1;
     min-width: 90px;
-    background-color: var(--stat-bg);
+    background-color: var(--card-bg);
     border: 1px solid transparent;
     border-radius: 4px;
     padding: 0.75rem 1.25rem;
@@ -468,7 +468,7 @@ body {
 
 .tab:hover {
     color: var(--text);
-    background-color: var(--stat-bg);
+    background-color: var(--card-bg);
 }
 
 .tab.active {

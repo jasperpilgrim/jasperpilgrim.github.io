@@ -14,15 +14,20 @@
 }
 
 [data-theme="light"] {
-    --bg: #ffffff;
-    --bg-secondary: #f8f9fa;
-    --text: #0d1117;
-    --text-secondary: #656d76;
-    --accent: #7c3aed;
-    --accent-hover: #6d28d9;
-    --border: #d1d9e0;
-    --card-bg: #f6f8fa;
-    --nav-bg: rgba(255, 255, 255, 0.95);
+    --bg: #f8f8f2;
+    --bg-secondary: #ffffff;
+    --text: #282a36;
+    --text-secondary: #6272a4;
+    --accent: #bd93f9;
+    --accent-hover: #8be9fd;
+    --border: #e0e0e8;
+    --card-bg: #ffffff;
+    --nav-bg: rgba(248, 248, 242, 0.95);
+    --stat-bg: #ffffff;
+    --accent-color: #bd93f9;
+    --text-color: #282a36;
+    --text-color-light: #6272a4;
+    --border-color: #e0e0e8;
 }
 
 [data-theme="dark"] {
@@ -695,7 +700,7 @@ body:has(.contact-content) .main-content {
 
 [data-theme="light"] .form-group input:focus,
 [data-theme="light"] .form-group textarea:focus {
-    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+    box-shadow: 0 0 0 3px rgba(189, 147, 249, 0.15);
 }
 
 .form-group textarea {

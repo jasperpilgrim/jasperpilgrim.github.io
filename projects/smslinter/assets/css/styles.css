@@ -159,7 +159,7 @@ body {
 }
 
 .stat-box {
-    background-color: var(--stat-bg);
+    background-color: var(--card-bg);
     border: 1px solid transparent;
     border-radius: 6px;
     padding: 1.25rem 1rem;

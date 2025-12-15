@@ -119,7 +119,7 @@ p {
     top: 50%;
     transform: translateY(-50%);
     z-index: 2;
-    padding-left: 0;
+    padding-left: 1.5rem;
     margin-left: 0;
     max-width: calc(100% - 2rem);
 }
@@ -322,6 +322,29 @@ p {
     margin: 0 auto;
     padding: 4rem 2rem;
     width: 100%;
+}
+
+.project-header {
+    max-width: 1800px;
+    margin: 0 auto 2rem;
+    padding: 0 2rem;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 1rem;
+}
+
+.project-header h1 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin: 0;
+}
+
+.project-header p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0.5rem 0 0;
+    line-height: 1.5;
 }
 
 .hero {

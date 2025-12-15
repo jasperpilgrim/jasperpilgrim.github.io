@@ -17,6 +17,12 @@
     height: calc(100vh - 80px);
 }
 
+.rssreader-page .project-header {
+    padding: 1.5rem 2rem 1rem;
+    margin-bottom: 0;
+    border-bottom: 2px solid var(--border);
+}
+
 .app-container {
     display: grid;
     grid-template-columns: 320px 1fr;

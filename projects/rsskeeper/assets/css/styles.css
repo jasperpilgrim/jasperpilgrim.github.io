@@ -418,6 +418,7 @@
     border-radius: 0;
     animation: slideIn 0.3s ease;
     animation-fill-mode: both;
+    position: relative;
 }
 
 .article-item:last-child {
@@ -454,6 +455,17 @@
     background: var(--card-bg);
     border-left: 4px solid var(--accent);
     padding-left: calc(2rem - 4px);
+    border-bottom: none;
+}
+
+.article-item.unread::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 4px;
+    right: 0;
+    height: 1px;
+    background: var(--border);
 }
 
 .article-item.unread:hover {

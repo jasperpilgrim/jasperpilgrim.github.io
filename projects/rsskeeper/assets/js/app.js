@@ -762,7 +762,7 @@
         const opml = `<?xml version="1.0" encoding="UTF-8"?>
 <opml version="1.0">
     <head>
-        <title>RSS Keeper Export</title>
+        <title>rssKeeper Export</title>
         <dateCreated>${new Date().toUTCString()}</dateCreated>
     </head>
     <body>

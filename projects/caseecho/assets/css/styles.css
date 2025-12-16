@@ -836,15 +836,27 @@ html {
 }
 
 .result-card-missing {
-    background: linear-gradient(to right, rgba(255, 85, 85, 0.08) 0%, rgba(255, 85, 85, 0) 100%);
+    background-color: rgba(255, 85, 85, 0.12);
 }
 
 .result-card-unidentified {
-    background: linear-gradient(to right, rgba(255, 184, 108, 0.08) 0%, rgba(255, 184, 108, 0) 100%);
+    background-color: rgba(255, 184, 108, 0.12);
 }
 
 .result-card-unclaimed {
-    background: linear-gradient(to right, rgba(241, 250, 140, 0.08) 0%, rgba(241, 250, 140, 0) 100%);
+    background-color: rgba(241, 250, 140, 0.12);
+}
+
+[data-theme="dark"] .result-card-missing {
+    background-color: rgba(255, 85, 85, 0.15);
+}
+
+[data-theme="dark"] .result-card-unidentified {
+    background-color: rgba(255, 184, 108, 0.15);
+}
+
+[data-theme="dark"] .result-card-unclaimed {
+    background-color: rgba(241, 250, 140, 0.15);
 }
 
 .result-card:hover {

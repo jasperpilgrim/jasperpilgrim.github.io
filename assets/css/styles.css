@@ -248,7 +248,7 @@ p {
 }
 
 .nav-link:hover {
-    color: var(--text);
+    color: var(--accent);
 }
 
 .nav-link.active {
@@ -561,6 +561,10 @@ p {
 
 .project-card:hover h2 {
     color: var(--accent-hover);
+}
+
+[data-theme="light"] .project-card:hover h2 {
+    color: #44475a;
 }
 
 .project-card p {

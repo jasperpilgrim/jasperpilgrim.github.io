@@ -1,40 +1,8 @@
-(function() {
-    const themeToggle = document.getElementById('themeToggle');
-
-    const getTheme = () => {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            return savedTheme;
-        }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    };
-
-    const setTheme = (theme) => {
-        document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-    };
-
-    const initTheme = () => {
-        const currentTheme = getTheme();
-        setTheme(currentTheme);
-    };
-
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        setTheme(newTheme);
-    });
-
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!localStorage.getItem('theme')) {
-            setTheme(e.matches ? 'dark' : 'light');
-        }
-    });
-
-    initTheme();
+(function () {
+    document.documentElement.setAttribute('data-theme', 'dark');
 })();
 
-(function() {
+(function () {
     const contactForm = document.getElementById('contact-form');
     if (!contactForm) return;
 
@@ -45,7 +13,7 @@
 
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         submitBtn.disabled = true;
         btnText.style.display = 'none';
         btnLoading.style.display = 'inline';
@@ -66,7 +34,7 @@
                 formMessage.className = 'form-message success';
                 formMessage.style.display = 'block';
                 contactForm.reset();
-                
+
                 setTimeout(() => {
                     formMessage.style.display = 'none';
                 }, 3000);

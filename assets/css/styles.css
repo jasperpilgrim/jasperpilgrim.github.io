@@ -108,7 +108,7 @@ p {
 }
 
 .nav-container:not(:has(.nav-brand)) {
-    padding-left: max(2rem, calc((100vw - 1400px) / 2 + 2rem));
+    padding-left: 0;
     padding-right: 0;
 }
 
@@ -278,6 +278,12 @@ p {
     width: 100%;
     display: flex;
     flex-direction: column;
+}
+
+body:has(.retro-links) .main-content {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: 100%;
 }
 
 .project-header {
